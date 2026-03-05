@@ -201,7 +201,7 @@ belum optimal
 :::
 :::
 
-# Permasalahan
+# *Research Questions*
 
 1. Bagaimana tingkat Digital Readiness UMKM?
 2. Bagaimana pola spasialnya?
@@ -386,10 +386,36 @@ Publikasi hasil penelitian pada jurnal ilmiah sebagai kontribusi akademik dalam 
 
 # Dampak yang Diharapkan
 
-- Kebijakan berbasis bukti (evidence-based)
-- Intervensi tepat sasaran
-- Replikasi model untuk daerah lain
+::: {.columns}
 
----
+::: {.column width="33%"}
+
+::: {.callout-note}
+### Kebijakan Berbasis Bukti
+Hasil penelitian menyediakan dasar empiris bagi pemerintah daerah dalam merumuskan kebijakan pengembangan UMKM yang berbasis data.
+:::
+
+:::
+
+::: {.column width="33%"}
+
+::: {.callout-note}
+### Intervensi Tepat Sasaran
+Pemetaan kesiapan digital memungkinkan identifikasi wilayah prioritas sehingga program digitalisasi UMKM dapat dilakukan secara lebih efektif.
+:::
+
+:::
+
+::: {.column width="33%"}
+
+::: {.callout-note}
+### Replikasi Model
+Kerangka indeks dan model spasial yang dikembangkan dapat diadaptasi untuk analisis kesiapan digital UMKM di wilayah lain.
+:::
+
+:::
+
+:::
+
 
 # Terima Kasih
