@@ -67,7 +67,7 @@ indiraputeri@uinmataram.ac.id <br>
 <h3>Any Tsalasatul Fitriyah</h3>
 <p class="role">Co-Investigator</p>
 
-<p class="desc">Senior data analyst</p>
+<p class="desc">Time series modelling, senior data analyst</p>
 
 <p class="contact">
 any.tsalasatul@uinmataram.ac.id <br>
