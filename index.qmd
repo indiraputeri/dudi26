@@ -114,6 +114,23 @@ ulfatunhasanah@uinmataram.ac.id <br>
 
 </div>
 
+<div class="team-member">
+
+
+<h3>Nur Awalunnisa</h3>
+<p class="role">Junior policy analyst</p>
+
+<p class="desc">Senior research assistant</p>
+
+<p class="contact">
+awalunnisa@uinmataram.ac.id <br>
+<a href="https://orcid.org/0009-0003-1525-1232" target="_blank">
+0009-0003-1525-1232
+</a>
+</p>
+
+</div>
+
 </div>
 
 # *Mengapa UMKM?*
