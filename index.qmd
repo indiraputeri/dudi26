@@ -1,0 +1,354 @@
+---
+title: ""
+author: "Indira Puteri Kinasih, dkk."
+format:
+  revealjs:
+    theme: white
+    transition: slide
+    slide-number: true
+    incremental: false
+    code-fold: true
+    css: style.css
+    html-math-method: mathjax
+    self-contained: false
+---
+::: {.title-slide}
+
+<div class="title-wrapper">
+
+<div class="title-left">
+<h1>Zonasi Intervensi Kebijakan UMKM Kota Mataram</h1>
+
+<p class="subtitle">
+Pemetaan Geospasial untuk Akselerasi Digitalisasi dan Sertifikasi Halal
+</p>
+
+<p class="institution">
+Proposal Penelitian Terapan - UIN Mataram  
+2026
+</p>
+
+</div>
+
+<div class="title-logo">
+<img src="figs/uinma_logo.png" alt="Logo UIN Mataram">
+<img src="figs/kemenag_logo.png" alt="Kemenag">
+</div>
+
+</div>
+
+:::
+
+# Tim Riset
+
+<div class="team-grid">
+
+<div class="team-member">
+
+
+<h3>Indira Puteri Kinasih</h3>
+<p class="role">Principal Investigator</p>
+
+<p class="desc">Spatial Modelling & Methodological Design</p>
+
+<p class="contact">
+indiraputeri@uinmataram.ac.id <br>
+<a href="https://orcid.org/0009-0009-6959-6723" target="_blank">
+0009-0009-6959-6723
+</a>
+</p>
+
+</div>
+
+
+<div class="team-member">
+
+
+<h3>Any Tsalasatul Fitriyah</h3>
+<p class="role">Co-Investigator</p>
+
+<p class="desc">Senior data analyst</p>
+
+<p class="contact">
+any.tsalasatul@uinmataram.ac.id <br>
+<a href="https://orcid.org/0000-0001-7417-7739" target="_blank">
+0000-0001-7417-7739
+</a>
+</p>
+
+</div>
+
+
+<div class="team-member">
+
+
+<h3>Nurul Susianti</h3>
+<p class="role">Junior data analyst</p>
+
+<p class="desc">Data collection & instruments</p>
+
+<p class="contact">
+nurulsusianti@uinmataram.ac.id <br>
+<a href="https://orcid.org/0009-0006-4279-9860" target="_blank">
+0009-0006-4279-9860
+</a>
+</p>
+
+</div>
+
+
+<div class="team-member">
+
+
+<h3>Ulfatun Hasanah</h3>
+<p class="role">Junior policy analyst</p>
+
+<p class="desc">Economy policy, Islamic economy</p>
+
+<p class="contact">
+ulfatunhasanah@uinmataram.ac.id <br>
+<a href="https://orchid.org/0000-0001-6719-3415" target="_blank">
+0000-0001-6719-3415
+</a>
+</p>
+
+</div>
+
+</div>
+
+# Tulang punggung ekonomi yang membutuhkan intervensi cerdas
+
+<div class="big-number">
+\> 99%
+</div>
+
+<div class="big-caption">
+Proporsi UMKM dari total unit usaha nasional
+</div>
+::: columns
+
+:::column
+::: callout-note
+### SDGs
+berperan langsung pada pengentasan kemiskinan, \
+pertumbuhan ekonomi, dan inovasi industri
+:::
+:::
+
+:::column
+::: callout-note
+### Asta cita
+menjadi fokus pembangunan nasional untuk kemandirian\
+ekonomi dan pemerataan
+:::
+:::
+
+:::
+
+::: callout-note
+### Integrasi DUDI
+mitra strategis DUDI dalam rantai\
+pasok yang berkelanjutan
+:::
+
+# Paradoks UMKM di Indonesia:{background-image="figs/geopoly_bg.png" background-opacity="0.15"}  
+## Kuantitas Masif, Kesiapan Rendah
+
+::: columns
+::: column
+<div class="big-number">
+\> 30jt\
+</div>
+
+unit UMKM terdaftar secara nasional (KADIN, 2024)\
+
+
+Ketimpangan akses dan literasi menyebabkan kontribusi nilai tambah nasional
+belum optimal
+
+:::
+
+::: column
+![](figs/donutchart.png)  
+ 
+:::
+:::
+
+# Potensi & *Blind spot*
+
+![](figs/why.svg)
+
+# *Mengapa Pemetaan Spasial?*
+
+::: columns
+:::column
+::: callout-important
+### Pendekatan klasik (*blind policy*)
+- kebijakan seragam
+- mengabaikan ketimpangan infrastruktur antar wilayah
+- seringkali tidak tepat sasaran
+:::
+:::
+
+::: column
+::: callout-note
+### Intervensi geospasial (*precision policy*)
+- kebijakan berbasis wilayah
+- mengidentifikasi klaster kebutuhan secara spesifik
+- distribusi anggaran dan pendampingan lebih efisien
+:::
+:::
+:::
+
+# Permasalahan
+
+1. Bagaimana tingkat Digital Readiness UMKM?
+2. Bagaimana pola spasialnya?
+3. Apakah terdapat klaster digital gap?
+4. Bagaimana model intervensi berbasis zonasi?
+
+
+# Tujuan Strategis Penelitian
+
+![](figs/steps.svg)
+
+# Fondasi Teoretis & Konseptual
+
+::: columns
+::: column="33%"
+::: callout-note
+## Literasi & Kesiapan Digital
+- berbasis *technology acceptance model*(TAM) &\
+indikator OECD
+- mengukur kemudahan adopsi dan integrasi\
+operasional
+:::
+:::
+
+::: column="33%"
+::: callout-note
+## Regulasi Sertifikasi Halal
+- merujuk pada UU no. 33 tahun 2014 ttg jaminan produk halal;
+- fokus pada kepatuhan proses dan perluasan akses pasar
+:::
+:::
+
+::: column="33%"
+::: callout-note
+## Model Regresi Spasial
+- menggunakan pendekatan Bayesian Conditionally Autoregressive (CAR);
+- mengatasi bias asumsi independensi pada UMKM yang berdekatan/bertetangga (*neighbourhood*)
+:::
+:::
+
+:::
+
+# Data dan Sampel
+
+![](figs/funneldiagram1.svg)
+
+# Instrumen Pengukuran: *Digital Readiness Index*
+
+::: columns
+::: column
+::: callout-tip
+## 4 Dimensi Utama
+- Infrastruktur Digital
+- Literasi Digital
+- Adopsi *platform*
+- Manajemen & Keamanan
+:::
+:::
+
+::: column
+::: callout-important
+## Formulasi
+
+Agregasi skor tiap dimensi menjadi skor \text{DRI} tunggal per lokasi
+
+$$
+\text{Dim}_i = 
+\frac{\sum_{m=1}^{M} b_{mi}}{S_{\max}} \times 100
+$$
+
+$$
+\text{DRI}_j = 
+\frac{1}{N} \sum_{i=1}^{N} \text{Dim}_i
+$$
+:::
+:::
+
+:::
+
+# Konstruksi Variabel
+
+::: columns
+::: column
+![](figs/spillus.png)
+:::
+
+::: column
+::: callout
+## Variabel respon
+Skor agregat Digital Readiness Index (DRI) pada level desa/kelurahan
+:::
+
+::: callout
+## Kovariat
+- Kepadatan penduduk
+- Akses internet
+- akses wisata
+- status kepemilikan sertifikasi halal
+:::
+:::
+
+:::
+
+
+# Model Statistik
+
+Menggunakan Bayesian Conditional Autoregressive (CAR)
+
+Mengontrol:
+- Autokorelasi spasial
+- Dependensi antar wilayah
+- Variabel penjelas tambahan
+
+---
+
+# Zonasi Intervensi
+
+Zona A – Prioritas Digitalisasi  
+Zona B – Prioritas Sertifikasi Halal  
+Zona C – Intervensi Terintegrasi  
+
+---
+
+# Output Penelitian
+
+- Peta interaktif UMKM
+- Indeks DRI per kecamatan
+- Model spasial CAR
+- Policy brief untuk Pemkot
+- Artikel ilmiah
+
+---
+
+# Timeline
+
+Jan–Feb: Persiapan & Desain  
+Mar–Apr: Pengumpulan Data  
+Mei: Analisis  
+Jun: Penyusunan Laporan & Diseminasi  
+
+---
+
+# Dampak yang Diharapkan
+
+- Kebijakan berbasis bukti (evidence-based)
+- Intervensi tepat sasaran
+- Replikasi model untuk daerah lain
+
+---
+
+# Terima Kasih

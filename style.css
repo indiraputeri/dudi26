@@ -1,0 +1,275 @@
+/* Background */
+.reveal {
+  background-color: #f4f1ea;
+  background-image: url("figs/geopoly_bg.png");
+  background-size: cover;
+}
+
+
+/* Headings */
+.reveal h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  color: #1e2f47;
+  line-height: 1.2;
+}
+
+.reveal h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 50px;
+  color: #1e2f47;
+}
+
+.reveal h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  color: #0a4c86;
+}
+
+/* Body */
+.reveal section {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 28px;
+  color: #1e2f47;
+}
+
+/* Highlight Box */
+.highlight-box {
+  display: inline-block;
+  padding: 20px 40px;
+  background-color: #1e2f47;
+  color: white;
+  font-size: 60px;
+  font-weight: 600;
+  margin: 30px 0;
+}
+
+/* Columns spacing */
+.columns {
+  margin-top: 40px;
+}
+
+/* Subtle divider */
+.reveal hr {
+  border: none;
+  height: 1px;
+  background: #2e4a6b;
+  margin: 30px 0;
+}
+
+/* ===== Title Slide Layout ===== */
+
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.title-left {
+  width: 65%;
+}
+
+.title-left h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px;
+  color: #1e2f47;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.subtitle {
+  font-size: 26px;
+  margin-top: 20px;
+  color: #2e4a6b;
+}
+
+.author {
+  margin-top: 40px;
+  font-size: 22px;
+  color: #444;
+}
+
+.author-grid {
+  display: flex;
+  gap: 60px;
+  margin-top: 35px;
+  font-size: 22px;
+  color: #444;
+}
+
+.institution {
+  margin-top: 30px;
+  font-size: 20px;
+  color: #666;
+}
+
+.title-logo img {
+  width: 130px;
+  height: auto;
+}
+
+/* Remove default center alignment */
+.reveal .slides section {
+  text-align: left;
+}
+
+/* ===== Research Team Layout ===== */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px 80px;
+  margin-top: 50px;
+}
+
+.team-member {
+  text-align: left;
+}
+
+.profile {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid #1e2f47;
+}
+
+.team-member h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: #1e2f47;
+  margin-bottom: 5px;
+}
+
+.role {
+  font-weight: 600;
+  color: #2e4a6b;
+  margin-bottom: 5px;
+}
+
+.desc {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.contact {
+  font-size: 16px;
+  color: #666;
+}
+
+.contact a {
+  color: #1e2f47;
+  text-decoration: none;
+}
+
+/* ===== Dual Logo Title Layout ===== */
+
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 100px;
+}
+
+.title-left {
+  width: 65%;
+}
+
+.title-logos {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.title-logos img {
+  width: 110px;
+  height: auto;
+}
+
+.flow-diagram {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.flow-box {
+  display: inline-block;
+  padding: 20px 40px;
+  border: 1.5px solid #1e2f47;
+  margin: 10px 0;
+  font-size: 24px;
+  color: #1e2f47;
+  background: white;
+}
+
+.flow-arrow {
+  font-size: 28px;
+  color: #1e2f47;
+}
+
+.solution {
+  background: #1e2f47;
+  color: white;
+  font-weight: 600;
+}
+
+.centered {
+  text-align: center;
+}
+
+.big-number {
+  font-size: 130px;
+  font-weight: 800;
+  color: #1e2f47;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.big-caption {
+  font-size: 28px;
+  color: #1e2f47;
+  text-align: center;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+.caption {
+  font-size: 18px;
+  color: #666;
+  margin-top: 10px;
+}
+
+.problem-box {
+  margin-top: 25px;
+  padding: 15px 20px;
+  border-left: 4px solid #1e2f47;
+  background-color: #f4f4f4;
+  font-style: italic;
+  font-size: 20px;
+  color: #333;
+}
+
+.reveal .columns {
+  margin-top: 50px;
+}
+
+
+/* Custom Callout - Academic Tone */
+.callout-note {
+  background-color: rgba(30, 47, 71, 0.08);   /* versi transparan dari warna utama */
+  border-left: 4px solid #1e2f47;
+  border-radius: 8px;
+}
+
+.callout-note .callout-title {
+  color: #1e2f47;
+  font-weight: 600;
+}
+
+.callout-note .callout-body {
+  color: #1e2f47;
+}
