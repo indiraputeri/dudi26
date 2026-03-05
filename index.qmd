@@ -131,8 +131,8 @@ Proporsi UMKM dari total unit usaha nasional
 :::column
 ::: callout-note
 ### SDGs
-berperan langsung pada pengentasan kemiskinan, \
-pertumbuhan ekonomi, dan inovasi industri
+berperan langsung pada pengentasan kemiskinan (1), \
+pertumbuhan ekonomi (8), dan inovasi industri(9)
 :::
 :::
 
