@@ -411,8 +411,13 @@ ulfatunhasanah@uinmataram.ac.id <br> <a href="https://orchid.org/0000-0001-6719-
 </div>
 </section>
 
-<section id="tulang-punggung-ekonomi-yang-membutuhkan-intervensi-cerdas" class="title-slide slide level1 center">
-<h1>Tulang punggung ekonomi yang membutuhkan intervensi cerdas</h1>
+<section>
+<section id="mengapa-umkm" class="title-slide slide level1 center">
+<h1><em>Mengapa UMKM?</em></h1>
+
+</section>
+<section id="tulang-punggung-ekonomi-yang-membutuhkan-intervensi-cerdas" class="slide level2">
+<h2>Tulang punggung ekonomi yang membutuhkan intervensi cerdas</h2>
 <div class="big-number">
 <p>&gt; 99%</p>
 </div>
@@ -466,8 +471,7 @@ pasok yang berkelanjutan</p>
 </div>
 </div>
 </div>
-</section>
-
+</section></section>
 <section>
 <section id="paradoks-umkm-di-indonesia" class="title-slide slide level1 center" data-background-image="figs/geopoly_bg.png" data-background-opacity="0.15">
 <h1>Paradoks UMKM di Indonesia:</h1>
@@ -700,50 +704,127 @@ operasional</li>
 </div>
 </section>
 
-<section>
-<section id="model-statistik" class="title-slide slide level1 center">
-<h1>Model Statistik</h1>
-<p>Menggunakan Bayesian Conditional Autoregressive (CAR)</p>
-<p>Mengontrol: - Autokorelasi spasial - Dependensi antar wilayah - Variabel penjelas tambahan</p>
-</section>
-<section class="slide level2">
-
-</section></section>
-<section>
-<section id="zonasi-intervensi" class="title-slide slide level1 center">
-<h1>Zonasi Intervensi</h1>
-<p>Zona A – Prioritas Digitalisasi<br>
-Zona B – Prioritas Sertifikasi Halal<br>
-Zona C – Intervensi Terintegrasi</p>
-</section>
-<section class="slide level2">
-
-</section></section>
-<section>
-<section id="output-penelitian" class="title-slide slide level1 center">
-<h1>Output Penelitian</h1>
+<section id="model-statistik-conditionally-autoregressive-car" class="title-slide slide level1 center">
+<h1>Model Statistik: <em>Conditionally Autoregressive</em> (CAR)</h1>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Model CAR digunakan untuk mengakomodasi <strong>ketergantungan spasial antar desa/kelurahan</strong>,<br>
+di mana tingkat kesiapan digital UMKM pada suatu wilayah dapat dipengaruhi oleh kondisi wilayah di sekitarnya.</p>
+<p><span class="math display">\[
+DRI_j=\beta_0 + \sum_{k=1}^p\beta_kX_{kj}+\varepsilon_j+u_j
+\]</span></p>
+<p><strong>Notasi model</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <ul>
-<li>Peta interaktif UMKM</li>
-<li>Indeks DRI per kecamatan</li>
-<li>Model spasial CAR</li>
-<li>Policy brief untuk Pemkot</li>
-<li>Artikel ilmiah</li>
+<li><span class="math inline">\(DRI_j\)</span> : <em>Digital Readiness Index</em> pada kecamatan (j)<br>
+</li>
+<li><span class="math inline">\(X_{kj}\)</span> : kovariat ke-(k)</li>
 </ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><span class="math inline">\(\beta_k\)</span> : koefisien regresi<br>
+</li>
+<li><span class="math inline">\(\varepsilon_j\)</span> : error acak<br>
+</li>
+<li><span class="math inline">\(u_j\)</span> : efek spasial (CAR)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<blockquote>
+<p>Model CAR memungkinkan analisis kesiapan digital UMKM dengan mempertimbangkan ketergantungan spasial antar desa/kelurahan.</p>
+</blockquote>
 </section>
-<section class="slide level2">
 
-</section></section>
-<section>
+<section id="luaran-penelitian" class="title-slide slide level1 center">
+<h1>Luaran Penelitian</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Peta Interaktif UMKM</strong></p>
+</div>
+<div class="callout-content">
+<p>Visualisasi spasial berbasis web yang menampilkan distribusi, karakteristik, dan tingkat kesiapan digital UMKM di Kota Mataram.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Indeks DRI per Kecamatan</strong></p>
+</div>
+<div class="callout-content">
+<p>Indeks komposit yang mengukur tingkat kesiapan digital UMKM pada setiap kecamatan untuk mendukung pemetaan prioritas kebijakan.</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Model Spasial CAR</strong></p>
+</div>
+<div class="callout-content">
+<p>Model statistik spasial untuk mengidentifikasi pola ketergantungan wilayah dan faktor yang memengaruhi kesiapan digital UMKM.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Policy Brief untuk Pemkot</strong></p>
+</div>
+<div class="callout-content">
+<p>Dokumen rekomendasi kebijakan berbasis data bagi pemerintah daerah dalam pengembangan UMKM dan transformasi digital.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Artikel Ilmiah</strong></p>
+</div>
+<div class="callout-content">
+<p>Publikasi hasil penelitian pada jurnal ilmiah sebagai kontribusi akademik dalam bidang ekonomi regional dan analisis spasial.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
 <section id="timeline" class="title-slide slide level1 center">
 <h1>Timeline</h1>
-<p>Jan–Feb: Persiapan &amp; Desain<br>
-Mar–Apr: Pengumpulan Data<br>
-Mei: Analisis<br>
-Jun: Penyusunan Laporan &amp; Diseminasi</p>
-</section>
-<section class="slide level2">
 
-</section></section>
+<img data-src="figs/timeline.png" class="r-stretch"></section>
+
 <section>
 <section id="dampak-yang-diharapkan" class="title-slide slide level1 center">
 <h1>Dampak yang Diharapkan</h1>

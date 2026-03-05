@@ -116,7 +116,8 @@ ulfatunhasanah@uinmataram.ac.id <br>
 
 </div>
 
-# Tulang punggung ekonomi yang membutuhkan intervensi cerdas
+# *Mengapa UMKM?*
+## Tulang punggung ekonomi yang membutuhkan intervensi cerdas
 
 <div class="big-number">
 \> 99%
@@ -305,43 +306,83 @@ Skor agregat Digital Readiness Index (DRI) pada level desa/kelurahan
 :::
 
 
-# Model Statistik
+# Model Statistik: *Conditionally Autoregressive* (CAR)
 
-Menggunakan Bayesian Conditional Autoregressive (CAR)
+::: callout-note
+Model CAR digunakan untuk mengakomodasi **ketergantungan spasial antar desa/kelurahan**,  
+di mana tingkat kesiapan digital UMKM pada suatu wilayah dapat dipengaruhi oleh kondisi wilayah di sekitarnya.
 
-Mengontrol:
-- Autokorelasi spasial
-- Dependensi antar wilayah
-- Variabel penjelas tambahan
+$$
+DRI_j=\beta_0 + \sum_{k=1}^p\beta_kX_{kj}+\varepsilon_j+u_j
+$$
 
----
+**Notasi model**
 
-# Zonasi Intervensi
+::: {.columns}
 
-Zona A – Prioritas Digitalisasi  
-Zona B – Prioritas Sertifikasi Halal  
-Zona C – Intervensi Terintegrasi  
+::: {.column width="50%"}
 
----
+- $DRI_j$ : *Digital Readiness Index* pada kecamatan \(j\)  
+- $X_{kj}$ : kovariat ke-\(k\)
 
-# Output Penelitian
+:::
 
-- Peta interaktif UMKM
-- Indeks DRI per kecamatan
-- Model spasial CAR
-- Policy brief untuk Pemkot
-- Artikel ilmiah
+::: {.column width="50%"}
 
----
+- $\beta_k$ : koefisien regresi  
+- $\varepsilon_j$ : error acak  
+- $u_j$ : efek spasial (CAR)
+
+:::
+
+:::
+
+:::
+
+> Model CAR memungkinkan analisis kesiapan digital UMKM dengan mempertimbangkan ketergantungan spasial antar desa/kelurahan.
+
+# Luaran Penelitian
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.callout-note}
+### Peta Interaktif UMKM
+Visualisasi spasial berbasis web yang menampilkan distribusi, karakteristik, dan tingkat kesiapan digital UMKM di Kota Mataram.
+:::
+
+::: {.callout-note}
+### Indeks DRI per Kecamatan
+Indeks komposit yang mengukur tingkat kesiapan digital UMKM pada setiap kecamatan untuk mendukung pemetaan prioritas kebijakan.
+:::
+
+:::
+
+::: {.column width="50%"}
+
+::: {.callout-note}
+### Model Spasial CAR
+Model statistik spasial untuk mengidentifikasi pola ketergantungan wilayah dan faktor yang memengaruhi kesiapan digital UMKM.
+:::
+
+::: {.callout-note}
+### Policy Brief untuk Pemkot
+Dokumen rekomendasi kebijakan berbasis data bagi pemerintah daerah dalam pengembangan UMKM dan transformasi digital.
+:::
+
+::: {.callout-note}
+### Artikel Ilmiah
+Publikasi hasil penelitian pada jurnal ilmiah sebagai kontribusi akademik dalam bidang ekonomi regional dan analisis spasial.
+:::
+
+:::
+
+:::
 
 # Timeline
 
-Jan–Feb: Persiapan & Desain  
-Mar–Apr: Pengumpulan Data  
-Mei: Analisis  
-Jun: Penyusunan Laporan & Diseminasi  
-
----
+![](figs/timeline.png)
 
 # Dampak yang Diharapkan
 
