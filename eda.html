@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="">
+
+<title>Analisis Eksploratori dan Pemodelan Spasial UMKM Kota Mataram</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="eda_files/libs/clipboard/clipboard.min.js"></script>
+<script src="eda_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="eda_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="eda_files/libs/quarto-html/popper.min.js"></script>
+<script src="eda_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="eda_files/libs/quarto-html/anchor.min.js"></script>
+<link href="eda_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="eda_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="eda_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="eda_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="eda_files/libs/bootstrap/bootstrap-b0c2dc8b2db9f3d32c968c8b6e8b77f5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Daftar Isi</h2>
+   
+  <ul>
+  <li><a href="#latar-belakang" id="toc-latar-belakang" class="nav-link active" data-scroll-target="#latar-belakang"><span class="header-section-number">1</span> Latar Belakang</a></li>
+  <li><a href="#tujuan" id="toc-tujuan" class="nav-link" data-scroll-target="#tujuan"><span class="header-section-number">2</span> Tujuan</a></li>
+  <li><a href="#dataset" id="toc-dataset" class="nav-link" data-scroll-target="#dataset"><span class="header-section-number">3</span> Dataset</a>
+  <ul class="collapse">
+  <li><a href="#data-resmi-profil-umkm-kota-mataram" id="toc-data-resmi-profil-umkm-kota-mataram" class="nav-link" data-scroll-target="#data-resmi-profil-umkm-kota-mataram"><span class="header-section-number">3.1</span> Data resmi: profil UMKM kota Mataram</a>
+  <ul class="collapse">
+  <li><a href="#ringkasan-karakteristik-umkm" id="toc-ringkasan-karakteristik-umkm" class="nav-link" data-scroll-target="#ringkasan-karakteristik-umkm"><span class="header-section-number">3.1.1</span> Ringkasan Karakteristik UMKM</a></li>
+  </ul></li>
+  <li><a href="#data-survei" id="toc-data-survei" class="nav-link" data-scroll-target="#data-survei"><span class="header-section-number">3.2</span> Data survei</a></li>
+  <li><a href="#konstruksi-digital-readiness-index-dri" id="toc-konstruksi-digital-readiness-index-dri" class="nav-link" data-scroll-target="#konstruksi-digital-readiness-index-dri"><span class="header-section-number">3.3</span> Konstruksi Digital Readiness Index (DRI)</a>
+  <ul class="collapse">
+  <li><a href="#standardisasi-skor-dimensi" id="toc-standardisasi-skor-dimensi" class="nav-link" data-scroll-target="#standardisasi-skor-dimensi"><span class="header-section-number">3.3.1</span> Standardisasi Skor Dimensi</a></li>
+  <li><a href="#pembentukan-dri" id="toc-pembentukan-dri" class="nav-link" data-scroll-target="#pembentukan-dri"><span class="header-section-number">3.3.2</span> Pembentukan DRI</a></li>
+  <li><a href="#pemeriksaan-distribusi-dri" id="toc-pemeriksaan-distribusi-dri" class="nav-link" data-scroll-target="#pemeriksaan-distribusi-dri"><span class="header-section-number">3.3.3</span> Pemeriksaan Distribusi DRI</a></li>
+  <li><a href="#agregasi-dri-pada-unit-spasial" id="toc-agregasi-dri-pada-unit-spasial" class="nav-link" data-scroll-target="#agregasi-dri-pada-unit-spasial"><span class="header-section-number">3.3.4</span> Agregasi DRI pada Unit Spasial</a></li>
+  </ul></li>
+  <li><a href="#aspek-halal" id="toc-aspek-halal" class="nav-link" data-scroll-target="#aspek-halal"><span class="header-section-number">3.4</span> Aspek halal</a>
+  <ul class="collapse">
+  <li><a href="#analisis-deskriptif" id="toc-analisis-deskriptif" class="nav-link" data-scroll-target="#analisis-deskriptif"><span class="header-section-number">3.4.1</span> Analisis Deskriptif</a></li>
+  <li><a href="#struktur-dan-pengelompokan-aspek-halal" id="toc-struktur-dan-pengelompokan-aspek-halal" class="nav-link" data-scroll-target="#struktur-dan-pengelompokan-aspek-halal"><span class="header-section-number">3.4.2</span> Struktur dan pengelompokan aspek halal</a></li>
+  <li><a href="#konstruksi-skor-aspek-halal" id="toc-konstruksi-skor-aspek-halal" class="nav-link" data-scroll-target="#konstruksi-skor-aspek-halal"><span class="header-section-number">3.4.3</span> Konstruksi skor aspek halal</a></li>
+  <li><a href="#hubungan-aspek-halal-dengan-dri" id="toc-hubungan-aspek-halal-dengan-dri" class="nav-link" data-scroll-target="#hubungan-aspek-halal-dengan-dri"><span class="header-section-number">3.4.4</span> Hubungan aspek halal dengan DRI</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#ringkasan-temuan" id="toc-ringkasan-temuan" class="nav-link" data-scroll-target="#ringkasan-temuan"><span class="header-section-number">4</span> Ringkasan Temuan</a>
+  <ul class="collapse">
+  <li><a href="#model-car-memiliki-kecocokan-yang-lebih-baik" id="toc-model-car-memiliki-kecocokan-yang-lebih-baik" class="nav-link" data-scroll-target="#model-car-memiliki-kecocokan-yang-lebih-baik"><span class="header-section-number">4.1</span> Model CAR memiliki kecocokan yang lebih baik</a></li>
+  <li><a href="#koefisien-regresi-relatif-stabil-setelah-efek-spasial-dimasukkan" id="toc-koefisien-regresi-relatif-stabil-setelah-efek-spasial-dimasukkan" class="nav-link" data-scroll-target="#koefisien-regresi-relatif-stabil-setelah-efek-spasial-dimasukkan"><span class="header-section-number">4.2</span> Koefisien regresi relatif stabil setelah efek spasial dimasukkan</a></li>
+  <li><a href="#asosiasi-mean_ecomm-dengan-dri" id="toc-asosiasi-mean_ecomm-dengan-dri" class="nav-link" data-scroll-target="#asosiasi-mean_ecomm-dengan-dri"><span class="header-section-number">4.3</span> Asosiasi <code>mean_ecomm</code> dengan DRI</a></li>
+  <li><a href="#hasil-rho-memberikan-bukti-adanya-struktur-spasial" id="toc-hasil-rho-memberikan-bukti-adanya-struktur-spasial" class="nav-link" data-scroll-target="#hasil-rho-memberikan-bukti-adanya-struktur-spasial"><span class="header-section-number">4.4</span> Hasil <span class="math inline">\(\rho\)</span> memberikan bukti adanya struktur spasial</a></li>
+  <li><a href="#interpretasi-parameter-spasial" id="toc-interpretasi-parameter-spasial" class="nav-link" data-scroll-target="#interpretasi-parameter-spasial"><span class="header-section-number">4.5</span> Interpretasi Parameter Spasial</a></li>
+  <li><a href="#kesiapan-digital-dan-aspek-sertifikasi-halal" id="toc-kesiapan-digital-dan-aspek-sertifikasi-halal" class="nav-link" data-scroll-target="#kesiapan-digital-dan-aspek-sertifikasi-halal"><span class="header-section-number">4.6</span> Kesiapan digital dan aspek sertifikasi halal</a></li>
+  </ul></li>
+  <li><a href="#kesimpulan" id="toc-kesimpulan" class="nav-link" data-scroll-target="#kesimpulan"><span class="header-section-number">5</span> Kesimpulan</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Format Lain</h2><ul><li><a href="eda.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analisis Eksploratori dan Pemodelan Spasial UMKM Kota Mataram</h1>
+<p class="subtitle lead">Kesiapan Digital dan Kepemilikan Sertifikasi Halal</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="latar-belakang" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Latar Belakang</h1>
+<p>Data master UMKM Kota Mataram merupakan sumber informasi penting yang dapat digunakan untuk memahami karakteristik pelaku usaha sebelum dilakukan pengumpulan data mengenai tingkat kesiapan digital maupun kepemilikan sertifikasi halal. Oleh karena itu, dilakukan Analisis Data Eksploratori (Exploratory Data Analysis/EDA) untuk memperoleh gambaran umum mengenai struktur data, kualitas data, dan karakteristik UMKM yang tersedia.</p>
+</section>
+<section id="tujuan" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Tujuan</h1>
+<p>Analisis ini bertujuan untuk:</p>
+<ol type="1">
+<li>Mendeskripsikan karakteristik dataset UMKM.</li>
+<li>Mengidentifikasi kualitas data.</li>
+<li>Mengetahui distribusi karakteristik UMKM.</li>
+<li>Menjadi baseline sebelum survei kesiapan digital dan sertifikasi halal.</li>
+</ol>
+</section>
+<section id="dataset" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Dataset</h1>
+<p>Dataset yang digunakan pada penelitian ini terdiri dari data primer dan sekunder. Data primer diperoleh dari hasil survei UMKM yang dilakukan oleh tim, sedangkan data sekunder didapatkan dari data administrasi Dinas Koperasi Kota Mataram. Berikut merupakan uraian singkat dari setiap dataset.</p>
+<section id="data-resmi-profil-umkm-kota-mataram" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-resmi-profil-umkm-kota-mataram"><span class="header-section-number">3.1</span> Data resmi: profil UMKM kota Mataram</h2>
+<p>Selain data primer yang diperoleh melalui survei, penelitian ini menggunakan data administratif UMKM yang diperoleh dari Dinas terkait di Kota Mataram. Dataset tersebut digunakan untuk memberikan gambaran mengenai populasi dan karakteristik UMKM yang menjadi konteks penelitian. Dataset terdiri atas 4.185 unit usaha dengan 17 variabel yang mencakup informasi identitas usaha, karakteristik usaha, lokasi, klasifikasi kegiatan usaha, serta beberapa karakteristik ekonomi dan ketenagakerjaan.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 10
+  jenis_perusahaan risiko_proyek skala_usaha kecamatan   kelurahan     kbli 
+  &lt;chr&gt;            &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;
+1 Perorangan       MT            Usaha Kecil Sekarbela   Kekalik Jaya  47729
+2 Perorangan       R             Usaha Mikro Ampenan     Taman Sari    47192
+3 Perorangan       R             Usaha Mikro Sandubaya   Bertais       47712
+4 Perorangan       R             Usaha Mikro Mataram     Pagutan Barat 47112
+5 Perorangan       R             Usaha Mikro Sandubaya   Dasan Cermen  47215
+6 Perorangan       R             Usaha Mikro Cakranegara Sayang-sayang 47112
+# ℹ 4 more variables: judul_kbli &lt;chr&gt;, luas &lt;chr&gt;, investasi &lt;dbl&gt;,
+#   tki_org &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Informasi yang tersedia meliputi nomor identifikasi usaha (NIB), nama perusahaan, jenis perusahaan, tingkat risiko proyek, skala usaha, alamat usaha, kecamatan dan kelurahan, kode dan uraian KBLI, identitas pemilik usaha, serta informasi kontak. Dataset juga memuat beberapa variabel kuantitatif, yaitu luas tanah, jumlah investasi, dan jumlah tenaga kerja. Dengan demikian, data administratif ini menyediakan informasi mengenai karakteristik struktural dan spasial UMKM yang tidak seluruhnya diperoleh dari instrumen survei.</p>
+<section id="ringkasan-karakteristik-umkm" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="ringkasan-karakteristik-umkm"><span class="header-section-number">3.1.1</span> Ringkasan Karakteristik UMKM</h3>
+<p>Sebanyak <strong>4.185 unit UMKM</strong> tercatat dalam dataset administratif. Variabel <code>skala_usaha</code> membedakan unit usaha ke dalam kategori seperti usaha mikro dan usaha kecil, sehingga dapat digunakan untuk menggambarkan struktur skala usaha dalam populasi yang diamati. Informasi lokasi pada tingkat kecamatan dan kelurahan juga memungkinkan distribusi UMKM dianalisis secara spasial.</p>
+<div id="tbl-ringkasan-skala-umkm" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ringkasan-skala-umkm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel&nbsp;1: Distribusi UMKM menurut skala usaha
+</figcaption>
+<div aria-describedby="tbl-ringkasan-skala-umkm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  skala_usaha        n persentase
+  &lt;chr&gt;          &lt;int&gt;      &lt;dbl&gt;
+1 Usaha Mikro     3896     93.1  
+2 Usaha Kecil      231      5.52 
+3 Usaha Besar       46      1.10 
+4 Usaha Menengah    12      0.287</code></pre>
+</div>
+</div>
+</figure>
+</div>
+<p>Distribusi tersebut memberikan gambaran mengenai konsentrasi UMKM secara administratif. Informasi ini selanjutnya dapat digunakan sebagai konteks dalam analisis spasial, terutama karena tingkat kesiapan digital yang diperoleh dari survei dapat dibandingkan dengan karakteristik wilayah tempat UMKM beroperasi.</p>
+<p>Selain karakteristik kategorikal, dataset juga memuat informasi mengenai jumlah investasi dan tenaga kerja. Variabel <code>jumlah_investasi_rp</code> menunjukkan nilai investasi usaha dalam rupiah, sedangkan <code>tki_org</code> menunjukkan jumlah tenaga kerja pada masing-masing unit usaha. Karena kedua variabel tersebut memiliki skala yang berbeda dan berpotensi memiliki distribusi yang menceng, statistik deskriptif seperti median dan rentang interkuartil digunakan sebagai pelengkap nilai rata-rata.</p>
+<div id="tbl-ringkasan-kecamatan-umkm" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ringkasan-kecamatan-umkm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel&nbsp;2: Distribusi UMKM menurut kecamatan
+</figcaption>
+<div aria-describedby="tbl-ringkasan-kecamatan-umkm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  kecamatan       n persentase
+  &lt;chr&gt;       &lt;int&gt;      &lt;dbl&gt;
+1 Mataram       802       19.2
+2 Cakranegara   799       19.1
+3 Sandubaya     785       18.8
+4 Selaparang    627       15.0
+5 Ampenan       601       14.4
+6 Sekarbela     571       13.6</code></pre>
+</div>
+</div>
+</figure>
+</div>
+<p>Data administratif ini selanjutnya digunakan sebagai sumber informasi mengenai karakteristik dan distribusi UMKM, sedangkan data survei digunakan untuk membangun dan mengukur <em>Digital Readiness Index</em> (DRI). Pemisahan fungsi kedua sumber data tersebut penting karena DRI dibentuk berdasarkan respons terhadap item-item instrumen survei, bukan berdasarkan variabel administratif dari Dinas.</p>
+<div class="cell">
+<div id="tbl-ringkasan-numerik-umkm" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ringkasan-numerik-umkm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabel&nbsp;3: Ringkasan variabel numerik pada data UMKM
+</figcaption>
+<div aria-describedby="tbl-ringkasan-numerik-umkm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="hxsksshzjb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hxsksshzjb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hxsksshzjb thead, #hxsksshzjb tbody, #hxsksshzjb tfoot, #hxsksshzjb tr, #hxsksshzjb td, #hxsksshzjb th {
+  border-style: none;
+}
+
+#hxsksshzjb p {
+  margin: 0;
+  padding: 0;
+}
+
+#hxsksshzjb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hxsksshzjb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hxsksshzjb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hxsksshzjb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hxsksshzjb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hxsksshzjb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hxsksshzjb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hxsksshzjb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hxsksshzjb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hxsksshzjb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hxsksshzjb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hxsksshzjb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hxsksshzjb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hxsksshzjb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hxsksshzjb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxsksshzjb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hxsksshzjb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hxsksshzjb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hxsksshzjb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxsksshzjb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hxsksshzjb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxsksshzjb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hxsksshzjb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxsksshzjb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hxsksshzjb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxsksshzjb .gt_left {
+  text-align: left;
+}
+
+#hxsksshzjb .gt_center {
+  text-align: center;
+}
+
+#hxsksshzjb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hxsksshzjb .gt_font_normal {
+  font-weight: normal;
+}
+
+#hxsksshzjb .gt_font_bold {
+  font-weight: bold;
+}
+
+#hxsksshzjb .gt_font_italic {
+  font-style: italic;
+}
+
+#hxsksshzjb .gt_super {
+  font-size: 65%;
+}
+
+#hxsksshzjb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hxsksshzjb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hxsksshzjb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hxsksshzjb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hxsksshzjb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hxsksshzjb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hxsksshzjb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hxsksshzjb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hxsksshzjb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading header">
+<td colspan="8" class="gt_heading gt_title gt_font_normal">Karakteristik UMKM Menurut Kecamatan</td>
+</tr>
+<tr class="gt_heading even">
+<td colspan="8" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Jumlah UMKM dan komposisi skala usaha; investasi dan tenaga kerja disajikan sebagai median (Q1–Q3)</td>
+</tr>
+<tr class="gt_col_headings header">
+<th id="kecamatan" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">kecamatan</th>
+<th id="Jumlah-UMKM" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Jumlah UMKM</th>
+<th id="Investasi-(Rp-juta)" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Investasi (Rp juta)</th>
+<th id="Tenaga-Kerja" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Tenaga Kerja</th>
+<th id="Usaha-Besar" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Usaha Besar</th>
+<th id="Usaha-Kecil" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Usaha Kecil</th>
+<th id="Usaha-Mikro" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Usaha Mikro</th>
+<th id="Usaha-Menengah" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col">Usaha Menengah</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_center" headers="kecamatan">Ampenan</td>
+<td class="gt_row gt_center" headers="Jumlah UMKM">601</td>
+<td class="gt_row gt_center" headers="Investasi (Rp juta)">10.0 (5.0–50.0)</td>
+<td class="gt_row gt_center" headers="Tenaga Kerja">2 (1–2)</td>
+<td class="gt_row gt_center" headers="Usaha Besar">3 (0.5%)</td>
+<td class="gt_row gt_center" headers="Usaha Kecil">35 (5.8%)</td>
+<td class="gt_row gt_center" headers="Usaha Mikro">563 (93.7%)</td>
+<td class="gt_row gt_center" headers="Usaha Menengah">0 (0.0%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="kecamatan">Cakranegara</td>
+<td class="gt_row gt_center" headers="Jumlah UMKM">799</td>
+<td class="gt_row gt_center" headers="Investasi (Rp juta)">15.0 (5.0–50.0)</td>
+<td class="gt_row gt_center" headers="Tenaga Kerja">2 (1–2)</td>
+<td class="gt_row gt_center" headers="Usaha Besar">12 (1.5%)</td>
+<td class="gt_row gt_center" headers="Usaha Kecil">31 (3.9%)</td>
+<td class="gt_row gt_center" headers="Usaha Mikro">754 (94.4%)</td>
+<td class="gt_row gt_center" headers="Usaha Menengah">2 (0.3%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="kecamatan">Mataram</td>
+<td class="gt_row gt_center" headers="Jumlah UMKM">802</td>
+<td class="gt_row gt_center" headers="Investasi (Rp juta)">20.0 (5.0–50.0)</td>
+<td class="gt_row gt_center" headers="Tenaga Kerja">2 (1–2)</td>
+<td class="gt_row gt_center" headers="Usaha Besar">14 (1.7%)</td>
+<td class="gt_row gt_center" headers="Usaha Kecil">55 (6.9%)</td>
+<td class="gt_row gt_center" headers="Usaha Mikro">731 (91.1%)</td>
+<td class="gt_row gt_center" headers="Usaha Menengah">2 (0.2%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="kecamatan">Sandubaya</td>
+<td class="gt_row gt_center" headers="Jumlah UMKM">785</td>
+<td class="gt_row gt_center" headers="Investasi (Rp juta)">20.0 (6.0–50.0)</td>
+<td class="gt_row gt_center" headers="Tenaga Kerja">2 (1–2)</td>
+<td class="gt_row gt_center" headers="Usaha Besar">11 (1.4%)</td>
+<td class="gt_row gt_center" headers="Usaha Kecil">28 (3.6%)</td>
+<td class="gt_row gt_center" headers="Usaha Mikro">742 (94.5%)</td>
+<td class="gt_row gt_center" headers="Usaha Menengah">4 (0.5%)</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_center" headers="kecamatan">Sekarbela</td>
+<td class="gt_row gt_center" headers="Jumlah UMKM">571</td>
+<td class="gt_row gt_center" headers="Investasi (Rp juta)">15.0 (5.0–50.0)</td>
+<td class="gt_row gt_center" headers="Tenaga Kerja">2 (1–2)</td>
+<td class="gt_row gt_center" headers="Usaha Besar">3 (0.5%)</td>
+<td class="gt_row gt_center" headers="Usaha Kecil">40 (7%)</td>
+<td class="gt_row gt_center" headers="Usaha Mikro">527 (92.3%)</td>
+<td class="gt_row gt_center" headers="Usaha Menengah">1 (0.2%)</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_center" headers="kecamatan">Selaparang</td>
+<td class="gt_row gt_center" headers="Jumlah UMKM">627</td>
+<td class="gt_row gt_center" headers="Investasi (Rp juta)">15.0 (4.0–50.0)</td>
+<td class="gt_row gt_center" headers="Tenaga Kerja">2 (1–2)</td>
+<td class="gt_row gt_center" headers="Usaha Besar">3 (0.5%)</td>
+<td class="gt_row gt_center" headers="Usaha Kecil">42 (6.7%)</td>
+<td class="gt_row gt_center" headers="Usaha Mikro">579 (92.3%)</td>
+<td class="gt_row gt_center" headers="Usaha Menengah">3 (0.5%)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="data-survei" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="data-survei"><span class="header-section-number">3.2</span> Data survei</h2>
+<p>Survei yang digunakan dalam penelitian ini dirancang untuk memperoleh gambaran mengenai karakteristik usaha sekaligus tingkat kesiapan digital pelaku Usaha Mikro, Kecil, dan Menengah (UMKM). Instrumen terdiri atas bagian informasi umum mengenai usaha dan pemilik, serta sejumlah pernyataan yang mengukur aspek-aspek terkait penggunaan dan kesiapan teknologi digital. Pada bagian karakteristik usaha, responden diminta memberikan informasi mengenai jenis usaha, penggunaan kanal penjualan atau pembelian secara daring, usia usaha, jumlah tenaga kerja, omzet bulanan, serta karakteristik pemilik seperti usia dan pendidikan terakhir. Informasi lokasi usaha juga dikumpulkan hingga tingkat kelurahan.</p>
+<p>Bagian utama instrumen menggunakan skala Likert lima tingkat, yaitu <em>Sangat Tidak Setuju</em> (STS), <em>Tidak Setuju</em> (TS), <em>Netral</em> (N), <em>Setuju</em> (S), dan <em>Sangat Setuju</em> (SS). Pernyataan dalam instrumen mencakup beberapa aspek kesiapan dan pemanfaatan teknologi digital. Aspek-aspek tersebut meliputi <strong>infrastruktur digital</strong>, <strong>keterampilan digital</strong>, <strong>proses bisnis</strong>, <strong>strategi digital</strong>, <strong>keamanan digital</strong>, serta <strong>data dan inovasi</strong>. Misalnya, infrastruktur digital mencakup kestabilan koneksi internet, ketersediaan perangkat yang memadai, dan penggunaan aplikasi daring atau <em>cloud</em>. Sementara itu, keterampilan digital mencakup kemampuan dasar menggunakan teknologi, pengalaman mengikuti pelatihan digital, dan pemahaman mengenai pemasaran digital.</p>
+<p>Selain aspek-aspek tersebut, instrumen juga memuat pertanyaan mengenai <strong>e-commerce dan media sosial</strong> serta <strong>sertifikasi halal</strong>. Bagian e-commerce dan media sosial mengukur penggunaan media sosial untuk promosi, pemanfaatan <em>marketplace</em>, dan proporsi penjualan yang berasal dari kanal daring. Bagian sertifikasi halal mengukur pengetahuan, persepsi manfaat, hambatan, dukungan pemerintah, kesiapan administrasi, serta kebutuhan pendampingan dalam proses sertifikasi.</p>
+<p>Dalam penelitian ini, tidak seluruh bagian survei digunakan sebagai indikator pembentuk DRI. Item yang secara substantif merepresentasikan kesiapan dan kapabilitas digital dipilih dan selanjutnya dikelompokkan ke dalam lima dimensi DRI, yaitu <strong>Skill</strong>, <strong>Business</strong>, <strong>Strategy</strong>, <strong>Security</strong>, dan <strong>Data</strong>. Dengan demikian, informasi karakteristik usaha dan bagian survei lainnya digunakan sebagai informasi pendukung atau variabel penelitian, sedangkan item yang relevan dengan lima dimensi tersebut menjadi dasar dalam proses evaluasi struktur instrumen dan konstruksi skor DRI.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 38
+  kode_umkm kecamatan kelurahan jenis_usaha online usia_usaha tenaga_kerja omset
+  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;
+1 UMKM001   Sekarbela Jempong … Jasa, Perd… ya     1-3 tahun  1-5 orang    kura…
+2 UMKM002   Mataram   Pagutan   Jasa        ya     1-3 tahun  1-5 orang    kura…
+3 UMKM003   Mataram   Pagesang… Kuliner     ya     1-3 tahun  1-5 orang    kura…
+4 UMKM004   Sandubaya Turida    Perdagangan ya     lebih dar… 6-10 orang   lebi…
+5 UMKM005   Sekarbela Jempong … Kuliner, J… ya     1-3 tahun  1-5 orang    kura…
+6 UMKM006   Selapara… Dasan Ag… Kuliner     ya     4-6 tahun  1-5 orang    kura…
+# ℹ 30 more variables: usia_pemilik &lt;chr&gt;, pendidikan &lt;chr&gt;, INF1 &lt;dbl&gt;,
+#   INF2 &lt;dbl&gt;, INF3 &lt;dbl&gt;, SKL1 &lt;dbl&gt;, SKL2 &lt;dbl&gt;, SKL3 &lt;dbl&gt;, BUS1 &lt;dbl&gt;,
+#   BUS2 &lt;dbl&gt;, BUS3 &lt;dbl&gt;, STR1 &lt;dbl&gt;, STR2 &lt;dbl&gt;, SEC1 &lt;dbl&gt;, SEC2 &lt;dbl&gt;,
+#   DAT1 &lt;dbl&gt;, DAT2 &lt;dbl&gt;, ECO1 &lt;dbl&gt;, ECO2 &lt;dbl&gt;, ECO3 &lt;dbl&gt;, HAL1 &lt;dbl&gt;,
+#   HAL2 &lt;dbl&gt;, HAL3 &lt;dbl&gt;, HAL4 &lt;dbl&gt;, HAL5 &lt;dbl&gt;, HAL6 &lt;dbl&gt;, HAL7 &lt;dbl&gt;,
+#   HAL8 &lt;dbl&gt;, HAL9 &lt;dbl&gt;, HAL10 &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="konstruksi-digital-readiness-index-dri" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="konstruksi-digital-readiness-index-dri"><span class="header-section-number">3.3</span> Konstruksi Digital Readiness Index (DRI)</h2>
+<p><em>Digital Readiness Index</em> (DRI) dikonstruksi untuk memperoleh satu ukuran komposit yang merepresentasikan tingkat kesiapan digital pada setiap responden. Konstruksi DRI diawali dengan identifikasi struktur dimensi yang mendasari instrumen pengukuran. Instrumen awal terdiri atas enam kelompok indikator, yaitu Infrastruktur (INF), Skill (SKL), Business (BUS), Strategy (STR), Security (SEC), dan Data (DAT). Sebelum skor indeks dihitung, dilakukan pemeriksaan terhadap kelayakan data untuk analisis faktor. Nilai Kaiser–Meyer–Olkin (KMO) secara keseluruhan sebesar 0,94 menunjukkan bahwa korelasi antaritem sangat memadai untuk analisis faktor. Selain itu, uji Bartlett terhadap matriks korelasi menghasilkan <span class="math inline">\(\chi^2=8001.616\)</span> dengan <span class="math inline">\(df=153\)</span> dan <span class="math inline">\(p&lt;0.001\)</span>, sehingga hipotesis bahwa matriks korelasi merupakan matriks identitas ditolak. Dengan demikian, data memenuhi persyaratan awal untuk mengevaluasi struktur konstruk.</p>
+<p>Selanjutnya dilakukan <em>exploratory factor analysis</em> (EFA) menggunakan metode minimum residual (minres), rotasi oblimin, dan matriks korelasi polikhorik karena indikator diukur pada skala ordinal. <em>Parallel analysis</em> memberikan indikasi awal adanya tiga faktor statistik. Namun, hasil tersebut tidak langsung digunakan sebagai dasar untuk menetapkan struktur substantif DRI. Evaluasi struktur juga mempertimbangkan kerangka konseptual instrumen dan interpretabilitas indikator. Hasil EFA tiga faktor menunjukkan bahwa sebagian besar indikator memiliki <em>communality</em> yang tinggi, tetapi beberapa indikator menunjukkan <em>cross-loading</em>. Secara khusus, indikator INF1 dan INF2 membentuk kelompok yang berbeda dari INF3, sedangkan INF3 menunjukkan pola pemuatan yang lebih dekat dengan kelompok kemampuan (<em>capability</em>). Hal ini menunjukkan bahwa struktur empiris tidak sepenuhnya mereproduksi pengelompokan awal indikator berdasarkan label konseptual.</p>
+<p>Temuan tersebut penting karena tujuan penelitian bukan semata-mata memperoleh jumlah faktor statistik yang paling kecil, tetapi membangun indeks yang memiliki interpretasi substantif dan dapat digunakan secara konsisten pada tahap analisis berikutnya. Oleh karena itu, evaluasi struktur dilakukan dengan mempertimbangkan kombinasi antara hasil analisis faktor eksploratori, makna substantif setiap indikator, serta struktur konseptual DRI yang digunakan dalam penelitian.</p>
+<p>Berdasarkan evaluasi tersebut, indikator Infrastructure tidak dipertahankan sebagai dimensi tersendiri dalam konstruksi skor akhir. Dengan demikian, struktur operasional DRI yang digunakan terdiri atas lima dimensi, yaitu Skill, Business, Strategy, Security, dan Data. Kelima dimensi tersebut selanjutnya diperlakukan sebagai komponen utama dari konstruk Digital Readiness.</p>
+<p>Untuk memastikan bahwa kelima dimensi tersebut memiliki dasar pengukuran yang memadai, dilakukan pengujian <em>confirmatory factor analysis</em> (CFA) pada struktur first-order. Hasil CFA menunjukkan bahwa indikator-indikator pada masing-masing dimensi memiliki standardized factor loading yang tinggi dan signifikan. Pada dimensi Skill, misalnya, loading SKL1, SKL2, dan SKL3 masing-masing sebesar 0,811, 1,020, dan 0,867. Pada dimensi Business, loading BUS1–BUS3 berada pada kisaran 0,895–0,965. Dimensi Strategy memiliki loading 0,889 dan 0,942, Security sebesar 0,964 dan 0,951, sedangkan Data sebesar 0,923 dan 0,873. Secara umum, hasil tersebut menunjukkan bahwa indikator-indikator yang dipertahankan memberikan kontribusi kuat terhadap dimensi masing-masing.</p>
+<p>Selanjutnya, struktur lima dimensi juga dievaluasi melalui model second-order, dengan DigitalCapability sebagai konstruk tingkat kedua yang direfleksikan oleh Skill, Business, Strategy, Security, dan Data. Model menghasilkan CFI = 0,998, TLI = 0,997, dan SRMR = 0,059, yang menunjukkan kesesuaian model yang baik pada beberapa indeks fit. Namun demikian, model juga menghasilkan indikasi Heywood case, khususnya varians residual negatif pada dimensi Data dan beberapa permasalahan varians pada konstruk laten. Oleh karena itu, hasil second-order CFA tidak digunakan sebagai dasar utama untuk mengestimasi skor indeks. Model tersebut digunakan terutama sebagai evaluasi terhadap struktur konstruk, sedangkan konstruksi skor DRI dilakukan dengan pendekatan komposit yang lebih sederhana dan transparan.</p>
+<section id="standardisasi-skor-dimensi" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="standardisasi-skor-dimensi"><span class="header-section-number">3.3.1</span> Standardisasi Skor Dimensi</h3>
+<p>Sebelum digabungkan menjadi indeks komposit, skor untuk masing-masing dimensi distandardisasi menggunakan <em>z-score</em>. Standardisasi dilakukan untuk menempatkan kelima dimensi pada skala yang sama sehingga dimensi dengan variabilitas awal yang berbeda tidak memberikan pengaruh yang tidak proporsional terhadap nilai indeks.</p>
+<p>Untuk setiap dimensi <span class="math inline">\(d\)</span>, skor terstandardisasi dihitung sebagai</p>
+<p><span class="math display">\[
+Z_{id} = \frac{X_{id} - \bar{X}_{d}}{s_d},
+\]</span></p>
+<p>dengan <span class="math inline">\(X_{id}\)</span> menyatakan skor dimensi <span class="math inline">\(d\)</span> untuk responden <span class="math inline">\(i\)</span>, <span class="math inline">\(\bar{X}_{d}\)</span> adalah rata-rata skor dimensi tersebut, dan <span class="math inline">\(s_d\)</span> adalah standar deviasi skor dimensi tersebut.</p>
+<p>Dengan demikian, diperoleh lima skor terstandardisasi:</p>
+<ul>
+<li><span class="math inline">\(Skill_z\)</span> untuk dimensi Skill;</li>
+<li><span class="math inline">\(Business_z\)</span> untuk dimensi Business;</li>
+<li><span class="math inline">\(Strategy_z\)</span> untuk dimensi Strategy;</li>
+<li><span class="math inline">\(Security_z\)</span> untuk dimensi Security; dan</li>
+<li><span class="math inline">\(Data_z\)</span> untuk dimensi Data.</li>
+</ul>
+<p>Kelima dimensi menunjukkan hubungan yang kuat satu sama lain. Korelasi antardimensi berada pada kisaran 0.733–0.883. Selain itu, konsistensi internal kelima skor dimensi sebagai satu set ukuran komposit menunjukkan nilai Cronbach’s alpha sebesar 0.95 (95% CI: 0.94–0.96). Hasil tersebut mendukung penggunaan kelima dimensi secara bersama-sama dalam pembentukan ukuran komposit Digital Readiness.</p>
+</section>
+<section id="pembentukan-dri" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="pembentukan-dri"><span class="header-section-number">3.3.2</span> Pembentukan DRI</h3>
+<p>Setelah standardisasi, DRI dihitung sebagai rata-rata aritmetika dari kelima skor dimensi:</p>
+<p><span class="math display">\[
+DRI_i =
+\frac{
+Skill_{z,i} +
+Business_{z,i} +
+Strategy_{z,i} +
+Security_{z,i} +
+Data_{z,i}
+}{5}.
+\]</span></p>
+<p>Dalam implementasi menggunakan R, konstruksi DRI dilakukan dengan kode berikut:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-1.2835 -0.7730 -0.1548  0.0000  0.6992  2.0778 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 49
+  kode_umkm kecamatan kelurahan jenis_usaha online usia_usaha tenaga_kerja omset
+  &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;
+1 UMKM001   Sekarbela Jempong … Jasa, Perd… ya     1-3 tahun  1-5 orang    kura…
+2 UMKM002   Mataram   Pagutan   Jasa        ya     1-3 tahun  1-5 orang    kura…
+3 UMKM003   Mataram   Pagesang… Kuliner     ya     1-3 tahun  1-5 orang    kura…
+4 UMKM004   Sandubaya Turida    Perdagangan ya     lebih dar… 6-10 orang   lebi…
+5 UMKM005   Sekarbela Jempong … Kuliner, J… ya     1-3 tahun  1-5 orang    kura…
+6 UMKM006   Selapara… Dasan Ag… Kuliner     ya     4-6 tahun  1-5 orang    kura…
+# ℹ 41 more variables: usia_pemilik &lt;chr&gt;, pendidikan &lt;chr&gt;, INF1 &lt;dbl&gt;,
+#   INF2 &lt;dbl&gt;, INF3 &lt;dbl&gt;, SKL1 &lt;dbl&gt;, SKL2 &lt;dbl&gt;, SKL3 &lt;dbl&gt;, BUS1 &lt;dbl&gt;,
+#   BUS2 &lt;dbl&gt;, BUS3 &lt;dbl&gt;, STR1 &lt;dbl&gt;, STR2 &lt;dbl&gt;, SEC1 &lt;dbl&gt;, SEC2 &lt;dbl&gt;,
+#   DAT1 &lt;dbl&gt;, DAT2 &lt;dbl&gt;, ECO1 &lt;dbl&gt;, ECO2 &lt;dbl&gt;, ECO3 &lt;dbl&gt;, HAL1 &lt;dbl&gt;,
+#   HAL2 &lt;dbl&gt;, HAL3 &lt;dbl&gt;, HAL4 &lt;dbl&gt;, HAL5 &lt;dbl&gt;, HAL6 &lt;dbl&gt;, HAL7 &lt;dbl&gt;,
+#   HAL8 &lt;dbl&gt;, HAL9 &lt;dbl&gt;, HAL10 &lt;dbl&gt;, Skill &lt;dbl&gt;, Business &lt;dbl&gt;,
+#   Strategy &lt;dbl&gt;, Security &lt;dbl&gt;, Data &lt;dbl&gt;, Skill_z &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Pada dataset akhir, seluruh 388 responden memiliki skor lengkap untuk kelima dimensi sehingga tidak terdapat responden yang kehilangan dimensi pada proses pembentukan DRI.</p>
+<p>Nilai DRI merupakan composite standardized index, karena indeks dibentuk dari skor-skor dimensi yang telah distandardisasi menggunakan z-score. DRI tidak menggunakan transformasi min–max normalization. Oleh karena itu, nilai DRI dapat bernilai negatif maupun positif.</p>
+<p>Secara substantif, nilai DRI diinterpretasikan relatif terhadap rata-rata sampel. Nilai DRI yang lebih tinggi menunjukkan tingkat kesiapan digital yang relatif lebih tinggi, sedangkan nilai yang lebih rendah menunjukkan tingkat kesiapan digital yang relatif lebih rendah. Nilai yang mendekati nol menunjukkan tingkat kesiapan digital yang berada di sekitar rata-rata sampel.</p>
+</section>
+<section id="pemeriksaan-distribusi-dri" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="pemeriksaan-distribusi-dri"><span class="header-section-number">3.3.3</span> Pemeriksaan Distribusi DRI</h3>
+<p>Distribusi DRI diperiksa secara deskriptif sebelum digunakan dalam analisis spasial. Pemeriksaan meliputi statistik deskriptif dan visualisasi distribusi indeks.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-1.2835 -0.7730 -0.1548  0.0000  0.6992  2.0778 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9171383</code></pre>
+</div>
+</div>
+<p>Distribusi DRI kemudian divisualisasikan menggunakan histogram:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="agregasi-dri-pada-unit-spasial" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="agregasi-dri-pada-unit-spasial"><span class="header-section-number">3.3.4</span> Agregasi DRI pada Unit Spasial</h3>
+<p>Karena analisis selanjutnya dilakukan pada tingkat kelurahan, skor DRI individual diagregasikan ke tingkat kelurahan. Nilai DRI kelurahan dihitung sebagai rata-rata DRI seluruh responden yang berada pada kelurahan tersebut:</p>
+<p><span class="math display">\[
+DRI_j^{(\mathrm{area})}
+=
+\frac{1}{n_j}
+\sum_{i=1}^{n_j} DRI_{ij},
+\]</span></p>
+<p>dengan <span class="math inline">\(DRI_j^{(area)}\)</span> merupakan nilai DRI pada kelurahan <span class="math inline">\(j\)</span>, <span class="math inline">\(n_j\)</span> adalah jumlah responden pada kelurahan <span class="math inline">\(j\)</span>, dan <span class="math inline">\(DRI_{ij}\)</span> adalah skor DRI responden <span class="math inline">\(i\)</span> pada kelurahan <span class="math inline">\(j\)</span>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 6
+   kecamatan kelurahan           n    DRI DRI_sd DRI_se
+   &lt;chr&gt;     &lt;chr&gt;           &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+ 1 Ampenan   Ampenan Selatan    28 -0.425     NA     NA
+ 2 Ampenan   Ampenan Tengah      1  0.197     NA     NA
+ 3 Ampenan   Ampenan Utara       1 -1.28      NA     NA
+ 4 Ampenan   Banjar              4  1.12      NA     NA
+ 5 Ampenan   Bintaro             1  2.01      NA     NA
+ 6 Ampenan   Dayan Peken         1  1.26      NA     NA
+ 7 Ampenan   Kebon Sari          1  1.17      NA     NA
+ 8 Ampenan   Pejarakan Karya     1  1.40      NA     NA
+ 9 Ampenan   Pejeruk             1  0.429     NA     NA
+10 Ampenan   Taman Sari          1 -0.107     NA     NA
+# ℹ 25 more rows</code></pre>
+</div>
+</div>
+<p>Hasil agregasi menghasilkan 35 kelurahan dengan jumlah responden yang tidak sama antarwilayah. Oleh karena itu, selain nilai rata-rata DRI, jumlah responden (<span class="math inline">\(n\)</span>) dan ukuran variasi DRI pada masing-masing kelurahan juga disimpan untuk keperluan pemeriksaan dan analisis selanjutnya.</p>
+<p>Dengan konstruksi tersebut, DRI yang digunakan sebagai response variable dalam analisis spasial merepresentasikan rata-rata tingkat kesiapan digital pada tingkat kelurahan, bukan skor individual responden.</p>
+</section>
+</section>
+<section id="aspek-halal" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="aspek-halal"><span class="header-section-number">3.4</span> Aspek halal</h2>
+<p>Aspek halal dalam penelitian ini diukur melalui sepuluh pernyataan dengan skala Likert lima tingkat. Kesepuluh pernyataan mencakup pemahaman dan persepsi manfaat sertifikasi halal, pengetahuan serta kesiapan dalam proses sertifikasi, hambatan yang dihadapi, dukungan pemerintah, dan akses terhadap layanan sertifikasi halal.</p>
+<section id="analisis-deskriptif" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="analisis-deskriptif"><span class="header-section-number">3.4.1</span> Analisis Deskriptif</h3>
+<p>Secara deskriptif, respons UMKM cenderung menunjukkan penilaian yang positif terhadap manfaat sertifikasi halal. Hal ini terutama terlihat pada HAL2, HAL6, dan HAL9. Pada HAL2, yaitu pernyataan bahwa sertifikasi halal meningkatkan kepercayaan konsumen, sebanyak 52% responden memberikan skor 4 dan 35% memberikan skor 5. Pada HAL6 mengenai peningkatan daya saing produk, 55% responden memberikan skor 4 dan 30% skor 5. Sementara itu, pada HAL9 mengenai kemampuan sertifikasi halal dalam memperluas pasar, 56% responden memberikan skor 4 dan 34% skor 5. HAL1 mengenai pentingnya sertifikasi halal juga menunjukkan kecenderungan respons positif, dengan 43% responden memberikan skor 4 dan 28% skor 5.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Tampilkan kode</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/halal_score.RData"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>halal_likert <span class="ot">&lt;-</span> halal_score <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"HAL"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(score)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(item, score) <span class="sc">%&gt;%</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(item) <span class="sc">%&gt;%</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">item =</span> <span class="fu">factor</span>(item, <span class="at">levels =</span> <span class="fu">paste0</span>(<span class="st">"HAL"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)),</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">score =</span> <span class="fu">factor</span>(score, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  halal_likert[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>,],</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> item,</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> prop,</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">factor</span>(score)</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">percent_format</span>(),</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"cividis"</span>,</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Skor"</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proporsi responden"</span>,</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribusi Respons UMKM terhadap Pernyataan Halal"</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pola tersebut menunjukkan bahwa sertifikasi halal secara umum dipandang positif oleh responden, khususnya dalam kaitannya dengan kepercayaan konsumen, daya saing, dan perluasan pasar. Namun, persepsi positif mengenai manfaat sertifikasi tidak dengan sendirinya menunjukkan bahwa UMKM telah memiliki kesiapan yang sama untuk menjalankan proses sertifikasi. Oleh karena itu, item-item halal selanjutnya dianalisis untuk melihat apakah terdapat beberapa aspek yang berbeda dalam pengalaman dan persepsi UMKM terhadap sertifikasi halal.</p>
+</section>
+<section id="struktur-dan-pengelompokan-aspek-halal" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="struktur-dan-pengelompokan-aspek-halal"><span class="header-section-number">3.4.2</span> Struktur dan pengelompokan aspek halal</h3>
+<p>Analisis korelasi polikorik terhadap sepuluh item menunjukkan bahwa hubungan antaritem cukup beragam. Beberapa item menunjukkan korelasi yang tinggi, terutama HAL1, HAL2, HAL6, dan HAL9. Korelasi antara HAL1 dan HAL2 sebesar 0,818, HAL2 dan HAL6 sebesar 0,835, HAL6 dan HAL9 sebesar 0,804, serta HAL2 dan HAL9 sebesar 0,733. Sebaliknya, beberapa pasangan item menunjukkan hubungan yang relatif rendah, misalnya korelasi HAL3 dengan HAL8 sebesar -0,042 dan HAL7 dengan HAL8 sebesar 0,025.</p>
+<p>Pola tersebut menunjukkan bahwa sepuluh item tidak sepenuhnya menggambarkan satu dimensi yang homogen. Secara substantif, item-item tersebut memang mencakup beberapa aspek yang berbeda. Berdasarkan pola hubungan antaritem dan kerangka pertanyaan, empat item, yaitu HAL1, HAL2, HAL6, dan HAL9, dikelompokkan sebagai aspek kesadaran dan persepsi manfaat sertifikasi halal. HAL3 dan HAL7 membentuk aspek kesiapan sertifikasi halal, sedangkan HAL4 dan HAL8 merepresentasikan hambatan dalam proses sertifikasi halal. HAL5 dan HAL10 dipertahankan sebagai indikator tunggal yang masing-masing menggambarkan persepsi terhadap dukungan pemerintah dan akses terhadap layanan sertifikasi halal.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 26%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspek</th>
+<th>Item</th>
+<th>Makna</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Awareness and Perceived Benefits</td>
+<td>HAL1, HAL2, HAL6, HAL9</td>
+<td>Pemahaman dan persepsi manfaat sertifikasi</td>
+</tr>
+<tr class="even">
+<td>Readiness</td>
+<td>HAL3, HAL7</td>
+<td>Pengetahuan prosedur dan kesiapan administratif</td>
+</tr>
+<tr class="odd">
+<td>Barrier</td>
+<td>HAL4, HAL8</td>
+<td>Kendala dan kebutuhan pendampingan</td>
+</tr>
+<tr class="even">
+<td>Support</td>
+<td>HAL5</td>
+<td>Persepsi terhadap sosialisasi pemerintah</td>
+</tr>
+<tr class="odd">
+<td>Access</td>
+<td>HAL10</td>
+<td>Persepsi mengenai akses layanan berdasarkan lokasi</td>
+</tr>
+</tbody>
+</table>
+<p>Pengelompokan tersebut juga memperoleh dukungan dari analisis CFA ordinal menggunakan estimator WLSMV. Loading terstandar untuk dimensi kesadaran dan persepsi manfaat berada pada rentang 0,834–0,919. Pada dimensi kesiapan, loading HAL3 dan HAL7 masing-masing sebesar 0,893 dan 0,884. Untuk dimensi hambatan, loading HAL4 sebesar 0,546 dan HAL8 sebesar 0,909.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Tampilkan kode</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/cor_df.RData"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>item_order <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HAL1"</span>, <span class="st">"HAL2"</span>, <span class="st">"HAL6"</span>, <span class="st">"HAL9"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HAL3"</span>, <span class="st">"HAL7"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HAL4"</span>, <span class="st">"HAL8"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HAL5"</span>, <span class="st">"HAL10"</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>cor_df <span class="ot">&lt;-</span> cor_df <span class="sc">%&gt;%</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">item1 =</span> <span class="fu">factor</span>(item1, <span class="at">levels =</span> item_order),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">item2 =</span> <span class="fu">factor</span>(item2, <span class="at">levels =</span> <span class="fu">rev</span>(item_order))</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  cor_df,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> item1, <span class="at">y =</span> item2, <span class="at">fill =</span> rho)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, rho)),</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"viridis"</span>,</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Korelasi"</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Meskipun demikian, ukuran kesesuaian model secara keseluruhan belum menunjukkan kecocokan yang sepenuhnya baik. CFI dan TLI standar masing-masing sebesar 0,990 dan 0,983, sedangkan RMSEA sebesar 0,146 dan SRMR sebesar 0,072. Nilai robust CFI sebesar 0,872 dan robust RMSEA sebesar 0,211 juga menunjukkan bahwa model tidak sebaik jika hanya dinilai berdasarkan indeks fit standar. Oleh karena itu, hasil CFA dalam penelitian ini lebih tepat digunakan sebagai informasi pendukung mengenai pola pengelompokan indikator, bukan sebagai dasar untuk menyatakan bahwa keseluruhan struktur pengukuran telah memiliki kecocokan yang sangat baik.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Tampilkan kode</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(semPlot)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/fit_halal.RData"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">semPaths</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  fit_halal,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">what =</span> <span class="st">"std"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">whatLabels =</span> <span class="st">"std"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">layout =</span> <span class="st">"tree"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">"mx"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">residuals =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">intercepts =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">edge.label.cex =</span> <span class="fl">0.9</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">sizeMan =</span> <span class="dv">6</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">sizeLat =</span> <span class="dv">8</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">nCharNodes =</span> <span class="dv">0</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="konstruksi-skor-aspek-halal" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="konstruksi-skor-aspek-halal"><span class="header-section-number">3.4.3</span> Konstruksi skor aspek halal</h3>
+<p>Berdasarkan hasil eksplorasi tersebut, aspek halal tidak dikonstruksi menjadi satu indeks tunggal. Pendekatan ini dipilih karena sepuluh item mencakup konsep yang berbeda, terutama antara persepsi manfaat, kesiapan, dan hambatan. Penggabungan seluruh item menjadi satu skor akan berpotensi mengaburkan perbedaan substantif tersebut.</p>
+<p>Skor Kesadaran dan Persepsi Manfaat Sertifikasi Halal dihitung sebagai rata-rata empat item, yaitu HAL1, HAL2, HAL6, dan HAL9. Konsistensi internal keempat item tersebut tergolong baik, dengan Cronbach’s alpha sebesar 0,88 dan korelasi antaritem rata-rata sebesar 0,67. Penghapusan salah satu item juga tidak memberikan peningkatan berarti terhadap nilai alpha, sehingga keempat item dipertahankan dalam skor komposit.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Tampilkan kode</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>halal_construct <span class="ot">&lt;-</span> halal_score <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">HAL_awareness =</span> <span class="fu">rowMeans</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(., HAL1, HAL2, HAL6, HAL9),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">HAL_readiness =</span> <span class="fu">rowMeans</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(., HAL3, HAL7),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">HAL_barrier =</span> <span class="fu">rowMeans</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(., HAL4, HAL8),</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    HAL_awareness,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    HAL_readiness,</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    HAL_barrier</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"Aspek"</span>,</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"Skor"</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>halal_construct <span class="ot">&lt;-</span> halal_construct <span class="sc">%&gt;%</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">Aspek =</span> <span class="fu">recode</span>(</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>      Aspek,</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">HAL_awareness =</span> <span class="st">"Kesadaran dan</span><span class="sc">\n</span><span class="st">persepsi manfaat"</span>,</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">HAL_readiness =</span> <span class="st">"Kesiapan</span><span class="sc">\n</span><span class="st">sertifikasi"</span>,</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">HAL_barrier =</span> <span class="st">"Hambatan</span><span class="sc">\n</span><span class="st">sertifikasi"</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  halal_construct,</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Aspek, <span class="at">y =</span> Skor)</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"grey90"</span>,</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey40"</span>,</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">trim =</span> <span class="cn">FALSE</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.15</span>,</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"white"</span>,</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.shape =</span> <span class="cn">NA</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>),</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Skor"</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>      <span class="at">angle =</span> <span class="dv">15</span>,</span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>      <span class="at">hjust =</span> <span class="dv">1</span></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Skor Kesiapan Sertifikasi Halal dihitung sebagai rata-rata HAL3 dan HAL7. Kedua item tersebut masing-masing memiliki loading terstandar sebesar 0,893 dan 0,884 pada faktor Readiness. Skor ini merepresentasikan kombinasi antara pengetahuan mengenai prosedur pengurusan sertifikasi dan kesiapan administrasi yang dirasakan oleh UMKM.</p>
+<p>Selanjutnya, skor Hambatan Sertifikasi Halal dihitung sebagai rata-rata HAL4 dan HAL8. Kedua item tersebut berkaitan dengan kendala biaya dan kebutuhan pendampingan dalam proses sertifikasi. Meskipun kedua indikator memiliki loading yang berbeda, masing-masing tetap memberikan informasi mengenai hambatan yang dirasakan oleh UMKM.</p>
+<p>HAL5 dan HAL10 tidak dimasukkan ke dalam ketiga skor komposit tersebut. HAL5 dipertahankan sebagai indikator dukungan/sosialisasi pemerintah, sedangkan HAL10 sebagai indikator akses layanan sertifikasi halal. Pemisahan ini dilakukan karena kedua item tersebut merepresentasikan kondisi eksternal yang berbeda dan tidak memiliki dasar empiris yang cukup dari analisis saat ini untuk digabungkan dengan salah satu konstruk utama.</p>
+<p>Ketiga skor komposit pertama dihitung sebagai rata-rata skor item penyusunnya, sehingga tetap berada pada skala 1–5. Dengan cara ini, interpretasi skor tetap langsung terkait dengan skala jawaban responden. Skor yang lebih tinggi menunjukkan tingkat persetujuan yang lebih tinggi terhadap aspek yang bersangkutan. Khusus untuk <code>HAL_barrier</code>, skor yang lebih tinggi menunjukkan persepsi hambatan yang lebih besar dan karenanya tidak boleh ditafsirkan sebagai kondisi halal yang lebih baik.</p>
+</section>
+<section id="hubungan-aspek-halal-dengan-dri" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="hubungan-aspek-halal-dengan-dri"><span class="header-section-number">3.4.4</span> Hubungan aspek halal dengan DRI</h3>
+<p>Setelah skor aspek halal dibentuk, hubungan antara kesiapan digital dan aspek halal dianalisis melalui korelasi. Hasilnya menunjukkan bahwa <code>DRI</code> memiliki korelasi positif dengan seluruh skor aspek halal, tetapi dengan kekuatan yang berbeda. Korelasi terbesar terdapat antara <code>DRI</code> dan Kesiapan Sertifikasi Halal, yaitu sebesar 0,564. Selanjutnya, korelasi DRI dengan Kesadaran dan Persepsi Manfaat Sertifikasi Halal sebesar 0,382, sedangkan korelasi dengan Hambatan Sertifikasi Halal sebesar 0,225. Hubungan DRI dengan Dukungan/Sosialisasi Pemerintah sebesar 0,134 dan dengan Akses Layanan Sertifikasi Halal sebesar 0,071.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Tampilkan kode</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cor_halal_dri <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Aspek =</span> <span class="fu">c</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kesiapan sertifikasi"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Kesadaran dan persepsi manfaat"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hambatan sertifikasi"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Dukungan/sosialisasi pemerintah"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Akses layanan sertifikasi"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fu">c</span>(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.564</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.382</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.225</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.134</span>,</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.071</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Aspek =</span> <span class="fu">factor</span>(Aspek, <span class="at">levels =</span> <span class="fu">rev</span>(Aspek))</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  cor_halal_dri,</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> r, <span class="at">y =</span> Aspek)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, r)),</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.15</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.5</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.65</span>),</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.08</span>))</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Koefisien korelasi"</span>,</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pola tersebut menunjukkan bahwa keterkaitan antara kesiapan digital dan aspek halal tidak seragam. Hubungan yang relatif lebih kuat ditemukan pada aspek yang berkaitan langsung dengan kesiapan UMKM untuk menjalani proses sertifikasi. Sebaliknya, hubungan DRI dengan persepsi mengenai dukungan pemerintah dan akses layanan relatif lemah. Dengan demikian, dalam data penelitian ini, kesiapan digital lebih erat berkaitan dengan aspek internal UMKM, khususnya kesiapan sertifikasi, dibandingkan dengan persepsi terhadap faktor eksternal seperti dukungan dan akses layanan.</p>
+<p>Korelasi positif sebesar 0,564 antara DRI dan Kesiapan Sertifikasi Halal menunjukkan bahwa UMKM dengan tingkat kesiapan digital yang lebih tinggi cenderung memiliki tingkat kesiapan sertifikasi halal yang lebih tinggi pula. Namun, hubungan ini merupakan hubungan asosiatif dan tidak dapat digunakan untuk menyimpulkan bahwa peningkatan kesiapan digital menyebabkan peningkatan kesiapan sertifikasi halal. Analisis korelasi juga belum memperhitungkan kemungkinan adanya karakteristik usaha lain yang secara bersamaan berkaitan dengan kedua variabel tersebut.</p>
+<p>Secara keseluruhan, hasil analisis memberikan indikasi bahwa aspek halal pada UMKM Kota Mataram lebih tepat dipahami sebagai beberapa dimensi yang saling berkaitan tetapi tidak identik. Persepsi terhadap manfaat sertifikasi, kesiapan untuk mengurus sertifikasi, hambatan yang dirasakan, dukungan pemerintah, dan akses layanan memberikan informasi yang berbeda mengenai posisi UMKM dalam proses sertifikasi halal. Di antara aspek tersebut, kesiapan sertifikasi halal menunjukkan keterkaitan paling kuat dengan DRI, sehingga aspek ini dapat digunakan sebagai fokus utama pada analisis lanjutan mengenai hubungan antara kesiapan digital dan kesiapan halal.</p>
+</section>
+</section>
+</section>
+<section id="ringkasan-temuan" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Ringkasan Temuan</h1>
+<p>Berdasarkan hasil GLM dan CAR yang sekarang sudah tersedia, berikut dideskripsikan hasil yang diperoleh. Ada tiga temuan utama: pengaruh <code>mean_ecomm</code>, keberadaan ketergantungan spasial, dan peningkatan kecocokan model setelah struktur spasial dimasukkan.</p>
+<section id="model-car-memiliki-kecocokan-yang-lebih-baik" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="model-car-memiliki-kecocokan-yang-lebih-baik"><span class="header-section-number">4.1</span> Model CAR memiliki kecocokan yang lebih baik</h2>
+<p>Kedua model menggunakan respons dan enam prediktor yang sama. Perbedaannya adalah GLM tidak memiliki efek spasial, sedangkan CAR menggunakan <em>random effect</em> spasial Leroux.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Kriteria</th>
+<th style="text-align: right;">GLM Gaussian</th>
+<th style="text-align: right;">CAR Leroux Gaussian</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DIC</td>
+<td style="text-align: right;">51,64</td>
+<td style="text-align: right;"><strong>42,78</strong></td>
+</tr>
+<tr class="even">
+<td>WAIC</td>
+<td style="text-align: right;">52,15</td>
+<td style="text-align: right;"><strong>47,32</strong></td>
+</tr>
+<tr class="odd">
+<td>LMPL</td>
+<td style="text-align: right;">-26,86</td>
+<td style="text-align: right;"><strong>-25,87</strong></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(p_D\)</span></td>
+<td style="text-align: right;">7,68</td>
+<td style="text-align: right;">6,58</td>
+</tr>
+</tbody>
+</table>
+<p>Untuk DIC dan WAIC, nilai yang lebih rendah menunjukkan kecocokan relatif yang lebih baik. Dengan demikian:</p>
+<p><span class="math display">\[ \Delta DIC = 51,64-42,78=8,85 \]</span></p>
+<p>dan</p>
+<p><span class="math display">\[ \Delta WAIC = 52.15-47.32=4.83. \]</span></p>
+<p>LMPL juga lebih tinggi pada model CAR:</p>
+<p><span class="math display">\[ -25.87 &gt; -26.86. \]</span></p>
+<p>Ketiga ukuran tersebut konsisten menunjukkan <strong>bahwa model CAR memberikan kecocokan yang lebih baik</strong> dibandingkan model Gaussian nonspasial.</p>
+<p>Ini merupakan salah satu hasil utama yang dapat Anda gunakan untuk mendukung penggunaan model spasial.</p>
+</section>
+<section id="koefisien-regresi-relatif-stabil-setelah-efek-spasial-dimasukkan" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="koefisien-regresi-relatif-stabil-setelah-efek-spasial-dimasukkan"><span class="header-section-number">4.2</span> Koefisien regresi relatif stabil setelah efek spasial dimasukkan</h2>
+<p>Hal yang menarik adalah koefisien antara kedua model hampir tidak berubah.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variabel</th>
+<th style="text-align: right;">GLM</th>
+<th style="text-align: right;">CAR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mean_ecomm</code></td>
+<td style="text-align: right;">0.657</td>
+<td style="text-align: right;">0.655</td>
+</tr>
+<tr class="even">
+<td><code>mean_infr</code></td>
+<td style="text-align: right;">0.430</td>
+<td style="text-align: right;">0.446</td>
+</tr>
+<tr class="odd">
+<td><code>prop_online</code></td>
+<td style="text-align: right;">0.617</td>
+<td style="text-align: right;">0.602</td>
+</tr>
+<tr class="even">
+<td><code>median_investment</code></td>
+<td style="text-align: right;">0.0135</td>
+<td style="text-align: right;">0.0134</td>
+</tr>
+<tr class="odd">
+<td><code>median_tk</code></td>
+<td style="text-align: right;">0.005</td>
+<td style="text-align: right;">0.012</td>
+</tr>
+<tr class="even">
+<td><code>prop_cv_pt</code></td>
+<td style="text-align: right;">-3.626</td>
+<td style="text-align: right;">-3.657</td>
+</tr>
+</tbody>
+</table>
+<p>Misalnya untuk <code>mean_ecomm</code>:</p>
+<p><span class="math display">\[ \beta_{\text{GLM}}=0.6569 \]</span></p>
+<p>sedangkan</p>
+<p><span class="math display">\[ \beta_{\text{CAR}}=0.6546. \]</span></p>
+<p>Perbedaannya sangat kecil. Interval kredibelnya juga hampir identik.</p>
+<p>Hal ini menunjukkan bahwa penambahan komponen spasial tidak mengubah secara material estimasi hubungan antara kovariat dan <code>DRI</code>.</p>
+<p>Jadi, model CAR bukan menghasilkan kesimpulan substantif yang sama sekali berbeda dari GLM. Perbedaannya terutama terletak pada bagaimana model menangani struktur spasial yang terdapat dalam data.</p>
+</section>
+<section id="asosiasi-mean_ecomm-dengan-dri" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="asosiasi-mean_ecomm-dengan-dri"><span class="header-section-number">4.3</span> Asosiasi <code>mean_ecomm</code> dengan DRI</h2>
+<p>Dalam model CAR, koefisien untuk <code>mean_ecomm</code> memiliki nilai sebesar</p>
+<p><span class="math display">\[
+\beta_{\mathrm{mean\_ecomm}} = 0.6546
+\]</span></p>
+<p>dengan selang kepercayaan 95% sebesar</p>
+<p><span class="math display">\[
+(0.3734,\;0.9384).
+\]</span></p>
+<p>Selang kepercayaan tersebut tidak mencakup nilai nol, sehingga terdapat bukti adanya asosiasi positif antara <code>mean_ecomm</code> dan DRI setelah memperhitungkan prediktor lainnya serta struktur spasial dalam model.</p>
+<p>Karena variabel respons dan prediktor telah distandardisasi, koefisien tersebut menunjukkan bahwa peningkatan satu simpangan baku pada <code>mean_ecomm</code> berasosiasi dengan peningkatan sekitar 0.65 simpangan baku pada <code>DRI</code>, setelah memperhitungkan prediktor lain dan efek spasial dalam model.</p>
+<p>Hasil yang serupa diperoleh dari model GLM, dengan</p>
+<p><span class="math display">\[
+\beta_{\mathrm{mean\_ecomm}} = 0.6569,
+\qquad
+CI_{95\%} = (0.3742,\;0.9362).
+\]</span></p>
+<p>Kesamaan estimasi dan selang kepercayaan antara model CAR dan GLM menunjukkan bahwa asosiasi antara <code>mean_ecomm</code> dan DRI relatif konsisten terhadap spesifikasi model yang digunakan.</p>
+<p>Untuk lima prediktor lainnya, selang kepercayaan 95% masih mencakup nilai nol. Dengan demikian, belum terdapat bukti yang cukup kuat untuk mendukung adanya asosiasi yang berbeda dari nol antara masing-masing prediktor dan DRI setelah memperhitungkan prediktor lainnya serta, pada model CAR, struktur spasial.</p>
+</section>
+<section id="hasil-rho-memberikan-bukti-adanya-struktur-spasial" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="hasil-rho-memberikan-bukti-adanya-struktur-spasial"><span class="header-section-number">4.4</span> Hasil <span class="math inline">\(\rho\)</span> memberikan bukti adanya struktur spasial</h2>
+<p>Model CAR memberikan:</p>
+<p><span class="math display">\[ \rho=0.3930 \]</span></p>
+<p>dengan:</p>
+<p><span class="math display">\[ 95\%\,CrI=(0.0145,\;0.9202). \]</span></p>
+<p>Karena selang kepercayaan berada di atas nol, terdapat bukti posterior mengenai ketergantungan spasial positif dalam komponen residual model.</p>
+<p>Artinya, setelah karakteristik UMKM yang dimasukkan ke dalam model diperhitungkan, masih terdapat struktur spasial pada <code>DRI</code> yang ditangkap oleh komponen CAR.</p>
+<p>Namun, intervalnya cukup lebar, yaitu 0.0145 sampai 0.9202. Jadi, bukti mengenai keberadaan ketergantungan spasial lebih kuat daripada ketepatan estimasi mengenai seberapa besar ketergantungan tersebut.</p>
+<blockquote class="blockquote">
+<p>“Hasil posterior memberikan bukti adanya ketergantungan spasial positif, meskipun besarnya ketergantungan tersebut masih memiliki ketidakpastian yang cukup besar.”</p>
+</blockquote>
+</section>
+<section id="interpretasi-parameter-spasial" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="interpretasi-parameter-spasial"><span class="header-section-number">4.5</span> Interpretasi Parameter Spasial</h2>
+<p>Hasil estimasi model CAR menunjukkan bahwa parameter spasial memiliki nilai posterior rata-rata sebesar <span class="math inline">\(\rho = 0.393\)</span>, dengan selang kepercayaan 95% sebesar <span class="math inline">\((0.0145, 0.9202)\)</span>. Selang tersebut tidak mencakup nilai nol, yang menunjukkan adanya bukti posterior mengenai ketergantungan spasial positif pada efek residual setelah memperhitungkan variabel prediktor dalam model.</p>
+<p>Sementara itu, Selang kepercayaan 95% untuk masing-masing efek spasial <span class="math inline">\(\phi_i\)</span> masih mencakup nilai nol. Kedua hasil tersebut menggambarkan aspek yang berbeda dari struktur spasial dalam model. Parameter <span class="math inline">\(\rho\)</span> merepresentasikan tingkat ketergantungan spasial secara keseluruhan, sedangkan <span class="math inline">\(\phi_i\)</span> merepresentasikan kontribusi efek spasial spesifik pada masing-masing kelurahan. Oleh karena itu, ketidakpastian pada efek spasial individual tidak bertentangan dengan adanya bukti ketergantungan spasial secara keseluruhan.</p>
+<p>Dengan demikian, hasil model menunjukkan adanya struktur ketergantungan spasial pada tingkat global, sementara bukti mengenai kontribusi spesifik dari masing-masing kelurahan masih belum cukup kuat berdasarkan selang kepercayaan individualnya.</p>
+</section>
+<section id="kesiapan-digital-dan-aspek-sertifikasi-halal" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="kesiapan-digital-dan-aspek-sertifikasi-halal"><span class="header-section-number">4.6</span> Kesiapan digital dan aspek sertifikasi halal</h2>
+<p>Setelah skor aspek halal dibentuk, hubungan antara kesiapan digital dan aspek sertifikasi halal dianalisis secara deskriptif melalui korelasi. Analisis ini bertujuan untuk melihat sejauh mana variasi dalam Digital Readiness Index (DRI) berkaitan dengan variasi pada masing-masing aspek sertifikasi halal.</p>
+<p>Hasil analisis menunjukkan bahwa DRI memiliki korelasi positif dengan seluruh aspek halal, meskipun kekuatan hubungannya berbeda. Korelasi terbesar ditemukan antara DRI dan Kesiapan Sertifikasi Halal, yaitu sebesar 0,564. Selanjutnya, korelasi DRI dengan Kesadaran dan Persepsi Manfaat Sertifikasi Halal sebesar 0,382, sedangkan korelasi dengan Hambatan Sertifikasi Halal sebesar 0,225. Hubungan dengan Dukungan/Sosialisasi Pemerintah dan Akses Layanan Sertifikasi Halal relatif lemah, masing-masing sebesar 0,134 dan 0,071.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Tampilkan kode</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>halal_plot <span class="ot">&lt;-</span> halal_score <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">DRI_group =</span> <span class="fu">ntile</span>(DRI, <span class="dv">3</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">DRI_group =</span> <span class="fu">factor</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>      DRI_group,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"DRI rendah"</span>, <span class="st">"DRI sedang"</span>, <span class="st">"DRI tinggi"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">readiness =</span> <span class="fu">factor</span>(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>      HAL_readiness,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(HAL_readiness))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(DRI_group, readiness) <span class="sc">%&gt;%</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(DRI_group) <span class="sc">%&gt;%</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  halal_plot,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> DRI_group, <span class="at">y =</span> prop, <span class="at">fill =</span> readiness)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"E"</span>,</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Skor kesiapan"</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>percent</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proporsi UMKM"</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Salin ke Papan Klip" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="eda_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pola distribusi juga menunjukkan kecenderungan bahwa UMKM pada kelompok DRI yang lebih tinggi memiliki skor Kesiapan Sertifikasi Halal yang lebih terkonsentrasi pada nilai yang lebih tinggi. Pada kelompok DRI rendah, skor 3 merupakan kategori yang paling banyak ditemukan, yaitu sebesar 24,6%. Pada kelompok DRI sedang, skor 3 dan 4 merupakan kategori yang dominan, masing-masing sebesar 25,6% dan 24,0%. Sementara itu, pada kelompok DRI tinggi, skor 4 dan 5 masing-masing mencakup 30,2% responden. Skor rendah, yaitu 1 sampai 2,5, hanya mencakup proporsi yang relatif kecil pada kelompok DRI tinggi.</p>
+<p>Temuan tersebut memberikan gambaran deskriptif yang konsisten dengan korelasi positif antara DRI dan Kesiapan Sertifikasi Halal. Dengan kata lain, UMKM dengan tingkat kesiapan digital yang lebih tinggi cenderung menunjukkan tingkat kesiapan sertifikasi halal yang lebih tinggi pula. Hubungan ini merupakan hubungan asosiatif dan tidak dapat digunakan untuk menyimpulkan bahwa peningkatan kesiapan digital menyebabkan peningkatan kesiapan sertifikasi halal.</p>
+<p>Menariknya, korelasi positif antara DRI dan Hambatan Sertifikasi Halal, meskipun lebih lemah, menunjukkan bahwa UMKM dengan kesiapan digital yang lebih tinggi juga cenderung melaporkan tingkat hambatan yang sedikit lebih tinggi. Karena skor yang lebih tinggi pada aspek hambatan menunjukkan persepsi hambatan yang lebih besar, temuan ini tidak dapat ditafsirkan sebagai kondisi yang lebih baik. Salah satu kemungkinan interpretasi adalah bahwa UMKM yang lebih siap secara digital mungkin lebih aktif mengenali atau mengevaluasi kebutuhan, biaya, dan proses yang terkait dengan sertifikasi halal. Namun, interpretasi tersebut bersifat tentatif dan memerlukan analisis lebih lanjut.</p>
+<p>Secara keseluruhan, hasil menunjukkan bahwa aspek sertifikasi halal tidak memiliki hubungan yang seragam dengan kesiapan digital. Hubungan yang relatif lebih kuat terlihat pada aspek internal UMKM, terutama Kesiapan Sertifikasi Halal dan Kesadaran serta Persepsi Manfaat Sertifikasi Halal, sedangkan hubungan dengan aspek eksternal berupa Dukungan/Sosialisasi Pemerintah dan Akses Layanan Sertifikasi Halal relatif lemah. Di antara aspek yang dianalisis, Kesiapan Sertifikasi Halal memiliki korelasi paling besar dengan DRI (r = 0,564). Oleh karena itu, hubungan antara kesiapan digital dan kesiapan sertifikasi halal dapat menjadi fokus analisis dan pembahasan lebih lanjut.</p>
+</section>
+</section>
+<section id="kesimpulan" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Kesimpulan</h1>
+<p>Perbandingan antara model Gaussian nonspasial dan model Gaussian Leroux CAR menunjukkan bahwa kedua model menghasilkan estimasi koefisien regresi yang relatif konsisten. Rata-rata indikator <em>e-commerce</em> (<code>mean_ecomm</code>) menunjukkan asosiasi positif yang paling jelas dengan DRI, dengan posterior mean sebesar 0.655 dan interval kredibel 95% sebesar (0.373; 0.938) pada model CAR. Karena variabel telah distandardisasi, hasil tersebut menunjukkan bahwa peningkatan satu simpangan baku pada rata-rata indikator <em>e-commerce</em> dikaitkan dengan peningkatan sekitar 0.65 simpangan baku pada DRI, setelah mengendalikan kovariat lainnya dan struktur spasial.</p>
+<p>Meskipun estimasi koefisien regresi relatif serupa, model CAR memberikan kecocokan yang lebih baik dibandingkan model nonspasial, dengan DIC sebesar 42.78 dibandingkan 51.64 dan WAIC sebesar 47.32 dibandingkan 52.15. Nilai LMPL juga lebih tinggi pada model CAR, yaitu -25.87 dibandingkan -26.86. Selain itu, posterior parameter ketergantungan spasial <span class="math inline">\(\rho\)</span> memiliki mean sebesar 0.393 dengan interval kredibel 95% sebesar (0.0145; 0.9202), yang memberikan bukti adanya ketergantungan spasial positif pada komponen residual model. Namun, interval kredibel untuk efek spasial individual pada tingkat kelurahan mencakup nol, sehingga belum terdapat bukti posterior yang cukup untuk menyimpulkan adanya efek spasial residual yang berbeda dari nol pada kelurahan tertentu.</p>
+<p>Secara keseluruhan, hasil menunjukkan bahwa struktur spasial relevan dalam pemodelan DRI pada tingkat kelurahan, sementara hubungan antara karakteristik wilayah dan DRI, khususnya indikator <em>e-commerce</em>, relatif stabil setelah struktur spasial diperhitungkan.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Disalin!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Disalin!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

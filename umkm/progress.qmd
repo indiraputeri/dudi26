@@ -1,0 +1,266 @@
+---
+title: ""
+subtitle: ""
+author: ""
+format:
+  revealjs:
+    theme: white
+    transition: slide
+    slide-number: true
+    incremental: false
+    code-fold: true
+    css: style.css
+    html-math-method: mathjax
+    self-contained: false
+---
+
+::: {.title-slide}
+
+<div class="title-wrapper">
+
+<div class="title-left">
+<h1>Zonasi Intervensi Kebijakan UMKM Kota Mataram</h1>
+
+<p class="subtitle">
+Pemetaan Geospasial untuk Akselerasi Digitalisasi dan Sertifikasi Halal
+</p>
+
+<p class="institution">
+Laporan Kemajuan Penelitian Terapan (DUDI) - UIN Mataram  
+2026
+</p>
+
+</div>
+
+<div class="title-logo">
+<img src="figs/uinma_logo.png" alt="Logo UIN Mataram">
+<img src="figs/kemenag_logo.png" alt="Kemenag">
+</div>
+
+</div>
+
+:::
+
+
+# Tim Riset
+
+<div class="team-grid">
+
+<div class="team-member">
+
+
+<h3>Indira Puteri Kinasih</h3>
+<p class="role">Principal Investigator</p>
+
+<p class="desc">Spatial Modelling & Methodological Design</p>
+
+<p class="contact">
+indiraputeri@uinmataram.ac.id <br>
+<a href="https://orcid.org/0009-0009-6959-6723" target="_blank">
+0009-0009-6959-6723
+</a>
+</p>
+
+</div>
+
+
+<div class="team-member">
+
+
+<h3>Any Tsalasatul Fitriyah</h3>
+<p class="role">Co-Investigator</p>
+
+<p class="desc">Time series modelling, senior data analyst</p>
+
+<p class="contact">
+any.tsalasatul@uinmataram.ac.id <br>
+<a href="https://orcid.org/0000-0001-7417-7739" target="_blank">
+0000-0001-7417-7739
+</a>
+</p>
+
+</div>
+
+
+<div class="team-member">
+
+
+<h3>Nurul Susianti</h3>
+<p class="role">Junior data analyst</p>
+
+<p class="desc">Data collection & instruments</p>
+
+<p class="contact">
+nurulsusianti@uinmataram.ac.id <br>
+<a href="https://orcid.org/0009-0006-4279-9860" target="_blank">
+0009-0006-4279-9860
+</a>
+</p>
+
+</div>
+
+
+<div class="team-member">
+
+
+<h3>Ulfatun Hasanah</h3>
+<p class="role">Junior policy analyst</p>
+
+<p class="desc">Economy policy, Islamic economy</p>
+
+<p class="contact">
+ulfatunhasanah@uinmataram.ac.id <br>
+<a href="https://orchid.org/0000-0001-6719-3415" target="_blank">
+0000-0001-6719-3415
+</a>
+</p>
+
+</div>
+
+<div class="team-member">
+
+
+<h3>Nur Awalunnisa</h3>
+<p class="role">Junior policy analyst</p>
+
+<p class="desc">Senior research assistant</p>
+
+<p class="contact">
+awalunnisa@uinmataram.ac.id <br>
+<a href="https://orcid.org/0009-0003-1525-1232" target="_blank">
+0009-0003-1525-1232
+</a>
+</p>
+
+</div>
+
+</div>
+
+
+
+## Fokus Penelitian
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+::: callout
+
+Penelitian diarahkan untuk:
+
+- memetakan karakteristik UMKM di Kota Mataram;
+- mengukur kesiapan digital UMKM;
+- memetakan status sertifikasi halal;
+- mengidentifikasi variasi UMKM secara spasial;
+- menyediakan informasi untuk mendukung pengembangan UMKM.
+:::
+:::
+
+::: {.column width="50%"}
+
+### Pendekatan
+
+`Database`
+
+↓
+
+`Survey`
+
+↓
+
+`Digital Readiness Index`
+
+↓
+
+`Spatial Analysis`
+
+:::
+
+:::
+
+
+## Perjalanan Penelitian
+
+```text
+Proposal
+   ↓
+Persiapan & Konsolidasi Data
+   ↓
+Exploratory Data Analysis
+   ↓
+Pengembangan Instrumen
+   ↓
+Pelaksanaan Survei
+   ↓
+Data Cleaning & Validation
+   ↓
+Digital Readiness Index
+   ↓
+Pemetaan Spasial
+   ↓
+Analisis & Rekomendasi
+
+::: {.callout-note}
+
+Current Focus
+
+Pengumpulan, validasi, dan integrasi data primer dengan database UMKM.
+:::
+
+
+## Konsolidasi Database UMKM
+
+::: {.columns}
+
+::: {.column width="60%"}
+
+Database awal penelitian memuat sekitar
+
+±4.000
+
+UMKM di Kota Mataram
+
+Database digunakan sebagai dasar untuk:
+
+identifikasi karakteristik UMKM;
+distribusi UMKM berdasarkan wilayah;
+pemeriksaan kelengkapan data;
+penyusunan kerangka pengumpulan data;
+integrasi data hasil survei.
+
+:::
+
+::: {.column width="40%"}
+
+Progress
+
+✓ Database awal dikonsolidasikan
+
+✓ Struktur data dieksplorasi
+
+✓ Variabel utama diidentifikasi
+
+✓ Data disiapkan untuk analisis
+
+:::
+
+:::
+
+## Exploratory Data Analysis
+
+EDA dilakukan untuk memahami:
+
+- struktur dan ukuran database;
+- karakteristik umum UMKM;
+- distribusi berdasarkan wilayah;
+- kelengkapan data;
+- konsistensi variabel;
+- potensi duplikasi dan permasalahan data.
+
+::: {.callout-note}
+
+Tujuan EDA
+
+Memastikan database memiliki struktur dan kualitas yang memadai sebelum digunakan dalam integrasi dan analisis lebih lanjut.
+
+:::

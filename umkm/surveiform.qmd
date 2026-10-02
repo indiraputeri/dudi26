@@ -1,0 +1,404 @@
+---
+title: "Survei Kesiapan Digital dan Kepemilikan Sertifikasi Halal UMKM Kota Mataram"
+
+lang: id
+documentclass: article
+
+fontsize: 10pt
+linestretch: 1.1
+
+geometry:
+  - left=2cm
+  - right=2cm
+  - top=2cm
+  - bottom=2cm
+
+format:
+  pdf:
+    pdf-engine: xelatex
+    toc: false
+    number-sections: false
+
+header-includes:
+  - |
+    \usepackage{multicol}
+    \usepackage{enumitem}
+    \usepackage{booktabs}
+    \usepackage{longtable}
+    \usepackage{tabularx}
+    \usepackage{array}
+    \usepackage{pifont}
+    \usepackage{amssymb}
+    \newcommand{\checkbox}{$\square$}
+    \newcommand{\checked}{$\blacksquare$}
+
+    \setlist{nosep,leftmargin=*}
+    \setlength{\columnsep}{0.8cm}
+---
+
+::: {.callout-note title="Petunjuk Pengisian"}
+
+Halo, **Bapak/Ibu Sahabat UMKM**,
+
+\vspace{0.4em}
+
+Perkenalkan, kami adalah **Tim Riset DUDI (Dunia Usaha dan Dunia Industri) Universitas Islam Negeri (UIN) Mataram**. Saat ini kami sedang melaksanakan penelitian mengenai **Pemetaan Kesiapan Digital dan Sertifikasi Halal UMKM di Kota Mataram**.
+
+\vspace{0.4em}
+
+Penelitian ini bertujuan untuk mengidentifikasi dan menganalisis secara spasial tingkat kesiapan digitalisasi serta kepemilikan sertifikasi halal UMKM di Kota Mataram. Hasil penelitian diharapkan menjadi dasar penyusunan zonasi intervensi kebijakan berbasis geospasial guna mendukung percepatan transformasi digital dan penguatan ekosistem halal bagi UMKM.
+
+\vspace{0.4em}
+
+Kuesioner ini merupakan bagian penting dari penelitian kami dalam membangun basis data UMKM yang akurat dan komprehensif. Oleh karena itu, partisipasi Bapak/Ibu dalam mengisi kuesioner ini sangat berarti bagi keberhasilan penelitian. **Seluruh data dan informasi yang Bapak/Ibu berikan akan dijaga kerahasiaannya dan hanya digunakan untuk keperluan penelitian.**
+
+\vspace{0.4em}
+
+Petunjuk pengisian:
+
+1. Bacalah setiap pertanyaan dengan seksama
+2. Pilih jawaban yang paling sesuai dengan kondisi usaha Bapak/Ibu
+3. Berikan tanda $\checkmark$ pada pilihan jawaban yang sesuai
+4. Tidak ada jawaban benar atau salah; isilah sesuai kondisi sebenarnya.
+5. Sebagai bentuk apresiasi atas partisipasi Anda, kami menyediakan hadiah pulsa dengan total nilai Rp. 3.000.000 untuk 100 responden yang beruntung yang akan dipilih melalui undian setelah survei berakhir. 
+
+\vspace{0.4em}
+
+Terima kasih atas kesediaan dan partisipasi Bapak/Ibu dalam mendukung penelitian ini.
+
+\vspace{0.4em}
+
+Hormat kami,
+
+**Tim Riset DUDI**  
+Universitas Islam Negeri (UIN) Mataram
+
+:::
+
+\newpage
+
+::: {.callout-note title="Nama dan Lokasi Usaha"}
+
+**1. Nama Usaha (UMKM)** *(boleh menggunakan nama/inisial untuk menjaga kerahasiaan)*
+
+\vspace{1em}
+\rule{10cm}{0.4pt}
+
+## 2. Lokasi Usaha (Kecamatan & Kelurahan)
+
+\begin{multicols}{3}
+
+\textbf{Ampenan}
+
+$\square$ Ampenan Tengah
+
+$\square$ Ampenan Selatan
+
+$\square$ Ampenan Utara
+
+$\square$ Banjar
+
+$\square$ Bintaro
+
+$\square$ Dayan Peken
+
+$\square$ Kebon Sari
+
+$\square$ Pejeruk
+
+$\square$ Taman Sari
+
+$\square$ Pejarakan Karya
+
+\vspace{0.4em}
+
+\textbf{Sekarbela}
+
+$\square$ Jempong Baru
+
+$\square$ Karang Pule
+
+$\square$ Kekalik Jaya
+
+$\square$ Tanjung Karang
+
+$\square$ Tanjung Karang Permai
+
+\columnbreak
+
+\textbf{Cakranegara}
+
+$\square$ Cakra Barat
+
+$\square$ Cakra Selatan
+
+$\square$ Cakra Timur
+
+$\square$ Cakra Utara
+
+$\square$ Mayura
+
+$\square$ Sapta Marga
+
+$\square$ Sayang-Sayang
+
+$\square$ Selagalas
+
+$\square$ Turida
+
+\vspace{0.4em}
+\textbf{Sandubaya}
+
+$\square$ Abian Tubuh Baru
+
+$\square$ Babakan
+
+$\square$ Bertais
+
+$\square$ Dasan Cermen
+
+$\square$ Mandalika
+
+$\square$ Selagalas
+
+$\square$ Turida
+
+\columnbreak
+
+\textbf{Selaparang}
+
+$\square$ Dasan Agung
+
+$\square$ Dasan Agung Baru
+
+$\square$ Gomong
+
+$\square$ Mataram Barat
+
+$\square$ Monjok
+
+$\square$ Monjok Barat
+
+$\square$ Monjok Timur
+
+$\square$ Rembiga
+
+\vspace{0.4em}
+
+\textbf{Mataram}
+
+$\square$ Pagesangan
+
+$\square$ Pagesangan Barat
+
+$\square$ Pagesangan Timur
+
+$\square$ Pagutan
+
+$\square$ Pagutan Barat
+
+$\square$ Pagutan Timur
+
+$\square$ Punia
+
+$\square$ Pejanggik
+
+$\square$ Mataram Timur
+
+\end{multicols}
+
+
+**4. Alamat Lengkap Usaha**
+
+\vspace{1em}
+\rule{10cm}{0.4pt} 
+
+:::
+
+
+::: {.callout-note title="Info Usaha dan Pemilik"}
+
+**Jenis usaha**
+
+\begin{tabularx}{\linewidth}{XXX}
+$\square$ Kuliner &
+$\square$ Fashion &
+$\square$ Kerajinan \\
+
+$\square$ Jasa &
+$\square$ Perdagangan &
+$\square$ Lainnya: \rule{3cm}{0.4pt}
+\end{tabularx}
+
+\vspace{0.5em}
+
+**Apakah kegiatan usaha (penjualan/pembelian) juga dilakukan secara online?**
+
+$\bigcirc$ Ya \hspace{2cm} $\bigcirc$ Tidak
+
+\vspace{0.5em}
+
+**Usia usaha**
+
+\begin{tabularx}{\linewidth}{XXX}
+$\square$ kurang dari 1 tahun &
+$\square$ 1-3 tahun &
+$\square$ 4-6 tahun \\
+
+$\square$ 7-10 tahun &
+$\square$ lebih dari 10 tahun &
+\end{tabularx}
+
+\vspace{0.5em}
+
+**Banyaknya tenaga kerja**
+
+\begin{tabularx}{\linewidth}{XXX}
+$\square$ 1-5 orang &
+$\square$ 6-10 orang \\
+
+$\square$ 11-20 tahun &
+$\square$ lebih dari 20 orang 
+\end{tabularx}
+
+\vspace{0.5em}
+
+**Omset (penjualan) per bulan**
+
+\begin{tabularx}{\linewidth}{XXX}
+$\square$ kurang dari 25 juta &
+$\square$ kurang dari 160 juta \\
+
+$\square$ 160 juta-1.25 M &
+$\square$ lebih dari 1.25 M
+\end{tabularx}
+
+\vspace{0.5em}
+
+**Nama pemilik usaha (dapat berupa inisial/anonim)**
+
+\vspace{0.7em}
+\rule{10cm}{0.4pt}
+
+\vspace{0.5em}
+
+**Usia pemilik usaha**
+
+\begin{tabularx}{\linewidth}{XXX}
+$\square$ kurang dari 20 tahun &
+$\square$ 21-30 tahun &
+$\square$ 31-40 tahun \\
+
+$\square$ 41-50 tahun &
+$\square$ lebih dari 50 tahun
+\end{tabularx}
+
+\vspace{0.5em}
+
+**Pendidikan terakhir**
+
+\begin{tabularx}{\linewidth}{XXXX}
+$\square$ SD/MI &
+$\square$ SMP/MTs &
+$\square$ SMA/MA/SMK &
+$\square$ Diploma \\
+
+$\square$ Sarjana &
+$\square$ Pascasarjana &
+$\square$ lainnya: \rule{2cm}{0.4pt}
+\end{tabularx}
+
+\vspace{0.5em}
+
+**Nomor WA yang dapat dihubungi**
+
+\vspace{0.7em}
+\rule{10cm}{0.4pt}
+
+:::
+
+::: {.callout-note title="Infrastruktur digital"}
+
+**Keterangan:** STS = Sangat Tidak Setuju, TS = Tidak Setuju, N = Netral, S = Setuju, SS = Sangat Setuju.
+
+| No | Pernyataan | STS | TS | N | S | SS |
+|:--:|------------|:---:|:--:|:--:|:--:|:--:|
+| 1 | Koneksi internet di wilayah usaha saya stabil dan cukup cepat. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 2 | Saya memiliki perangkat (HP/Laptop) yang cukup untuk mendukung operasional usaha. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 3 | Saya menggunakan aplikasi *online/cloud* (google drive, dll).  | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+
+:::
+
+::: {.callout-note title="Keterampilan digital"}
+
+| No | Pernyataan | STS | TS | N | S | SS |
+|:--:|------------|:---:|:--:|:--:|:--:|:--:|
+| 1 | Saya atau karyawan memiliki kemampuan dasar menggunakan teknologi. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 2 | Kami pernah mengikuti pelatihan digital dalam 1 tahun terakhir.  | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 3 | Saya memahami pemasaran digital (media sosial, *marketplace*).| $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+
+:::
+
+::: {.callout-note title="Proses Bisnis"}
+
+| No | Pernyataan | STS | TS | N | S | SS |
+|:--:|------------|:---:|:--:|:--:|:--:|:--:|
+| 1 | Pembukuan usaha sudah dilakukan secara digital.  | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 2 | Pengelolaan stok dilakukan dengan bantuan teknologi.  | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 3 | Data pelanggan disimpan secara rapi (misalnya Excel/WA). | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+
+:::
+
+::: {.callout-note title="Strategi Digital"}
+
+| No | Pernyataan | STS | TS | N | S | SS |
+|:--:|------------|:---:|:--:|:--:|:--:|:--:|
+| 1 | Saya memiliki rencana untuk mengembangkan usaha secara digital.  | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 2 | Saya menyisihkan anggaran untuk teknologi/digitalisasi.  | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+
+:::
+
+::: {.callout-note title="Keamanan Digital"}
+
+| No | Pernyataan | STS | TS | N | S | SS |
+|:--:|------------|:---:|:--:|:--:|:--:|:--:|
+| 1 | Saya menggunakan backup data usaha secara rutin. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 2 | Saya menggunakan perlindungan dasar (password/antivirus). | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+
+:::
+
+::: {.callout-note title="Data & Inovasi"}
+
+| No | Pernyataan | STS | TS | N | S | SS |
+|:--:|------------|:---:|:--:|:--:|:--:|:--:|
+| 1 | Saya menggunakan data untuk mengambil keputusan usaha. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 2 | Saya pernah mencoba cara baru berbasis digital untuk usaha. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+
+:::
+
+::: {.callout-note title="E-commerce & Media sosial"}
+
+| No | Pernyataan | STS | TS | N | S | SS |
+|:--:|------------|:---:|:--:|:--:|:--:|:--:|
+| 1 | Usaha saya memiliki akun media sosial aktif untuk promosi. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 2 | Saya menjual produk melalui marketplace/online. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 3 | Sebagian penjualan berasal dari online. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+
+:::
+
+::: {.callout-note title="Sertifikasi Halal"}
+
+| No | Pernyataan | STS | TS | N | S | SS |
+|:--:|------------|:---:|:--:|:--:|:--:|:--:|
+| 1 | Saya memahami pentingnya sertifikasi halal bagi usaha. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 2 | Sertifikasi halal meningkatkan kepercayaan konsumen. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 3 | Saya mengetahui prosedur pengurusan sertifikasi halal. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 4 | Biaya sertifikasi halal masih menjadi kendala usaha saya. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 5 | Pemerintah memberikan sosialisasi yang cukup terkait sertifikasi halal. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 6 | Sertifikasi halal meningkatkan daya saing produk. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 7 | Saya memiliki kesiapan administrasi untuk sertifikasi halal. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 8 | Saya membutuhkan pendampingan dalam proses sertifikasi halal. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 9 | Sertifikasi halal membantu memperluas pasar usaha. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+| 10 | Lokasi usaha mempengaruhi akses terhadap layanan sertifikasi halal. | $\square$ | $\square$ | $\square$ | $\square$ | $\square$ |
+
+:::

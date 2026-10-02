@@ -1,7 +1,7 @@
 /* Background */
 .reveal {
-  background-color: #f4f1ea;
-  background-image: url("figs/geopoly_bg.png");
+  background-color: #fdfcf9;
+  /* background-image: url("figs/geopoly_bg.png"); */
   background-size: cover;
 }
 
