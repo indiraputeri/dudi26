@@ -35,7 +35,6 @@ execute:
 editor: visual
 ---
 
-
 ```{r, echo=FALSE}
 library(tidyverse)
 library(janitor)
@@ -45,7 +44,6 @@ library(ggplot2)
 library(dplyr)
 ```
 
-
 # Latar Belakang
 
 Data master UMKM Kota Mataram merupakan sumber informasi penting yang dapat digunakan untuk memahami karakteristik pelaku usaha sebelum dilakukan pengumpulan data mengenai tingkat kesiapan digital maupun kepemilikan sertifikasi halal. Oleh karena itu, dilakukan Analisis Data Eksploratori (Exploratory Data Analysis/EDA) untuk memperoleh gambaran umum mengenai struktur data, kualitas data, dan karakteristik UMKM yang tersedia.
@@ -54,23 +52,18 @@ Data master UMKM Kota Mataram merupakan sumber informasi penting yang dapat digu
 
 Analisis ini bertujuan untuk:
 
-1. Mendeskripsikan karakteristik dataset UMKM.
-2. Mengidentifikasi kualitas data.
-3. Mengetahui distribusi karakteristik UMKM.
-4. Menjadi baseline sebelum survei kesiapan digital dan sertifikasi halal.
-
+1.  Mendeskripsikan karakteristik dataset UMKM.
+2.  Mengidentifikasi kualitas data.
+3.  Mengetahui distribusi karakteristik UMKM.
+4.  Menjadi baseline sebelum survei kesiapan digital dan sertifikasi halal.
 
 # Dataset
 
-Dataset yang digunakan pada penelitian ini terdiri dari data primer dan sekunder.
-Data primer diperoleh dari hasil survei UMKM yang dilakukan oleh tim, sedangkan data sekunder didapatkan dari data administrasi Dinas Koperasi Kota Mataram. 
-Berikut merupakan uraian singkat dari setiap dataset.
+Dataset yang digunakan pada penelitian ini terdiri dari data primer dan sekunder. Data primer diperoleh dari hasil survei UMKM yang dilakukan oleh tim, sedangkan data sekunder didapatkan dari data administrasi Dinas Koperasi Kota Mataram. Berikut merupakan uraian singkat dari setiap dataset.
 
 ## Data resmi: profil UMKM kota Mataram
 
-Selain data primer yang diperoleh melalui survei, penelitian ini menggunakan data administratif UMKM yang diperoleh dari Dinas terkait di Kota Mataram.
-Dataset tersebut digunakan untuk memberikan gambaran mengenai populasi dan karakteristik UMKM yang menjadi konteks penelitian.
-Dataset terdiri atas 4.185 unit usaha dengan 17 variabel yang mencakup informasi identitas usaha, karakteristik usaha, lokasi, klasifikasi kegiatan usaha, serta beberapa karakteristik ekonomi dan ketenagakerjaan.
+Selain data primer yang diperoleh melalui survei, penelitian ini menggunakan data administratif UMKM yang diperoleh dari Dinas terkait di Kota Mataram. Dataset tersebut digunakan untuk memberikan gambaran mengenai populasi dan karakteristik UMKM yang menjadi konteks penelitian. Dataset terdiri atas 4.185 unit usaha dengan 17 variabel yang mencakup informasi identitas usaha, karakteristik usaha, lokasi, klasifikasi kegiatan usaha, serta beberapa karakteristik ekonomi dan ketenagakerjaan.
 
 ```{r, echo=FALSE}
 
@@ -99,9 +92,7 @@ head(umkm)
 
 ```
 
-Informasi yang tersedia meliputi nomor identifikasi usaha (NIB), nama perusahaan, jenis perusahaan, tingkat risiko proyek, skala usaha, alamat usaha, kecamatan dan kelurahan, kode dan uraian KBLI, identitas pemilik usaha, serta informasi kontak.
-Dataset juga memuat beberapa variabel kuantitatif, yaitu luas tanah, jumlah investasi, dan jumlah tenaga kerja.
-Dengan demikian, data administratif ini menyediakan informasi mengenai karakteristik struktural dan spasial UMKM yang tidak seluruhnya diperoleh dari instrumen survei.
+Informasi yang tersedia meliputi nomor identifikasi usaha (NIB), nama perusahaan, jenis perusahaan, tingkat risiko proyek, skala usaha, alamat usaha, kecamatan dan kelurahan, kode dan uraian KBLI, identitas pemilik usaha, serta informasi kontak. Dataset juga memuat beberapa variabel kuantitatif, yaitu luas tanah, jumlah investasi, dan jumlah tenaga kerja. Dengan demikian, data administratif ini menyediakan informasi mengenai karakteristik struktural dan spasial UMKM yang tidak seluruhnya diperoleh dari instrumen survei.
 
 ### Ringkasan Karakteristik UMKM
 
@@ -118,13 +109,9 @@ umkm %>%
   )
 ```
 
-Distribusi tersebut memberikan gambaran mengenai konsentrasi UMKM secara administratif.
-Informasi ini selanjutnya dapat digunakan sebagai konteks dalam analisis spasial, terutama karena tingkat kesiapan digital yang diperoleh dari survei dapat dibandingkan dengan karakteristik wilayah tempat UMKM beroperasi.
+Distribusi tersebut memberikan gambaran mengenai konsentrasi UMKM secara administratif. Informasi ini selanjutnya dapat digunakan sebagai konteks dalam analisis spasial, terutama karena tingkat kesiapan digital yang diperoleh dari survei dapat dibandingkan dengan karakteristik wilayah tempat UMKM beroperasi.
 
-Selain karakteristik kategorikal, dataset juga memuat informasi mengenai jumlah investasi dan tenaga kerja.
-Variabel `jumlah_investasi_rp` menunjukkan nilai investasi usaha dalam rupiah, sedangkan `tki_org` menunjukkan jumlah tenaga kerja pada masing-masing unit usaha.
-Karena kedua variabel tersebut memiliki skala yang berbeda dan berpotensi memiliki distribusi yang menceng, statistik deskriptif seperti median dan rentang interkuartil digunakan sebagai pelengkap nilai rata-rata.
-
+Selain karakteristik kategorikal, dataset juga memuat informasi mengenai jumlah investasi dan tenaga kerja. Variabel `jumlah_investasi_rp` menunjukkan nilai investasi usaha dalam rupiah, sedangkan `tki_org` menunjukkan jumlah tenaga kerja pada masing-masing unit usaha. Karena kedua variabel tersebut memiliki skala yang berbeda dan berpotensi memiliki distribusi yang menceng, statistik deskriptif seperti median dan rentang interkuartil digunakan sebagai pelengkap nilai rata-rata.
 
 ```{r, echo=FALSE}
 #| label: tbl-ringkasan-kecamatan-umkm
@@ -137,9 +124,7 @@ umkm %>%
   )
 ```
 
-Data administratif ini selanjutnya digunakan sebagai sumber informasi mengenai karakteristik dan distribusi UMKM, sedangkan data survei digunakan untuk membangun dan mengukur *Digital Readiness Index* (DRI).
-Pemisahan fungsi kedua sumber data tersebut penting karena DRI dibentuk berdasarkan respons terhadap item-item instrumen survei, bukan berdasarkan variabel administratif dari Dinas.
-
+Data administratif ini selanjutnya digunakan sebagai sumber informasi mengenai karakteristik dan distribusi UMKM, sedangkan data survei digunakan untuk membangun dan mengukur *Digital Readiness Index* (DRI). Pemisahan fungsi kedua sumber data tersebut penting karena DRI dibentuk berdasarkan respons terhadap item-item instrumen survei, bukan berdasarkan variabel administratif dari Dinas.
 
 ```{r, echo=FALSE}
 #| label: tbl-ringkasan-numerik-umkm
@@ -219,26 +204,15 @@ sum_kec %>%
   )
 ```
 
-
 ## Data survei
 
-Survei yang digunakan dalam penelitian ini dirancang untuk memperoleh gambaran mengenai karakteristik usaha sekaligus tingkat kesiapan digital pelaku Usaha Mikro, Kecil, dan Menengah (UMKM).
-Instrumen terdiri atas bagian informasi umum mengenai usaha dan pemilik, serta sejumlah pernyataan yang mengukur aspek-aspek terkait penggunaan dan kesiapan teknologi digital.
-Pada bagian karakteristik usaha, responden diminta memberikan informasi mengenai jenis usaha, penggunaan kanal penjualan atau pembelian secara daring, usia usaha, jumlah tenaga kerja, omzet bulanan, serta karakteristik pemilik seperti usia dan pendidikan terakhir.
-Informasi lokasi usaha juga dikumpulkan hingga tingkat kelurahan.
+Survei yang digunakan dalam penelitian ini dirancang untuk memperoleh gambaran mengenai karakteristik usaha sekaligus tingkat kesiapan digital pelaku Usaha Mikro, Kecil, dan Menengah (UMKM). Instrumen terdiri atas bagian informasi umum mengenai usaha dan pemilik, serta sejumlah pernyataan yang mengukur aspek-aspek terkait penggunaan dan kesiapan teknologi digital. Pada bagian karakteristik usaha, responden diminta memberikan informasi mengenai jenis usaha, penggunaan kanal penjualan atau pembelian secara daring, usia usaha, jumlah tenaga kerja, omzet bulanan, serta karakteristik pemilik seperti usia dan pendidikan terakhir. Informasi lokasi usaha juga dikumpulkan hingga tingkat kelurahan.
 
-Bagian utama instrumen menggunakan skala Likert lima tingkat, yaitu *Sangat Tidak Setuju* (STS), *Tidak Setuju* (TS), *Netral* (N), *Setuju* (S), dan *Sangat Setuju* (SS).
-Pernyataan dalam instrumen mencakup beberapa aspek kesiapan dan pemanfaatan teknologi digital. Aspek-aspek tersebut meliputi **infrastruktur digital**, **keterampilan digital**, **proses bisnis**, **strategi digital**, **keamanan digital**, serta **data dan inovasi**.
-Misalnya, infrastruktur digital mencakup kestabilan koneksi internet, ketersediaan perangkat yang memadai, dan penggunaan aplikasi daring atau *cloud*.
-Sementara itu, keterampilan digital mencakup kemampuan dasar menggunakan teknologi, pengalaman mengikuti pelatihan digital, dan pemahaman mengenai pemasaran digital.
+Bagian utama instrumen menggunakan skala Likert lima tingkat, yaitu *Sangat Tidak Setuju* (STS), *Tidak Setuju* (TS), *Netral* (N), *Setuju* (S), dan *Sangat Setuju* (SS). Pernyataan dalam instrumen mencakup beberapa aspek kesiapan dan pemanfaatan teknologi digital. Aspek-aspek tersebut meliputi **infrastruktur digital**, **keterampilan digital**, **proses bisnis**, **strategi digital**, **keamanan digital**, serta **data dan inovasi**. Misalnya, infrastruktur digital mencakup kestabilan koneksi internet, ketersediaan perangkat yang memadai, dan penggunaan aplikasi daring atau *cloud*. Sementara itu, keterampilan digital mencakup kemampuan dasar menggunakan teknologi, pengalaman mengikuti pelatihan digital, dan pemahaman mengenai pemasaran digital.
 
-Selain aspek-aspek tersebut, instrumen juga memuat pertanyaan mengenai **e-commerce dan media sosial** serta **sertifikasi halal**.
-Bagian e-commerce dan media sosial mengukur penggunaan media sosial untuk promosi, pemanfaatan *marketplace*, dan proporsi penjualan yang berasal dari kanal daring.
-Bagian sertifikasi halal mengukur pengetahuan, persepsi manfaat, hambatan, dukungan pemerintah, kesiapan administrasi, serta kebutuhan pendampingan dalam proses sertifikasi.
+Selain aspek-aspek tersebut, instrumen juga memuat pertanyaan mengenai **e-commerce dan media sosial** serta **sertifikasi halal**. Bagian e-commerce dan media sosial mengukur penggunaan media sosial untuk promosi, pemanfaatan *marketplace*, dan proporsi penjualan yang berasal dari kanal daring. Bagian sertifikasi halal mengukur pengetahuan, persepsi manfaat, hambatan, dukungan pemerintah, kesiapan administrasi, serta kebutuhan pendampingan dalam proses sertifikasi.
 
-Dalam penelitian ini, tidak seluruh bagian survei digunakan sebagai indikator pembentuk DRI.
-Item yang secara substantif merepresentasikan kesiapan dan kapabilitas digital dipilih dan selanjutnya dikelompokkan ke dalam lima dimensi DRI, yaitu **Skill**, **Business**, **Strategy**, **Security**, dan **Data**.
-Dengan demikian, informasi karakteristik usaha dan bagian survei lainnya digunakan sebagai informasi pendukung atau variabel penelitian, sedangkan item yang relevan dengan lima dimensi tersebut menjadi dasar dalam proses evaluasi struktur instrumen dan konstruksi skor DRI.
+Dalam penelitian ini, tidak seluruh bagian survei digunakan sebagai indikator pembentuk DRI. Item yang secara substantif merepresentasikan kesiapan dan kapabilitas digital dipilih dan selanjutnya dikelompokkan ke dalam lima dimensi DRI, yaitu **Skill**, **Business**, **Strategy**, **Security**, dan **Data**. Dengan demikian, informasi karakteristik usaha dan bagian survei lainnya digunakan sebagai informasi pendukung atau variabel penelitian, sedangkan item yang relevan dengan lima dimensi tersebut menjadi dasar dalam proses evaluasi struktur instrumen dan konstruksi skor DRI.
 
 ```{r, echo=FALSE}
 
@@ -342,44 +316,19 @@ head(usrv)
 
 ```
 
-
 ## Konstruksi Digital Readiness Index (DRI)
 
-*Digital Readiness Index* (DRI) dikonstruksi untuk memperoleh satu ukuran komposit yang merepresentasikan tingkat kesiapan digital pada setiap responden.
-Konstruksi DRI diawali dengan identifikasi struktur dimensi yang mendasari instrumen pengukuran.
-Instrumen awal terdiri atas enam kelompok indikator, yaitu Infrastruktur (INF), Skill (SKL), Business (BUS), Strategy (STR), Security (SEC), dan Data (DAT).
-Sebelum skor indeks dihitung, dilakukan pemeriksaan terhadap kelayakan data untuk analisis faktor.
-Nilai Kaiser–Meyer–Olkin (KMO) secara keseluruhan sebesar 0,94 menunjukkan bahwa korelasi antaritem sangat memadai untuk analisis faktor.
-Selain itu, uji Bartlett terhadap matriks korelasi menghasilkan $\chi^2=8001.616$ dengan $df=153$ dan $p<0.001$, sehingga hipotesis bahwa matriks korelasi merupakan matriks identitas ditolak.
-Dengan demikian, data memenuhi persyaratan awal untuk mengevaluasi struktur konstruk.
+*Digital Readiness Index* (DRI) dikonstruksi untuk memperoleh satu ukuran komposit yang merepresentasikan tingkat kesiapan digital pada setiap responden. Konstruksi DRI diawali dengan identifikasi struktur dimensi yang mendasari instrumen pengukuran. Instrumen awal terdiri atas enam kelompok indikator, yaitu Infrastruktur (INF), Skill (SKL), Business (BUS), Strategy (STR), Security (SEC), dan Data (DAT). Sebelum skor indeks dihitung, dilakukan pemeriksaan terhadap kelayakan data untuk analisis faktor. Nilai Kaiser–Meyer–Olkin (KMO) secara keseluruhan sebesar 0,94 menunjukkan bahwa korelasi antaritem sangat memadai untuk analisis faktor. Selain itu, uji Bartlett terhadap matriks korelasi menghasilkan $\chi^2=8001.616$ dengan $df=153$ dan $p<0.001$, sehingga hipotesis bahwa matriks korelasi merupakan matriks identitas ditolak. Dengan demikian, data memenuhi persyaratan awal untuk mengevaluasi struktur konstruk.
 
-Selanjutnya dilakukan *exploratory factor analysis* (EFA) menggunakan metode minimum residual (minres), rotasi oblimin, dan matriks korelasi polikhorik karena indikator diukur pada skala ordinal.
-*Parallel analysis* memberikan indikasi awal adanya tiga faktor statistik.
-Namun, hasil tersebut tidak langsung digunakan sebagai dasar untuk menetapkan struktur substantif DRI.
-Evaluasi struktur juga mempertimbangkan kerangka konseptual instrumen dan interpretabilitas indikator.
-Hasil EFA tiga faktor menunjukkan bahwa sebagian besar indikator memiliki *communality* yang tinggi, tetapi beberapa indikator menunjukkan *cross-loading*.
-Secara khusus, indikator INF1 dan INF2 membentuk kelompok yang berbeda dari INF3, sedangkan INF3 menunjukkan pola pemuatan yang lebih dekat dengan kelompok kemampuan (*capability*).
-Hal ini menunjukkan bahwa struktur empiris tidak sepenuhnya mereproduksi pengelompokan awal indikator berdasarkan label konseptual.
+Selanjutnya dilakukan *exploratory factor analysis* (EFA) menggunakan metode minimum residual (minres), rotasi oblimin, dan matriks korelasi polikhorik karena indikator diukur pada skala ordinal. *Parallel analysis* memberikan indikasi awal adanya tiga faktor statistik. Namun, hasil tersebut tidak langsung digunakan sebagai dasar untuk menetapkan struktur substantif DRI. Evaluasi struktur juga mempertimbangkan kerangka konseptual instrumen dan interpretabilitas indikator. Hasil EFA tiga faktor menunjukkan bahwa sebagian besar indikator memiliki *communality* yang tinggi, tetapi beberapa indikator menunjukkan *cross-loading*. Secara khusus, indikator INF1 dan INF2 membentuk kelompok yang berbeda dari INF3, sedangkan INF3 menunjukkan pola pemuatan yang lebih dekat dengan kelompok kemampuan (*capability*). Hal ini menunjukkan bahwa struktur empiris tidak sepenuhnya mereproduksi pengelompokan awal indikator berdasarkan label konseptual.
 
-Temuan tersebut penting karena tujuan penelitian bukan semata-mata memperoleh jumlah faktor statistik yang paling kecil, tetapi membangun indeks yang memiliki interpretasi substantif dan dapat digunakan secara konsisten pada tahap analisis berikutnya.
-Oleh karena itu, evaluasi struktur dilakukan dengan mempertimbangkan kombinasi antara hasil analisis faktor eksploratori, makna substantif setiap indikator, serta struktur konseptual DRI yang digunakan dalam penelitian.
+Temuan tersebut penting karena tujuan penelitian bukan semata-mata memperoleh jumlah faktor statistik yang paling kecil, tetapi membangun indeks yang memiliki interpretasi substantif dan dapat digunakan secara konsisten pada tahap analisis berikutnya. Oleh karena itu, evaluasi struktur dilakukan dengan mempertimbangkan kombinasi antara hasil analisis faktor eksploratori, makna substantif setiap indikator, serta struktur konseptual DRI yang digunakan dalam penelitian.
 
-Berdasarkan evaluasi tersebut, indikator Infrastructure tidak dipertahankan sebagai dimensi tersendiri dalam konstruksi skor akhir.
-Dengan demikian, struktur operasional DRI yang digunakan terdiri atas lima dimensi, yaitu Skill, Business, Strategy, Security, dan Data.
-Kelima dimensi tersebut selanjutnya diperlakukan sebagai komponen utama dari konstruk Digital Readiness.
+Berdasarkan evaluasi tersebut, indikator Infrastructure tidak dipertahankan sebagai dimensi tersendiri dalam konstruksi skor akhir. Dengan demikian, struktur operasional DRI yang digunakan terdiri atas lima dimensi, yaitu Skill, Business, Strategy, Security, dan Data. Kelima dimensi tersebut selanjutnya diperlakukan sebagai komponen utama dari konstruk Digital Readiness.
 
-Untuk memastikan bahwa kelima dimensi tersebut memiliki dasar pengukuran yang memadai, dilakukan pengujian *confirmatory factor analysis* (CFA) pada struktur first-order.
-Hasil CFA menunjukkan bahwa indikator-indikator pada masing-masing dimensi memiliki standardized factor loading yang tinggi dan signifikan.
-Pada dimensi Skill, misalnya, loading SKL1, SKL2, dan SKL3 masing-masing sebesar 0,811, 1,020, dan 0,867.
-Pada dimensi Business, loading BUS1–BUS3 berada pada kisaran 0,895–0,965.
-Dimensi Strategy memiliki loading 0,889 dan 0,942, Security sebesar 0,964 dan 0,951, sedangkan Data sebesar 0,923 dan 0,873.
-Secara umum, hasil tersebut menunjukkan bahwa indikator-indikator yang dipertahankan memberikan kontribusi kuat terhadap dimensi masing-masing.
+Untuk memastikan bahwa kelima dimensi tersebut memiliki dasar pengukuran yang memadai, dilakukan pengujian *confirmatory factor analysis* (CFA) pada struktur first-order. Hasil CFA menunjukkan bahwa indikator-indikator pada masing-masing dimensi memiliki standardized factor loading yang tinggi dan signifikan. Pada dimensi Skill, misalnya, loading SKL1, SKL2, dan SKL3 masing-masing sebesar 0,811, 1,020, dan 0,867. Pada dimensi Business, loading BUS1–BUS3 berada pada kisaran 0,895–0,965. Dimensi Strategy memiliki loading 0,889 dan 0,942, Security sebesar 0,964 dan 0,951, sedangkan Data sebesar 0,923 dan 0,873. Secara umum, hasil tersebut menunjukkan bahwa indikator-indikator yang dipertahankan memberikan kontribusi kuat terhadap dimensi masing-masing.
 
-Selanjutnya, struktur lima dimensi juga dievaluasi melalui model second-order, dengan DigitalCapability sebagai konstruk tingkat kedua yang direfleksikan oleh Skill, Business, Strategy, Security, dan Data.
-Model menghasilkan CFI = 0,998, TLI = 0,997, dan SRMR = 0,059, yang menunjukkan kesesuaian model yang baik pada beberapa indeks fit.
-Namun demikian, model juga menghasilkan indikasi Heywood case, khususnya varians residual negatif pada dimensi Data dan beberapa permasalahan varians pada konstruk laten.
-Oleh karena itu, hasil second-order CFA tidak digunakan sebagai dasar utama untuk mengestimasi skor indeks.
-Model tersebut digunakan terutama sebagai evaluasi terhadap struktur konstruk, sedangkan konstruksi skor DRI dilakukan dengan pendekatan komposit yang lebih sederhana dan transparan.
+Selanjutnya, struktur lima dimensi juga dievaluasi melalui model second-order, dengan DigitalCapability sebagai konstruk tingkat kedua yang direfleksikan oleh Skill, Business, Strategy, Security, dan Data. Model menghasilkan CFI = 0,998, TLI = 0,997, dan SRMR = 0,059, yang menunjukkan kesesuaian model yang baik pada beberapa indeks fit. Namun demikian, model juga menghasilkan indikasi Heywood case, khususnya varians residual negatif pada dimensi Data dan beberapa permasalahan varians pada konstruk laten. Oleh karena itu, hasil second-order CFA tidak digunakan sebagai dasar utama untuk mengestimasi skor indeks. Model tersebut digunakan terutama sebagai evaluasi terhadap struktur konstruk, sedangkan konstruksi skor DRI dilakukan dengan pendekatan komposit yang lebih sederhana dan transparan.
 
 ### Standardisasi Skor Dimensi
 
@@ -395,13 +344,13 @@ dengan $X_{id}$ menyatakan skor dimensi $d$ untuk responden $i$, $\bar{X}_{d}$ a
 
 Dengan demikian, diperoleh lima skor terstandardisasi:
 
-- $Skill_z$ untuk dimensi Skill;
-- $Business_z$ untuk dimensi Business;
-- $Strategy_z$ untuk dimensi Strategy;
-- $Security_z$ untuk dimensi Security; dan
-- $Data_z$ untuk dimensi Data.
+-   $Skill_z$ untuk dimensi Skill;
+-   $Business_z$ untuk dimensi Business;
+-   $Strategy_z$ untuk dimensi Strategy;
+-   $Security_z$ untuk dimensi Security; dan
+-   $Data_z$ untuk dimensi Data.
 
-Kelima dimensi menunjukkan hubungan yang kuat satu sama lain. Korelasi antardimensi berada pada kisaran 0.733--0.883. Selain itu, konsistensi internal kelima skor dimensi sebagai satu set ukuran komposit menunjukkan nilai Cronbach's alpha sebesar 0.95 (95\% CI: 0.94--0.96). Hasil tersebut mendukung penggunaan kelima dimensi secara bersama-sama dalam pembentukan ukuran komposit Digital Readiness.
+Kelima dimensi menunjukkan hubungan yang kuat satu sama lain. Korelasi antardimensi berada pada kisaran 0.733--0.883. Selain itu, konsistensi internal kelima skor dimensi sebagai satu set ukuran komposit menunjukkan nilai Cronbach's alpha sebesar 0.95 (95% CI: 0.94--0.96). Hasil tersebut mendukung penggunaan kelima dimensi secara bersama-sama dalam pembentukan ukuran komposit Digital Readiness.
 
 ### Pembentukan DRI
 
@@ -429,7 +378,6 @@ head(dri_score)
 
 ```
 
-
 Pada dataset akhir, seluruh 388 responden memiliki skor lengkap untuk kelima dimensi sehingga tidak terdapat responden yang kehilangan dimensi pada proses pembentukan DRI.
 
 Nilai DRI merupakan composite standardized index, karena indeks dibentuk dari skor-skor dimensi yang telah distandardisasi menggunakan z-score. DRI tidak menggunakan transformasi min--max normalization. Oleh karena itu, nilai DRI dapat bernilai negatif maupun positif.
@@ -445,7 +393,6 @@ summary(dri_score$DRI)
 sd(dri_score$DRI, na.rm = TRUE)
 ```
 
-
 Distribusi DRI kemudian divisualisasikan menggunakan histogram:
 
 ```{r, echo=FALSE}
@@ -458,7 +405,6 @@ ggplot(dri_score, aes(x = DRI)) +
   ) +
   theme_minimal()
 ```
-
 
 ### Agregasi DRI pada Unit Spasial
 
@@ -495,15 +441,13 @@ dri_kel <- dri_score %>%
 dri_kel
 ```
 
-
 Hasil agregasi menghasilkan 35 kelurahan dengan jumlah responden yang tidak sama antarwilayah. Oleh karena itu, selain nilai rata-rata DRI, jumlah responden ($n$) dan ukuran variasi DRI pada masing-masing kelurahan juga disimpan untuk keperluan pemeriksaan dan analisis selanjutnya.
 
 Dengan konstruksi tersebut, DRI yang digunakan sebagai response variable dalam analisis spasial merepresentasikan rata-rata tingkat kesiapan digital pada tingkat kelurahan, bukan skor individual responden.
 
 ## Aspek halal
 
-Aspek halal dalam penelitian ini diukur melalui sepuluh pernyataan dengan skala Likert lima tingkat.
-Kesepuluh pernyataan mencakup pemahaman dan persepsi manfaat sertifikasi halal, pengetahuan serta kesiapan dalam proses sertifikasi, hambatan yang dihadapi, dukungan pemerintah, dan akses terhadap layanan sertifikasi halal.
+Aspek halal dalam penelitian ini diukur melalui sepuluh pernyataan dengan skala Likert lima tingkat. Kesepuluh pernyataan mencakup pemahaman dan persepsi manfaat sertifikasi halal, pengetahuan serta kesiapan dalam proses sertifikasi, hambatan yang dihadapi, dukungan pemerintah, dan akses terhadap layanan sertifikasi halal.
 
 ### Analisis Deskriptif
 
@@ -564,36 +508,23 @@ ggplot(
 
 ```
 
-
 Pola tersebut menunjukkan bahwa sertifikasi halal secara umum dipandang positif oleh responden, khususnya dalam kaitannya dengan kepercayaan konsumen, daya saing, dan perluasan pasar. Namun, persepsi positif mengenai manfaat sertifikasi tidak dengan sendirinya menunjukkan bahwa UMKM telah memiliki kesiapan yang sama untuk menjalankan proses sertifikasi. Oleh karena itu, item-item halal selanjutnya dianalisis untuk melihat apakah terdapat beberapa aspek yang berbeda dalam pengalaman dan persepsi UMKM terhadap sertifikasi halal.
-
 
 ### Struktur dan pengelompokan aspek halal
 
-Analisis korelasi polikorik terhadap sepuluh item menunjukkan bahwa hubungan antaritem cukup beragam. 
-Beberapa item menunjukkan korelasi yang tinggi, terutama HAL1, HAL2, HAL6, dan HAL9. 
-Korelasi antara HAL1 dan HAL2 sebesar 0,818, HAL2 dan HAL6 sebesar 0,835, HAL6 dan HAL9 sebesar 0,804, serta HAL2 dan HAL9 sebesar 0,733.
-Sebaliknya, beberapa pasangan item menunjukkan hubungan yang relatif rendah, misalnya korelasi HAL3 dengan HAL8 sebesar -0,042 dan HAL7 dengan HAL8 sebesar 0,025.
+Analisis korelasi polikorik terhadap sepuluh item menunjukkan bahwa hubungan antaritem cukup beragam. Beberapa item menunjukkan korelasi yang tinggi, terutama HAL1, HAL2, HAL6, dan HAL9. Korelasi antara HAL1 dan HAL2 sebesar 0,818, HAL2 dan HAL6 sebesar 0,835, HAL6 dan HAL9 sebesar 0,804, serta HAL2 dan HAL9 sebesar 0,733. Sebaliknya, beberapa pasangan item menunjukkan hubungan yang relatif rendah, misalnya korelasi HAL3 dengan HAL8 sebesar -0,042 dan HAL7 dengan HAL8 sebesar 0,025.
 
-Pola tersebut menunjukkan bahwa sepuluh item tidak sepenuhnya menggambarkan satu dimensi yang homogen. 
-Secara substantif, item-item tersebut memang mencakup beberapa aspek yang berbeda.
-Berdasarkan pola hubungan antaritem dan kerangka pertanyaan, empat item, yaitu HAL1, HAL2, HAL6, dan HAL9, dikelompokkan sebagai aspek kesadaran dan persepsi manfaat sertifikasi halal.
-HAL3 dan HAL7 membentuk aspek kesiapan sertifikasi halal, sedangkan HAL4 dan HAL8 merepresentasikan hambatan dalam proses sertifikasi halal.
-HAL5 dan HAL10 dipertahankan sebagai indikator tunggal yang masing-masing menggambarkan persepsi terhadap dukungan pemerintah dan akses terhadap layanan sertifikasi halal.
+Pola tersebut menunjukkan bahwa sepuluh item tidak sepenuhnya menggambarkan satu dimensi yang homogen. Secara substantif, item-item tersebut memang mencakup beberapa aspek yang berbeda. Berdasarkan pola hubungan antaritem dan kerangka pertanyaan, empat item, yaitu HAL1, HAL2, HAL6, dan HAL9, dikelompokkan sebagai aspek kesadaran dan persepsi manfaat sertifikasi halal. HAL3 dan HAL7 membentuk aspek kesiapan sertifikasi halal, sedangkan HAL4 dan HAL8 merepresentasikan hambatan dalam proses sertifikasi halal. HAL5 dan HAL10 dipertahankan sebagai indikator tunggal yang masing-masing menggambarkan persepsi terhadap dukungan pemerintah dan akses terhadap layanan sertifikasi halal.
 
-| Aspek     | Item                   | Makna                                              |
-| ------------------- | ---------------------- | ------------------------------------------ |
+| Aspek                            | Item                   | Makna                                              |
+|-------------------|-------------------|-----------------------------------|
 | Awareness and Perceived Benefits | HAL1, HAL2, HAL6, HAL9 | Pemahaman dan persepsi manfaat sertifikasi         |
-| Readiness | HAL3, HAL7             | Pengetahuan prosedur dan kesiapan administratif    |
-| Barrier   | HAL4, HAL8             | Kendala dan kebutuhan pendampingan                 |
-| Support   | HAL5                   | Persepsi terhadap sosialisasi pemerintah           |
-| Access    | HAL10                  | Persepsi mengenai akses layanan berdasarkan lokasi |
+| Readiness                        | HAL3, HAL7             | Pengetahuan prosedur dan kesiapan administratif    |
+| Barrier                          | HAL4, HAL8             | Kendala dan kebutuhan pendampingan                 |
+| Support                          | HAL5                   | Persepsi terhadap sosialisasi pemerintah           |
+| Access                           | HAL10                  | Persepsi mengenai akses layanan berdasarkan lokasi |
 
-
-Pengelompokan tersebut juga memperoleh dukungan dari analisis CFA ordinal menggunakan estimator WLSMV.
-Loading terstandar untuk dimensi kesadaran dan persepsi manfaat berada pada rentang 0,834–0,919.
-Pada dimensi kesiapan, loading HAL3 dan HAL7 masing-masing sebesar 0,893 dan 0,884.
-Untuk dimensi hambatan, loading HAL4 sebesar 0,546 dan HAL8 sebesar 0,909.
+Pengelompokan tersebut juga memperoleh dukungan dari analisis CFA ordinal menggunakan estimator WLSMV. Loading terstandar untuk dimensi kesadaran dan persepsi manfaat berada pada rentang 0,834–0,919. Pada dimensi kesiapan, loading HAL3 dan HAL7 masing-masing sebesar 0,893 dan 0,884. Untuk dimensi hambatan, loading HAL4 sebesar 0,546 dan HAL8 sebesar 0,909.
 
 ```{r}
 library(ggplot2)
@@ -643,11 +574,7 @@ ggplot(
   )
 ```
 
-
-Meskipun demikian, ukuran kesesuaian model secara keseluruhan belum menunjukkan kecocokan yang sepenuhnya baik.
-CFI dan TLI standar masing-masing sebesar 0,990 dan 0,983, sedangkan RMSEA sebesar 0,146 dan SRMR sebesar 0,072.
-Nilai robust CFI sebesar 0,872 dan robust RMSEA sebesar 0,211 juga menunjukkan bahwa model tidak sebaik jika hanya dinilai berdasarkan indeks fit standar.
-Oleh karena itu, hasil CFA dalam penelitian ini lebih tepat digunakan sebagai informasi pendukung mengenai pola pengelompokan indikator, bukan sebagai dasar untuk menyatakan bahwa keseluruhan struktur pengukuran telah memiliki kecocokan yang sangat baik.
+Meskipun demikian, ukuran kesesuaian model secara keseluruhan belum menunjukkan kecocokan yang sepenuhnya baik. CFI dan TLI standar masing-masing sebesar 0,990 dan 0,983, sedangkan RMSEA sebesar 0,146 dan SRMR sebesar 0,072. Nilai robust CFI sebesar 0,872 dan robust RMSEA sebesar 0,211 juga menunjukkan bahwa model tidak sebaik jika hanya dinilai berdasarkan indeks fit standar. Oleh karena itu, hasil CFA dalam penelitian ini lebih tepat digunakan sebagai informasi pendukung mengenai pola pengelompokan indikator, bukan sebagai dasar untuk menyatakan bahwa keseluruhan struktur pengukuran telah memiliki kecocokan yang sangat baik.
 
 ```{r}
 library(semPlot)
@@ -669,16 +596,11 @@ semPaths(
 )
 ```
 
-
 ### Konstruksi skor aspek halal
 
-Berdasarkan hasil eksplorasi tersebut, aspek halal tidak dikonstruksi menjadi satu indeks tunggal. 
-Pendekatan ini dipilih karena sepuluh item mencakup konsep yang berbeda, terutama antara persepsi manfaat, kesiapan, dan hambatan. Penggabungan seluruh item menjadi satu skor akan berpotensi mengaburkan perbedaan substantif tersebut.
+Berdasarkan hasil eksplorasi tersebut, aspek halal tidak dikonstruksi menjadi satu indeks tunggal. Pendekatan ini dipilih karena sepuluh item mencakup konsep yang berbeda, terutama antara persepsi manfaat, kesiapan, dan hambatan. Penggabungan seluruh item menjadi satu skor akan berpotensi mengaburkan perbedaan substantif tersebut.
 
-Skor Kesadaran dan Persepsi Manfaat Sertifikasi Halal dihitung sebagai rata-rata empat item, yaitu HAL1, HAL2, HAL6, dan HAL9.
-Konsistensi internal keempat item tersebut tergolong baik, dengan Cronbach's alpha sebesar 0,88 dan korelasi antaritem rata-rata sebesar 0,67.
-Penghapusan salah satu item juga tidak memberikan peningkatan berarti terhadap nilai alpha, sehingga keempat item dipertahankan dalam skor komposit.
-
+Skor Kesadaran dan Persepsi Manfaat Sertifikasi Halal dihitung sebagai rata-rata empat item, yaitu HAL1, HAL2, HAL6, dan HAL9. Konsistensi internal keempat item tersebut tergolong baik, dengan Cronbach's alpha sebesar 0,88 dan korelasi antaritem rata-rata sebesar 0,67. Penghapusan salah satu item juga tidak memberikan peningkatan berarti terhadap nilai alpha, sehingga keempat item dipertahankan dalam skor komposit.
 
 ```{r}
 library(dplyr)
@@ -754,31 +676,17 @@ ggplot(
 
 ```
 
+Skor Kesiapan Sertifikasi Halal dihitung sebagai rata-rata HAL3 dan HAL7. Kedua item tersebut masing-masing memiliki loading terstandar sebesar 0,893 dan 0,884 pada faktor Readiness. Skor ini merepresentasikan kombinasi antara pengetahuan mengenai prosedur pengurusan sertifikasi dan kesiapan administrasi yang dirasakan oleh UMKM.
 
-Skor Kesiapan Sertifikasi Halal dihitung sebagai rata-rata HAL3 dan HAL7.
-Kedua item tersebut masing-masing memiliki loading terstandar sebesar 0,893 dan 0,884 pada faktor Readiness.
-Skor ini merepresentasikan kombinasi antara pengetahuan mengenai prosedur pengurusan sertifikasi dan kesiapan administrasi yang dirasakan oleh UMKM.
+Selanjutnya, skor Hambatan Sertifikasi Halal dihitung sebagai rata-rata HAL4 dan HAL8. Kedua item tersebut berkaitan dengan kendala biaya dan kebutuhan pendampingan dalam proses sertifikasi. Meskipun kedua indikator memiliki loading yang berbeda, masing-masing tetap memberikan informasi mengenai hambatan yang dirasakan oleh UMKM.
 
-Selanjutnya, skor Hambatan Sertifikasi Halal dihitung sebagai rata-rata HAL4 dan HAL8.
-Kedua item tersebut berkaitan dengan kendala biaya dan kebutuhan pendampingan dalam proses sertifikasi.
-Meskipun kedua indikator memiliki loading yang berbeda, masing-masing tetap memberikan informasi mengenai hambatan yang dirasakan oleh UMKM.
+HAL5 dan HAL10 tidak dimasukkan ke dalam ketiga skor komposit tersebut. HAL5 dipertahankan sebagai indikator dukungan/sosialisasi pemerintah, sedangkan HAL10 sebagai indikator akses layanan sertifikasi halal. Pemisahan ini dilakukan karena kedua item tersebut merepresentasikan kondisi eksternal yang berbeda dan tidak memiliki dasar empiris yang cukup dari analisis saat ini untuk digabungkan dengan salah satu konstruk utama.
 
-HAL5 dan HAL10 tidak dimasukkan ke dalam ketiga skor komposit tersebut.
-HAL5 dipertahankan sebagai indikator dukungan/sosialisasi pemerintah, sedangkan HAL10 sebagai indikator akses layanan sertifikasi halal.
-Pemisahan ini dilakukan karena kedua item tersebut merepresentasikan kondisi eksternal yang berbeda dan tidak memiliki dasar empiris yang cukup dari analisis saat ini untuk digabungkan dengan salah satu konstruk utama.
-
-Ketiga skor komposit pertama dihitung sebagai rata-rata skor item penyusunnya, sehingga tetap berada pada skala 1–5.
-Dengan cara ini, interpretasi skor tetap langsung terkait dengan skala jawaban responden.
-Skor yang lebih tinggi menunjukkan tingkat persetujuan yang lebih tinggi terhadap aspek yang bersangkutan.
-Khusus untuk `HAL_barrier`, skor yang lebih tinggi menunjukkan persepsi hambatan yang lebih besar dan karenanya tidak boleh ditafsirkan sebagai kondisi halal yang lebih baik.
+Ketiga skor komposit pertama dihitung sebagai rata-rata skor item penyusunnya, sehingga tetap berada pada skala 1–5. Dengan cara ini, interpretasi skor tetap langsung terkait dengan skala jawaban responden. Skor yang lebih tinggi menunjukkan tingkat persetujuan yang lebih tinggi terhadap aspek yang bersangkutan. Khusus untuk `HAL_barrier`, skor yang lebih tinggi menunjukkan persepsi hambatan yang lebih besar dan karenanya tidak boleh ditafsirkan sebagai kondisi halal yang lebih baik.
 
 ### Hubungan aspek halal dengan DRI
 
-Setelah skor aspek halal dibentuk, hubungan antara kesiapan digital dan aspek halal dianalisis melalui korelasi.
-Hasilnya menunjukkan bahwa `DRI` memiliki korelasi positif dengan seluruh skor aspek halal, tetapi dengan kekuatan yang berbeda.
-Korelasi terbesar terdapat antara `DRI` dan Kesiapan Sertifikasi Halal, yaitu sebesar 0,564. 
-Selanjutnya, korelasi DRI dengan Kesadaran dan Persepsi Manfaat Sertifikasi Halal sebesar 0,382, sedangkan korelasi dengan Hambatan Sertifikasi Halal sebesar 0,225.
-Hubungan DRI dengan Dukungan/Sosialisasi Pemerintah sebesar 0,134 dan dengan Akses Layanan Sertifikasi Halal sebesar 0,071.
+Setelah skor aspek halal dibentuk, hubungan antara kesiapan digital dan aspek halal dianalisis melalui korelasi. Hasilnya menunjukkan bahwa `DRI` memiliki korelasi positif dengan seluruh skor aspek halal, tetapi dengan kekuatan yang berbeda. Korelasi terbesar terdapat antara `DRI` dan Kesiapan Sertifikasi Halal, yaitu sebesar 0,564. Selanjutnya, korelasi DRI dengan Kesadaran dan Persepsi Manfaat Sertifikasi Halal sebesar 0,382, sedangkan korelasi dengan Hambatan Sertifikasi Halal sebesar 0,225. Hubungan DRI dengan Dukungan/Sosialisasi Pemerintah sebesar 0,134 dan dengan Akses Layanan Sertifikasi Halal sebesar 0,071.
 
 ```{r}
 cor_halal_dri <- tibble::tibble(
@@ -825,37 +733,26 @@ ggplot(
   )
 ```
 
+Pola tersebut menunjukkan bahwa keterkaitan antara kesiapan digital dan aspek halal tidak seragam. Hubungan yang relatif lebih kuat ditemukan pada aspek yang berkaitan langsung dengan kesiapan UMKM untuk menjalani proses sertifikasi. Sebaliknya, hubungan DRI dengan persepsi mengenai dukungan pemerintah dan akses layanan relatif lemah. Dengan demikian, dalam data penelitian ini, kesiapan digital lebih erat berkaitan dengan aspek internal UMKM, khususnya kesiapan sertifikasi, dibandingkan dengan persepsi terhadap faktor eksternal seperti dukungan dan akses layanan.
 
-Pola tersebut menunjukkan bahwa keterkaitan antara kesiapan digital dan aspek halal tidak seragam. 
-Hubungan yang relatif lebih kuat ditemukan pada aspek yang berkaitan langsung dengan kesiapan UMKM untuk menjalani proses sertifikasi.
-Sebaliknya, hubungan DRI dengan persepsi mengenai dukungan pemerintah dan akses layanan relatif lemah. 
-Dengan demikian, dalam data penelitian ini, kesiapan digital lebih erat berkaitan dengan aspek internal UMKM, khususnya kesiapan sertifikasi, dibandingkan dengan persepsi terhadap faktor eksternal seperti dukungan dan akses layanan.
+Korelasi positif sebesar 0,564 antara DRI dan Kesiapan Sertifikasi Halal menunjukkan bahwa UMKM dengan tingkat kesiapan digital yang lebih tinggi cenderung memiliki tingkat kesiapan sertifikasi halal yang lebih tinggi pula. Namun, hubungan ini merupakan hubungan asosiatif dan tidak dapat digunakan untuk menyimpulkan bahwa peningkatan kesiapan digital menyebabkan peningkatan kesiapan sertifikasi halal. Analisis korelasi juga belum memperhitungkan kemungkinan adanya karakteristik usaha lain yang secara bersamaan berkaitan dengan kedua variabel tersebut.
 
-Korelasi positif sebesar 0,564 antara DRI dan Kesiapan Sertifikasi Halal menunjukkan bahwa UMKM dengan tingkat kesiapan digital yang lebih tinggi cenderung memiliki tingkat kesiapan sertifikasi halal yang lebih tinggi pula.
-Namun, hubungan ini merupakan hubungan asosiatif dan tidak dapat digunakan untuk menyimpulkan bahwa peningkatan kesiapan digital menyebabkan peningkatan kesiapan sertifikasi halal.
-Analisis korelasi juga belum memperhitungkan kemungkinan adanya karakteristik usaha lain yang secara bersamaan berkaitan dengan kedua variabel tersebut.
-
-Secara keseluruhan, hasil analisis memberikan indikasi bahwa aspek halal pada UMKM Kota Mataram lebih tepat dipahami sebagai beberapa dimensi yang saling berkaitan tetapi tidak identik.
-Persepsi terhadap manfaat sertifikasi, kesiapan untuk mengurus sertifikasi, hambatan yang dirasakan, dukungan pemerintah, dan akses layanan memberikan informasi yang berbeda mengenai posisi UMKM dalam proses sertifikasi halal.
-Di antara aspek tersebut, kesiapan sertifikasi halal menunjukkan keterkaitan paling kuat dengan DRI, sehingga aspek ini dapat digunakan sebagai fokus utama pada analisis lanjutan mengenai hubungan antara kesiapan digital dan kesiapan halal.
-
+Secara keseluruhan, hasil analisis memberikan indikasi bahwa aspek halal pada UMKM Kota Mataram lebih tepat dipahami sebagai beberapa dimensi yang saling berkaitan tetapi tidak identik. Persepsi terhadap manfaat sertifikasi, kesiapan untuk mengurus sertifikasi, hambatan yang dirasakan, dukungan pemerintah, dan akses layanan memberikan informasi yang berbeda mengenai posisi UMKM dalam proses sertifikasi halal. Di antara aspek tersebut, kesiapan sertifikasi halal menunjukkan keterkaitan paling kuat dengan DRI, sehingga aspek ini dapat digunakan sebagai fokus utama pada analisis lanjutan mengenai hubungan antara kesiapan digital dan kesiapan halal.
 
 # Ringkasan Temuan
 
-Berdasarkan hasil GLM dan CAR yang sekarang sudah tersedia, berikut dideskripsikan hasil yang diperoleh.
-Ada tiga temuan utama: pengaruh `mean_ecomm`, keberadaan ketergantungan spasial, dan peningkatan kecocokan model setelah struktur spasial dimasukkan.
+Berdasarkan hasil GLM dan CAR yang sekarang sudah tersedia, berikut dideskripsikan hasil yang diperoleh. Ada tiga temuan utama: pengaruh `mean_ecomm`, keberadaan ketergantungan spasial, dan peningkatan kecocokan model setelah struktur spasial dimasukkan.
 
 ## Model CAR memiliki kecocokan yang lebih baik
 
-Kedua model menggunakan respons dan enam prediktor yang sama.
-Perbedaannya adalah GLM tidak memiliki efek spasial, sedangkan CAR menggunakan *random effect* spasial Leroux.
+Kedua model menggunakan respons dan enam prediktor yang sama. Perbedaannya adalah GLM tidak memiliki efek spasial, sedangkan CAR menggunakan *random effect* spasial Leroux.
 
 | Kriteria | GLM Gaussian | CAR Leroux Gaussian |
-| -------- | -----------: | ------------------: |
+|----------|-------------:|--------------------:|
 | DIC      |        51,64 |           **42,78** |
 | WAIC     |        52,15 |           **47,32** |
 | LMPL     |       -26,86 |          **-25,87** |
-| $p_D$  |         7,68 |                6,58 |
+| $p_D$    |         7,68 |                6,58 |
 
 Untuk DIC dan WAIC, nilai yang lebih rendah menunjukkan kecocokan relatif yang lebih baik. Dengan demikian:
 
@@ -878,7 +775,7 @@ Ini merupakan salah satu hasil utama yang dapat Anda gunakan untuk mendukung pen
 Hal yang menarik adalah koefisien antara kedua model hampir tidak berubah.
 
 | Variabel            |    GLM |    CAR |
-| ------------------- | -----: | -----: |
+|---------------------|-------:|-------:|
 | `mean_ecomm`        |  0.657 |  0.655 |
 | `mean_infr`         |  0.430 |  0.446 |
 | `prop_online`       |  0.617 |  0.602 |
@@ -894,8 +791,7 @@ sedangkan
 
 $$ \beta_{\text{CAR}}=0.6546. $$
 
-Perbedaannya sangat kecil.
-Interval kredibelnya juga hampir identik.
+Perbedaannya sangat kecil. Interval kredibelnya juga hampir identik.
 
 Hal ini menunjukkan bahwa penambahan komponen spasial tidak mengubah secara material estimasi hubungan antara kovariat dan `DRI`.
 
@@ -929,9 +825,7 @@ $$
 
 Kesamaan estimasi dan selang kepercayaan antara model CAR dan GLM menunjukkan bahwa asosiasi antara `mean_ecomm` dan DRI relatif konsisten terhadap spesifikasi model yang digunakan.
 
-Untuk lima prediktor lainnya, selang kepercayaan 95% masih mencakup nilai nol.
-Dengan demikian, belum terdapat bukti yang cukup kuat untuk mendukung adanya asosiasi yang berbeda dari nol antara masing-masing prediktor dan DRI setelah memperhitungkan prediktor lainnya serta, pada model CAR, struktur spasial.
-
+Untuk lima prediktor lainnya, selang kepercayaan 95% masih mencakup nilai nol. Dengan demikian, belum terdapat bukti yang cukup kuat untuk mendukung adanya asosiasi yang berbeda dari nol antara masing-masing prediktor dan DRI setelah memperhitungkan prediktor lainnya serta, pada model CAR, struktur spasial.
 
 ## Hasil $\rho$ memberikan bukti adanya struktur spasial
 
@@ -947,21 +841,15 @@ Karena selang kepercayaan berada di atas nol, terdapat bukti posterior mengenai 
 
 Artinya, setelah karakteristik UMKM yang dimasukkan ke dalam model diperhitungkan, masih terdapat struktur spasial pada `DRI` yang ditangkap oleh komponen CAR.
 
-Namun, intervalnya cukup lebar, yaitu 0.0145 sampai 0.9202.
-Jadi, bukti mengenai keberadaan ketergantungan spasial lebih kuat daripada ketepatan estimasi mengenai seberapa besar ketergantungan tersebut.
+Namun, intervalnya cukup lebar, yaitu 0.0145 sampai 0.9202. Jadi, bukti mengenai keberadaan ketergantungan spasial lebih kuat daripada ketepatan estimasi mengenai seberapa besar ketergantungan tersebut.
 
->"Hasil posterior memberikan bukti adanya ketergantungan spasial positif, meskipun besarnya ketergantungan tersebut masih memiliki ketidakpastian yang cukup besar."
-
+> "Hasil posterior memberikan bukti adanya ketergantungan spasial positif, meskipun besarnya ketergantungan tersebut masih memiliki ketidakpastian yang cukup besar."
 
 ## Interpretasi Parameter Spasial
 
-Hasil estimasi model CAR menunjukkan bahwa parameter spasial memiliki nilai posterior rata-rata sebesar $\rho = 0.393$, dengan selang kepercayaan 95% sebesar $(0.0145, 0.9202)$.
-Selang tersebut tidak mencakup nilai nol, yang menunjukkan adanya bukti posterior mengenai ketergantungan spasial positif pada efek residual setelah memperhitungkan variabel prediktor dalam model.
+Hasil estimasi model CAR menunjukkan bahwa parameter spasial memiliki nilai posterior rata-rata sebesar $\rho = 0.393$, dengan selang kepercayaan 95% sebesar $(0.0145, 0.9202)$. Selang tersebut tidak mencakup nilai nol, yang menunjukkan adanya bukti posterior mengenai ketergantungan spasial positif pada efek residual setelah memperhitungkan variabel prediktor dalam model.
 
-Sementara itu, Selang kepercayaan 95% untuk masing-masing efek spasial $\phi_i$ masih mencakup nilai nol.
-Kedua hasil tersebut menggambarkan aspek yang berbeda dari struktur spasial dalam model.
-Parameter $\rho$ merepresentasikan tingkat ketergantungan spasial secara keseluruhan, sedangkan $\phi_i$ merepresentasikan kontribusi efek spasial spesifik pada masing-masing kelurahan.
-Oleh karena itu, ketidakpastian pada efek spasial individual tidak bertentangan dengan adanya bukti ketergantungan spasial secara keseluruhan.
+Sementara itu, Selang kepercayaan 95% untuk masing-masing efek spasial $\phi_i$ masih mencakup nilai nol. Kedua hasil tersebut menggambarkan aspek yang berbeda dari struktur spasial dalam model. Parameter $\rho$ merepresentasikan tingkat ketergantungan spasial secara keseluruhan, sedangkan $\phi_i$ merepresentasikan kontribusi efek spasial spesifik pada masing-masing kelurahan. Oleh karena itu, ketidakpastian pada efek spasial individual tidak bertentangan dengan adanya bukti ketergantungan spasial secara keseluruhan.
 
 Dengan demikian, hasil model menunjukkan adanya struktur ketergantungan spasial pada tingkat global, sementara bukti mengenai kontribusi spesifik dari masing-masing kelurahan masih belum cukup kuat berdasarkan selang kepercayaan individualnya.
 
@@ -970,7 +858,6 @@ Dengan demikian, hasil model menunjukkan adanya struktur ketergantungan spasial 
 Setelah skor aspek halal dibentuk, hubungan antara kesiapan digital dan aspek sertifikasi halal dianalisis secara deskriptif melalui korelasi. Analisis ini bertujuan untuk melihat sejauh mana variasi dalam Digital Readiness Index (DRI) berkaitan dengan variasi pada masing-masing aspek sertifikasi halal.
 
 Hasil analisis menunjukkan bahwa DRI memiliki korelasi positif dengan seluruh aspek halal, meskipun kekuatan hubungannya berbeda. Korelasi terbesar ditemukan antara DRI dan Kesiapan Sertifikasi Halal, yaitu sebesar 0,564. Selanjutnya, korelasi DRI dengan Kesadaran dan Persepsi Manfaat Sertifikasi Halal sebesar 0,382, sedangkan korelasi dengan Hambatan Sertifikasi Halal sebesar 0,225. Hubungan dengan Dukungan/Sosialisasi Pemerintah dan Akses Layanan Sertifikasi Halal relatif lemah, masing-masing sebesar 0,134 dan 0,071.
-
 
 ```{r}
 
@@ -1021,16 +908,10 @@ Menariknya, korelasi positif antara DRI dan Hambatan Sertifikasi Halal, meskipun
 
 Secara keseluruhan, hasil menunjukkan bahwa aspek sertifikasi halal tidak memiliki hubungan yang seragam dengan kesiapan digital. Hubungan yang relatif lebih kuat terlihat pada aspek internal UMKM, terutama Kesiapan Sertifikasi Halal dan Kesadaran serta Persepsi Manfaat Sertifikasi Halal, sedangkan hubungan dengan aspek eksternal berupa Dukungan/Sosialisasi Pemerintah dan Akses Layanan Sertifikasi Halal relatif lemah. Di antara aspek yang dianalisis, Kesiapan Sertifikasi Halal memiliki korelasi paling besar dengan DRI (r = 0,564). Oleh karena itu, hubungan antara kesiapan digital dan kesiapan sertifikasi halal dapat menjadi fokus analisis dan pembahasan lebih lanjut.
 
-
 # Kesimpulan
 
-Perbandingan antara model Gaussian nonspasial dan model Gaussian Leroux CAR menunjukkan bahwa kedua model menghasilkan estimasi koefisien regresi yang relatif konsisten.
-Rata-rata indikator *e-commerce* (`mean_ecomm`) menunjukkan asosiasi positif yang paling jelas dengan DRI, dengan posterior mean sebesar 0.655 dan interval kredibel 95% sebesar (0.373; 0.938) pada model CAR.
-Karena variabel telah distandardisasi, hasil tersebut menunjukkan bahwa peningkatan satu simpangan baku pada rata-rata indikator *e-commerce* dikaitkan dengan peningkatan sekitar 0.65 simpangan baku pada DRI, setelah mengendalikan kovariat lainnya dan struktur spasial.
+Perbandingan antara model Gaussian nonspasial dan model Gaussian Leroux CAR menunjukkan bahwa kedua model menghasilkan estimasi koefisien regresi yang relatif konsisten. Rata-rata indikator *e-commerce* (`mean_ecomm`) menunjukkan asosiasi positif yang paling jelas dengan DRI, dengan posterior mean sebesar 0.655 dan interval kredibel 95% sebesar (0.373; 0.938) pada model CAR. Karena variabel telah distandardisasi, hasil tersebut menunjukkan bahwa peningkatan satu simpangan baku pada rata-rata indikator *e-commerce* dikaitkan dengan peningkatan sekitar 0.65 simpangan baku pada DRI, setelah mengendalikan kovariat lainnya dan struktur spasial.
 
-Meskipun estimasi koefisien regresi relatif serupa, model CAR memberikan kecocokan yang lebih baik dibandingkan model nonspasial, dengan DIC sebesar 42.78 dibandingkan 51.64 dan WAIC sebesar 47.32 dibandingkan 52.15.
-Nilai LMPL juga lebih tinggi pada model CAR, yaitu -25.87 dibandingkan -26.86. Selain itu, posterior parameter ketergantungan spasial $\rho$ memiliki mean sebesar 0.393 dengan interval kredibel 95% sebesar (0.0145; 0.9202), yang memberikan bukti adanya ketergantungan spasial positif pada komponen residual model.
-Namun, interval kredibel untuk efek spasial individual pada tingkat kelurahan mencakup nol, sehingga belum terdapat bukti posterior yang cukup untuk menyimpulkan adanya efek spasial residual yang berbeda dari nol pada kelurahan tertentu.
+Meskipun estimasi koefisien regresi relatif serupa, model CAR memberikan kecocokan yang lebih baik dibandingkan model nonspasial, dengan DIC sebesar 42.78 dibandingkan 51.64 dan WAIC sebesar 47.32 dibandingkan 52.15. Nilai LMPL juga lebih tinggi pada model CAR, yaitu -25.87 dibandingkan -26.86. Selain itu, posterior parameter ketergantungan spasial $\rho$ memiliki mean sebesar 0.393 dengan interval kredibel 95% sebesar (0.0145; 0.9202), yang memberikan bukti adanya ketergantungan spasial positif pada komponen residual model. Namun, interval kredibel untuk efek spasial individual pada tingkat kelurahan mencakup nol, sehingga belum terdapat bukti posterior yang cukup untuk menyimpulkan adanya efek spasial residual yang berbeda dari nol pada kelurahan tertentu.
 
 Secara keseluruhan, hasil menunjukkan bahwa struktur spasial relevan dalam pemodelan DRI pada tingkat kelurahan, sementara hubungan antara karakteristik wilayah dan DRI, khususnya indikator *e-commerce*, relatif stabil setelah struktur spasial diperhitungkan.
-
