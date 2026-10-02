@@ -19,7 +19,7 @@ format:
   html:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     code-fold: true
     code-summary: "Tampilkan kode"
     theme: cosmo
@@ -27,7 +27,7 @@ format:
   pdf:
     toc: true
     toc-depth: 3
-    number-sections: true
+    number-sections: false
     
 execute:
   warning: false
