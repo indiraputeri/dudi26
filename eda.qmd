@@ -957,7 +957,6 @@ $$ -25.87 > -26.86. $$
 
 Ketiga ukuran tersebut konsisten menunjukkan **bahwa model CAR memberikan kecocokan yang lebih baik** dibandingkan model Gaussian nonspasial.
 
-Ini merupakan salah satu hasil utama yang dapat Anda gunakan untuk mendukung penggunaan model spasial.
 
 ## Koefisien regresi relatif stabil setelah efek spasial dimasukkan
 
@@ -1146,7 +1145,7 @@ Secara keseluruhan, hasil menunjukkan bahwa aspek sertifikasi halal tidak memili
 1. **Menerapkan pendampingan sertifikasi halal berbasis tingkat kesiapan UMKM**, dengan DRI sebagai salah satu instrumen untuk menentukan intensitas pendampingan. Contohnya seperti tabel berikut:
 
 | Kondisi                               | Fokus intervensi                                                                        |
-| ------------------------------------- | --------------------------------------------------------------------------------------- |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------|
 | DRI relatif rendah                    | Literasi digital dasar + pengenalan sertifikasi halal                                   |
 | DRI relatif rendah + readiness rendah | Pendampingan intensif dan bantuan administratif                                         |
 | DRI relatif tinggi + readiness rendah | Fokus pada akses informasi, prosedur, dan fasilitasi sertifikasi                        |
