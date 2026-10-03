@@ -1,6 +1,6 @@
 ---
 title: "Analisis Eksploratori dan Pemodelan Spasial UMKM Kota Mataram"
-subtitle: "Kesiapan Digital dan Kepemilikan Sertifikasi Halal"
+subtitle: "Kesiapan Digital dan Aspek Sertifikasi Halal"
 author: ""
 
 lang: id
@@ -44,28 +44,112 @@ library(ggplot2)
 library(dplyr)
 ```
 
-# Latar Belakang
 
-Data master UMKM Kota Mataram merupakan sumber informasi penting yang dapat digunakan untuk memahami karakteristik pelaku usaha sebelum dilakukan pengumpulan data mengenai tingkat kesiapan digital maupun kepemilikan sertifikasi halal. Oleh karena itu, dilakukan Analisis Data Eksploratori (Exploratory Data Analysis/EDA) untuk memperoleh gambaran umum mengenai struktur data, kualitas data, dan karakteristik UMKM yang tersedia.
+## Latar Belakang
 
-# Tujuan
+Data master UMKM Kota Mataram menjadi sumber informasi awal untuk memahami karakteristik, distribusi, dan kondisi usaha UMKM yang menjadi sasaran penelitian. Data tersebut digunakan untuk membangun konteks empiris mengenai populasi UMKM sebelum dilakukan analisis lebih lanjut mengenai kesiapan digital dan aspek sertifikasi halal.
+
+Analisis dilakukan secara bertahap, dimulai dengan Analisis Data Eksploratori (Exploratory Data Analysis/EDA) untuk memahami struktur data, karakteristik UMKM, distribusi spasial, serta kualitas dan keterbatasan data. Tahap ini kemudian dilanjutkan dengan analisis dan pemodelan statistik serta spasial untuk mengidentifikasi pola, hubungan, dan variasi antarwilayah yang relevan dengan kesiapan digital dan sertifikasi halal.
+
+Hasil analisis dan pemodelan selanjutnya digunakan untuk memperoleh insight mengenai faktor-faktor yang berkaitan dengan kesiapan digital, kondisi sertifikasi halal, serta variasinya antarwilayah. Temuan tersebut menjadi dasar dalam menyusun rekomendasi kebijakan yang lebih terarah, khususnya dalam menentukan kelompok dan wilayah yang memerlukan prioritas intervensi.
+
+Dengan demikian, analisis tidak hanya diarahkan untuk menghasilkan deskripsi statistik, tetapi membangun alur analitis dari **pemahaman data, pemodelan, interpretasi hasil, hingga perumusan rekomendasi kebijakan**.
+
+### Tujuan
 
 Analisis ini bertujuan untuk:
 
-1.  Mendeskripsikan karakteristik dataset UMKM.
-2.  Mengidentifikasi kualitas data.
-3.  Mengetahui distribusi karakteristik UMKM.
-4.  Menjadi baseline sebelum survei kesiapan digital dan sertifikasi halal.
+1. mendeskripsikan karakteristik dan distribusi UMKM Kota Mataram berdasarkan informasi yang tersedia dalam data master;
+2. mengevaluasi kualitas, kelengkapan, dan keterbatasan data sebagai dasar analisis;
+3. mengidentifikasi pola dan karakteristik UMKM yang relevan dengan kesiapan digital dan sertifikasi halal;
+4. menganalisis hubungan dan variasi kesiapan digital serta aspek sertifikasi halal melalui pendekatan statistik dan spasial;
+5. menghasilkan *insight* empiris mengenai karakteristik dan wilayah UMKM yang berkaitan dengan kebutuhan intervensi; dan
+6. menerjemahkan hasil analisis menjadi rekomendasi kebijakan yang dapat mendukung penentuan prioritas intervensi digitalisasi dan sertifikasi halal UMKM di Kota Mataram.
+
+
+# Konteks Geografis: Kota Mataram
+
+Kota Mataram merupakan wilayah perkotaan yang terdiri atas sejumlah kecamatan dan kelurahan dengan karakteristik geografis yang beragam.
+Dalam analisis ini, unit spasial yang digunakan adalah kelurahan.
+Sebanyak 50 kelurahan digunakan sebagai unit analisis untuk menggambarkan variasi kesiapan digital dan karakteristik UMKM secara spasial.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#| label: fig-mtrmap
+#| fig-cap: "Peta 50 kelurahan di Kota Mataram sebagai unit analisis, dengan gradasi warna menunjukkan jumlah UMKM pada masing-masing kelurahan."
+
+library(leaflet)
+load("data/mtrvlg_umkm2.RData")
+
+leaflet() %>%
+  addTiles() %>%
+  addPolygons(
+  data = mtrvlg_umkm2,
+  
+  fillColor = ~colorNumeric(
+    palette = viridisLite::viridis(256),
+    domain = mtrvlg_umkm2$jumlah_umkm
+  )(jumlah_umkm),
+  
+  fillOpacity = 0.85,
+  color = "white",
+  weight = 1,
+  
+  label = ~paste0(
+    kelurahan,
+    " | ",
+    kecamatan,
+    " | UMKM: ",
+    jumlah_umkm
+  ),
+  
+  popup = ~paste0(
+    "<b>Kelurahan:</b> ", kelurahan, "<br>",
+    "<b>Kecamatan:</b> ", kecamatan, "<br>",
+    "<b>Jumlah UMKM:</b> ", jumlah_umkm
+  )
+)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#| label: fig-mtrnb
+#| fig-cap: "Peta *neighbourhood* Kota Mataram berdasarkan queen contiguity."
+#| fig-width: 8
+#| fig-height: 6
+#| out-width: "80%"
+
+knitr::include_graphics("figs/mtr_nb.png")
+```
+
+
+Struktur keterhubungan antarwilayah dibentuk menggunakan pendekatan *queen contiguity*, yaitu dua kelurahan dianggap bertetangga apabila memiliki batas atau titik sudut yang sama.
+Struktur ini digunakan untuk merepresentasikan kedekatan spasial antarwilayah dalam analisis spasial selanjutnya.
 
 # Dataset
 
-Dataset yang digunakan pada penelitian ini terdiri dari data primer dan sekunder. Data primer diperoleh dari hasil survei UMKM yang dilakukan oleh tim, sedangkan data sekunder didapatkan dari data administrasi Dinas Koperasi Kota Mataram. Berikut merupakan uraian singkat dari setiap dataset.
+Dataset yang digunakan pada penelitian ini terdiri dari data resmi (*official dataset*) dan data survei.
+Data resmi diperoleh dari data administrasi Dinas Koperasi Kota Mataram, sedangkan data survei diperoleh dari hasil survei UMKM yang dilakukan oleh tim riset.
+Berikut merupakan uraian singkat dari setiap dataset.
 
 ## Data resmi: profil UMKM kota Mataram
 
-Selain data primer yang diperoleh melalui survei, penelitian ini menggunakan data administratif UMKM yang diperoleh dari Dinas terkait di Kota Mataram. Dataset tersebut digunakan untuk memberikan gambaran mengenai populasi dan karakteristik UMKM yang menjadi konteks penelitian. Dataset terdiri atas 4.185 unit usaha dengan 17 variabel yang mencakup informasi identitas usaha, karakteristik usaha, lokasi, klasifikasi kegiatan usaha, serta beberapa karakteristik ekonomi dan ketenagakerjaan.
+Selain data primer yang diperoleh melalui survei, penelitian ini menggunakan data administratif UMKM yang diperoleh dari Dinas terkait di Kota Mataram.
+Dataset tersebut digunakan untuk memberikan gambaran mengenai populasi dan karakteristik UMKM yang menjadi konteks penelitian.
+Dataset terdiri atas 4.185 unit usaha dengan 17 variabel yang mencakup informasi identitas usaha, karakteristik usaha, lokasi, klasifikasi kegiatan usaha, serta beberapa karakteristik ekonomi dan ketenagakerjaan.
 
-```{r, echo=FALSE}
+Informasi yang tersedia meliputi nomor identifikasi usaha (NIB), nama perusahaan, jenis perusahaan, tingkat risiko proyek, skala usaha, alamat usaha, kecamatan dan kelurahan, kode dan uraian KBLI, identitas pemilik usaha, serta informasi kontak.
+Dataset juga memuat beberapa variabel kuantitatif, yaitu luas tanah, jumlah investasi, dan jumlah tenaga kerja.
+Dengan demikian, data administratif ini menyediakan informasi mengenai karakteristik struktural dan spasial UMKM yang tidak seluruhnya diperoleh dari instrumen survei.
+
+### Ringkasan Karakteristik UMKM
+
+Data administratif yang diperoleh dari dinas terkait mencakup 4185 unit usaha yang tersebar di wilayah Kota Mataram.
+Berdasarkan @tbl-summaryumkm, karakteristik UMKM menunjukkan adanya variasi jumlah unit usaha antar kecamatan di Kota Mataram.
+Jumlah UMKM terbanyak tercatat di Kecamatan Mataram, yaitu 802 unit, diikuti Cakranegara sebanyak 799 unit dan Sandubaya sebanyak 785 unit.
+Sementara itu, jumlah UMKM lebih rendah terdapat di Selaparang sebanyak 627 unit, Ampenan sebanyak 601 unit, dan Sekarbela sebanyak 571 unit.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: tbl-summaryumkm
+#| tbl-cap: "Ringkasan variabel numerik pada data UMKM"
 
 umkm <- read_excel(
   "data/umkm.xlsx",
@@ -88,47 +172,6 @@ umkm <- umkm %>%
     )
   )
 
-head(umkm)
-
-```
-
-Informasi yang tersedia meliputi nomor identifikasi usaha (NIB), nama perusahaan, jenis perusahaan, tingkat risiko proyek, skala usaha, alamat usaha, kecamatan dan kelurahan, kode dan uraian KBLI, identitas pemilik usaha, serta informasi kontak. Dataset juga memuat beberapa variabel kuantitatif, yaitu luas tanah, jumlah investasi, dan jumlah tenaga kerja. Dengan demikian, data administratif ini menyediakan informasi mengenai karakteristik struktural dan spasial UMKM yang tidak seluruhnya diperoleh dari instrumen survei.
-
-### Ringkasan Karakteristik UMKM
-
-Sebanyak **4.185 unit UMKM** tercatat dalam dataset administratif. Variabel `skala_usaha` membedakan unit usaha ke dalam kategori seperti usaha mikro dan usaha kecil, sehingga dapat digunakan untuk menggambarkan struktur skala usaha dalam populasi yang diamati. Informasi lokasi pada tingkat kecamatan dan kelurahan juga memungkinkan distribusi UMKM dianalisis secara spasial.
-
-```{r, echo=FALSE}
-#| label: tbl-ringkasan-skala-umkm
-#| tbl-cap: "Distribusi UMKM menurut skala usaha"
-
-umkm %>%
-  count(skala_usaha, sort = TRUE) %>%
-  mutate(
-    persentase = 100 * n / sum(n)
-  )
-```
-
-Distribusi tersebut memberikan gambaran mengenai konsentrasi UMKM secara administratif. Informasi ini selanjutnya dapat digunakan sebagai konteks dalam analisis spasial, terutama karena tingkat kesiapan digital yang diperoleh dari survei dapat dibandingkan dengan karakteristik wilayah tempat UMKM beroperasi.
-
-Selain karakteristik kategorikal, dataset juga memuat informasi mengenai jumlah investasi dan tenaga kerja. Variabel `jumlah_investasi_rp` menunjukkan nilai investasi usaha dalam rupiah, sedangkan `tki_org` menunjukkan jumlah tenaga kerja pada masing-masing unit usaha. Karena kedua variabel tersebut memiliki skala yang berbeda dan berpotensi memiliki distribusi yang menceng, statistik deskriptif seperti median dan rentang interkuartil digunakan sebagai pelengkap nilai rata-rata.
-
-```{r, echo=FALSE}
-#| label: tbl-ringkasan-kecamatan-umkm
-#| tbl-cap: "Distribusi UMKM menurut kecamatan"
-
-umkm %>%
-  count(kecamatan, sort = TRUE) %>%
-  mutate(
-    persentase = 100 * n / sum(n)
-  )
-```
-
-Data administratif ini selanjutnya digunakan sebagai sumber informasi mengenai karakteristik dan distribusi UMKM, sedangkan data survei digunakan untuk membangun dan mengukur *Digital Readiness Index* (DRI). Pemisahan fungsi kedua sumber data tersebut penting karena DRI dibentuk berdasarkan respons terhadap item-item instrumen survei, bukan berdasarkan variabel administratif dari Dinas.
-
-```{r, echo=FALSE}
-#| label: tbl-ringkasan-numerik-umkm
-#| tbl-cap: "Ringkasan variabel numerik pada data UMKM"
 
 sum_kec <- umkm %>%
   group_by(kecamatan) %>%
@@ -204,6 +247,152 @@ sum_kec %>%
   )
 ```
 
+Dari sisi investasi, median investasi per UMKM berkisar antara Rp10 juta hingga Rp20 juta. Kecamatan Mataram dan Sandubaya memiliki median investasi sebesar Rp20 juta, sedangkan Ampenan memiliki median terendah sebesar Rp10 juta. Rentang antarkuartil menunjukkan bahwa distribusi investasi cukup lebar pada seluruh kecamatan, dengan nilai kuartil atas mencapai Rp50 juta di beberapa kecamatan.
+
+Median tenaga kerja relatif seragam, yaitu dua orang per UMKM pada seluruh kecamatan. Rentang antarkuartil juga relatif sempit, yaitu sekitar 1–2 orang, sehingga berdasarkan data administratif ini sebagian besar unit usaha memiliki jumlah tenaga kerja yang relatif kecil.
+
+Komposisi skala usaha menunjukkan pola yang sangat konsisten antar kecamatan. UMKM didominasi oleh usaha mikro, dengan proporsi antara 91,1% di Kecamatan Mataram hingga 94,5% di Kecamatan Sandubaya. Usaha kecil memiliki proporsi sekitar 3,6–7,0%, sedangkan usaha besar dan usaha menengah hanya mencakup sebagian kecil unit usaha. Proporsi usaha menengah bahkan tidak melebihi 0,5% pada kecamatan yang ditampilkan.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: tbl-bentuk-usaha-umkm
+#| tbl-cap: "Distribusi UMKM menurut bentuk usaha"
+
+
+bentuk_usaha <- umkm %>%
+  mutate(
+    bentuk_usaha_ringkas = case_when(
+      jenis_perusahaan %in% c(
+        "Koperasi",
+        "Persekutuan dan Perkumpulan",
+        "Badan Hukum Lainnya",
+        "Persekutuan Perdata",
+        "Perusahaan Umum (Perum)"
+      ) ~ "Lainnya",
+      TRUE ~ jenis_perusahaan
+    )
+  ) %>%
+  count(bentuk_usaha_ringkas, name = "n") %>%
+  mutate(
+    persentase = 100 * n / sum(n),
+    `Bentuk Usaha` = bentuk_usaha_ringkas,
+    `Jumlah (n)` = n,
+    `Persentase (%)` = sprintf("%.1f", persentase)
+  ) %>%
+  select(
+    `Bentuk Usaha`,
+    `Jumlah (n)`,
+    `Persentase (%)`
+  ) %>%
+  arrange(desc(`Jumlah (n)`))
+
+bentuk_usaha %>%
+  gt() %>%
+  fmt_number(
+    columns = `Jumlah (n)`,
+    decimals = 0
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = everything()
+  ) %>%
+  tab_header(
+    title = "Bentuk Usaha UMKM",
+    subtitle = "Distribusi 4.185 unit usaha berdasarkan bentuk kelembagaan"
+  )
+```
+
+Pada tingkat kecamatan, jumlah UMKM dan komposisi skala usaha menunjukkan variasi antarwilayah.
+@tbl-summaryumkm juga menunjukkan perbedaan karakteristik investasi dan tenaga kerja antar kecamatan.
+Informasi ini memberikan konteks terhadap variasi spasial UMKM yang selanjutnya direpresentasikan pada tingkat kelurahan dalam analisis spasial.
+
+Selain itu, berdasarkan karakteristik kelembagaannya (@tbl-bentuk-usaha-umkm), UMKM dalam dataset ini didominasi oleh usaha berbentuk perorangan, yaitu sebanyak 3560 unit atau 85.1%.
+Bentuk usaha lainnya terdiri atas CV sebanyak 370 unit (8.8%), dan PT sebanyak 237 unit (5.7%).
+Lima unit usaha lainnya (0.4%) tercatat dalam beberapa bentuk kelembagaan dengan jumlah yang sangat kecil.
+
+<!-- Selain karakteristik kategorikal, dataset juga memuat informasi mengenai jumlah investasi dan tenaga kerja. -->
+<!-- Variabel `jumlah_investasi_rp` menunjukkan nilai investasi usaha dalam rupiah, sedangkan `tki_org` menunjukkan jumlah tenaga kerja pada masing-masing unit usaha. -->
+<!-- Karena kedua variabel tersebut memiliki skala yang berbeda dan berpotensi memiliki distribusi yang menceng, statistik deskriptif seperti median dan rentang interkuartil digunakan sebagai pelengkap nilai rata-rata. -->
+
+<!-- Data administratif ini selanjutnya digunakan sebagai sumber informasi mengenai karakteristik dan distribusi UMKM, sedangkan data survei digunakan untuk membangun dan mengukur *Digital Readiness Index* (DRI). -->
+<!-- Pemisahan fungsi kedua sumber data tersebut penting karena DRI dibentuk berdasarkan respons terhadap item-item instrumen survei, bukan berdasarkan variabel administratif dari Dinas. -->
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: tbl-kbli
+#| tbl-cap: "Distribusi 4185 unit usaha berdasarkan kelompok KBLI tiga digit"
+
+load("data/kelompok_kbli.RData")
+
+# # Mapping kelompok KBLI 3 digit
+# kbli_label <- c(
+#   "141" = "Pembuatan pakaian",
+#   "451" = "Perdagangan mobil",
+#   "453" = "Perdagangan suku cadang dan aksesori mobil",
+#   "454" = "Perdagangan suku cadang dan aksesori sepeda motor",
+#   "461" = "Perdagangan besar atas dasar balas jasa/kontrak",
+#   "462" = "Perdagangan besar hasil pertanian",
+#   "463" = "Perdagangan besar makanan dan minuman",
+#   "464" = "Perdagangan besar barang keperluan rumah tangga",
+#   "465" = "Perdagangan besar mesin dan peralatan",
+#   "466" = "Perdagangan besar peralatan khusus",
+#   "469" = "Perdagangan besar berbagai macam barang",
+#   "471" = "Perdagangan eceran berbagai macam barang",
+#   "472" = "Perdagangan eceran makanan dan hasil pertanian",
+#   "473" = "Perdagangan eceran BBM dan LPG",
+#   "474" = "Perdagangan eceran komputer dan perlengkapannya",
+#   "475" = "Perdagangan eceran peralatan rumah tangga",
+#   "476" = "Perdagangan eceran hasil pencetakan dan penerbitan",
+#   "477" = "Perdagangan eceran khusus",
+#   "478" = "Perdagangan eceran kaki lima dan los pasar",
+#   "479" = "Perdagangan eceran bukan di toko",
+#   "561" = "Penyediaan makanan",
+#   "562" = "Jasa boga/katering",
+#   "563" = "Penyediaan minuman",
+#   "962" = "Aktivitas penatu"
+# )
+# 
+# kelompok_kbli <- umkm %>%
+#   mutate(
+#     kbli_3digit = substr(kbli, 1, 3),
+#     kelompok_usaha = recode(
+#       kbli_3digit,
+#       !!!kbli_label
+#     )
+#   ) %>%
+#   count(kbli_3digit, kelompok_usaha, name = "n") %>%
+#   mutate(
+#     persentase = 100 * n / sum(n)
+#   ) %>%
+#   arrange(desc(n)) %>%
+#   transmute(
+#     `Kelompok Kegiatan Usaha` = kelompok_usaha,
+#     `Jumlah (n)` = n,
+#     `Persentase (%)` = sprintf("%.1f", persentase)
+#   )
+
+kelompok_kbli %>%
+  gt() %>%
+  fmt_number(
+    columns = `Jumlah (n)`,
+    decimals = 0
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = c(`Jumlah (n)`, `Persentase (%)`)
+  ) %>%
+  tab_header(
+    title = "Kelompok Kegiatan Usaha UMKM"
+  )
+
+```
+
+Berdasarkan klasifikasi KBLI tiga digit (@tbl-kbli), kegiatan usaha dalam dataset menunjukkan keragaman yang cukup luas, dengan 24 kelompok kegiatan yang teridentifikasi.
+Distribusi tersebut terutama terkonsentrasi pada beberapa kelompok kegiatan utama.
+Kelompok 561, yang berkaitan dengan penyediaan makanan, merupakan kelompok dengan jumlah UMKM terbesar, yaitu 935 unit (22.3%).
+Selanjutnya, kelompok 477 dan 471 masing-masing mencakup 684 unit (16.3%) dan 674 unit (16.1%). 
+Kelompok 472 mencakup 381 unit (9.1%), sedangkan kelompok 463 mencakup 243 unit (5.8%). 
+Kelompok-kelompok kegiatan lainnya memiliki proporsi yang lebih kecil.
+
 ## Data survei
 
 Survei yang digunakan dalam penelitian ini dirancang untuk memperoleh gambaran mengenai karakteristik usaha sekaligus tingkat kesiapan digital pelaku Usaha Mikro, Kecil, dan Menengah (UMKM). Instrumen terdiri atas bagian informasi umum mengenai usaha dan pemilik, serta sejumlah pernyataan yang mengukur aspek-aspek terkait penggunaan dan kesiapan teknologi digital. Pada bagian karakteristik usaha, responden diminta memberikan informasi mengenai jenis usaha, penggunaan kanal penjualan atau pembelian secara daring, usia usaha, jumlah tenaga kerja, omzet bulanan, serta karakteristik pemilik seperti usia dan pendidikan terakhir. Informasi lokasi usaha juga dikumpulkan hingga tingkat kelurahan.
@@ -214,107 +403,6 @@ Selain aspek-aspek tersebut, instrumen juga memuat pertanyaan mengenai **e-comme
 
 Dalam penelitian ini, tidak seluruh bagian survei digunakan sebagai indikator pembentuk DRI. Item yang secara substantif merepresentasikan kesiapan dan kapabilitas digital dipilih dan selanjutnya dikelompokkan ke dalam lima dimensi DRI, yaitu **Skill**, **Business**, **Strategy**, **Security**, dan **Data**. Dengan demikian, informasi karakteristik usaha dan bagian survei lainnya digunakan sebagai informasi pendukung atau variabel penelitian, sedangkan item yang relevan dengan lima dimensi tersebut menjadi dasar dalam proses evaluasi struktur instrumen dan konstruksi skor DRI.
 
-```{r, echo=FALSE}
-
-srv <- read_csv("data/dri.csv")
-
-# Kolom kelurahan dari Google Form
-kolom_kelurahan <- c(
-  "Pilih kelurahan...5",
-  "Pilih kelurahan...6",
-  "Pilih kelurahan...7",
-  "Pilih kelurahan...8",
-  "Pilih kelurahan...9",
-  "Pilih Kelurahan"
-)
-
-# Membuat satu kolom kelurahan
-usrv <- srv %>%
-  mutate(
-    kelurahan = coalesce(!!!syms(kolom_kelurahan)),
-    kode_umkm = sprintf("UMKM%03d", row_number())
-  ) %>% 
-  rename(
-    kecamatan = `Lokasi usaha (kecamatan)`,
-    jenis_usaha = `Jenis usaha`,
-    online = `Apakah kegiatan usaha (penjualan/pembelian) juga dilakukan secara online?`,
-    usia_usaha = `Usia Usaha`,
-    tenaga_kerja = `Banyaknya tenaga kerja/karyawan`,
-    omset = `Omset (penjualan) per bulan`,
-    usia_pemilik = `Usia pemilik usaha`,
-    pendidikan = `Pendidikan terakhir`,
-    INF1 = `Koneksi internet di wilayah usaha saya stabil dan cukup cepat`,
-    INF2 = `Saya memiliki perangkat (HP/Laptop) yang cukup untuk operasional`,
-    INF3 = `Saya menggunakan aplikasi online/cloud (google drive, dll)`,
-
-    SKL1 = `Saya atau karyawan memiliki kemampuan dasar menggunakan teknologi`,
-    SKL2 = `Kami pernah mengikuti pelatihan digital dalam 1 tahun terakhir`,
-    SKL3 = `Saya memahami pemasaran digital (media sosial, marketplace)`,
-
-    BUS1 = `Pembukuan usaha sudah dilakukan secara digital`,
-    BUS2 = `Pengelolaan stok dilakukan dengan bantuan teknologi`,
-    BUS3 = `Data pelanggan disimpan secara rapi (misalnya Excel/WA)`,
-
-    STR1 = `Saya memiliki rencana untuk mengembangkan usaha secara digital`,
-    STR2 = `Saya menyisihkan anggaran untuk teknologi/digitalisasi`,
-
-    SEC1 = `Saya menggunakan backup data usaha secara rutin`,
-    SEC2 = `Saya menggunakan perlindungan dasar (password/antivirus)`,
-
-    DAT1 = `Saya menggunakan data untuk mengambil keputusan usaha`,
-    DAT2 = `Saya pernah mencoba cara baru berbasis digital untuk usaha`,
-
-    ECO1 = `Usaha saya memiliki akun media sosial aktif untuk promosi`,
-    ECO2 = `Saya menjual produk melalui marketplace/online`,
-    ECO3 = `Sebagian penjualan berasal dari online`,
-
-    HAL1 = `Saya memahami pentingnya sertifikasi halal bagi usaha`,
-    HAL2 = `Sertifikasi halal meningkatkan kepercayaan konsumen`,
-    HAL3 = `Saya mengetahui prosedur pengurusan sertifikasi halal`,
-    HAL4 = `Biaya sertifikasi halal masih menjadi kendala usaha saya`,
-    HAL5 = `Pemerintah memberikan sosialisasi yang cukup terkait sertifikasi halal`,
-    HAL6 = `Sertifikasi halal meningkatkan daya saing produk`,
-    HAL7 = `Saya memiliki kesiapan administrasi untuk sertifikasi halal`,
-    HAL8 = `Saya membutuhkan pendampingan dalam proses sertifikasi halal`,
-    HAL9 = `Sertifikasi halal membantu memperluas pasar usaha`,
-    HAL10 = `Lokasi usaha mempengaruhi akses terhadap layanan sertifikasi halal`
-  ) %>% 
-  select(-starts_with("Pilih kelurahan"),
-         -Timestamp,
-         -`Email Address`,
-         -`Nama usaha (UMKM)`,
-         -`Surveyor (referral)`,
-         -`foto responden/lokasi usaha responden`,
-         -`Nama pemilik usaha (dapat berupa inisial/anonim)`
-         )
-
-usrv <- usrv %>%
-  select(
-    kode_umkm,
-    kecamatan,
-    kelurahan,
-
-    jenis_usaha,
-    online,
-    usia_usaha,
-    tenaga_kerja,
-    omset,
-    usia_pemilik,
-    pendidikan,
-
-    starts_with("INF"),
-    starts_with("SKL"),
-    starts_with("BUS"),
-    starts_with("STR"),
-    starts_with("SEC"),
-    starts_with("DAT"),
-    starts_with("ECO"),
-    starts_with("HAL")
-  )
-
-head(usrv)
-
-```
 
 ## Konstruksi Digital Readiness Index (DRI)
 
@@ -323,6 +411,70 @@ head(usrv)
 Selanjutnya dilakukan *exploratory factor analysis* (EFA) menggunakan metode minimum residual (minres), rotasi oblimin, dan matriks korelasi polikhorik karena indikator diukur pada skala ordinal. *Parallel analysis* memberikan indikasi awal adanya tiga faktor statistik. Namun, hasil tersebut tidak langsung digunakan sebagai dasar untuk menetapkan struktur substantif DRI. Evaluasi struktur juga mempertimbangkan kerangka konseptual instrumen dan interpretabilitas indikator. Hasil EFA tiga faktor menunjukkan bahwa sebagian besar indikator memiliki *communality* yang tinggi, tetapi beberapa indikator menunjukkan *cross-loading*. Secara khusus, indikator INF1 dan INF2 membentuk kelompok yang berbeda dari INF3, sedangkan INF3 menunjukkan pola pemuatan yang lebih dekat dengan kelompok kemampuan (*capability*). Hal ini menunjukkan bahwa struktur empiris tidak sepenuhnya mereproduksi pengelompokan awal indikator berdasarkan label konseptual.
 
 Temuan tersebut penting karena tujuan penelitian bukan semata-mata memperoleh jumlah faktor statistik yang paling kecil, tetapi membangun indeks yang memiliki interpretasi substantif dan dapat digunakan secara konsisten pada tahap analisis berikutnya. Oleh karena itu, evaluasi struktur dilakukan dengan mempertimbangkan kombinasi antara hasil analisis faktor eksploratori, makna substantif setiap indikator, serta struktur konseptual DRI yang digunakan dalam penelitian.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: tbl-dimdri
+#| tbl-cap: "Dimensi Penyusun Digital Readiness Index"
+
+library(dplyr)
+library(gt)
+
+dimensi_dri <- tibble(
+  Dimensi = c(
+    "Skill",
+    "Business",
+    "Strategy",
+    "Security",
+    "Data"
+  ),
+  Kode = c(
+    "SKL",
+    "BUS",
+    "STR",
+    "SEC",
+    "DAT"
+  ),
+  Indikator = c(
+    "SKL1–SKL3",
+    "BUS1–BUS3",
+    "STR1–STR2",
+    "SEC1–SEC2",
+    "DAT1–DAT2"
+  ),
+  Deskripsi = c(
+    "Keterampilan dan kemampuan dasar dalam menggunakan teknologi digital.",
+    "Pemanfaatan teknologi digital dalam proses dan aktivitas bisnis.",
+    "Perencanaan dan penerapan strategi yang berkaitan dengan pemanfaatan teknologi digital.",
+    "Kesadaran dan praktik terkait keamanan dalam penggunaan teknologi dan informasi digital.",
+    "Pemanfaatan data dan teknologi untuk mendukung informasi, pengambilan keputusan, dan inovasi."
+  )
+)
+
+dimensi_dri %>%
+  gt() %>%
+  tab_header(
+    title = "Struktur akhir konstruk DRI yang digunakan dalam penelitian"
+  ) %>%
+  cols_label(
+    Dimensi = "Dimensi",
+    Kode = "Kode",
+    Indikator = "Indikator",
+    Deskripsi = "Aspek yang diukur"
+  ) %>%
+  cols_align(
+    align = "center",
+    columns = c(Dimensi, Kode, Indikator)
+  ) %>%
+  cols_align(
+    align = "left",
+    columns = Deskripsi
+  ) %>%
+  tab_options(
+    table.font.size = px(12),
+    data_row.padding = px(6)
+  )
+```
+
 
 Berdasarkan evaluasi tersebut, indikator Infrastructure tidak dipertahankan sebagai dimensi tersendiri dalam konstruksi skor akhir. Dengan demikian, struktur operasional DRI yang digunakan terdiri atas lima dimensi, yaitu Skill, Business, Strategy, Security, dan Data. Kelima dimensi tersebut selanjutnya diperlakukan sebagai komponen utama dari konstruk Digital Readiness.
 
@@ -354,7 +506,7 @@ Kelima dimensi menunjukkan hubungan yang kuat satu sama lain. Korelasi antardime
 
 ### Pembentukan DRI
 
-Setelah standardisasi, DRI dihitung sebagai rata-rata aritmetika dari kelima skor dimensi:
+Setelah standardisasi, DRI dihitung sebagai rata-rata dari kelima skor dimensi:
 
 $$
 DRI_i =
@@ -367,44 +519,58 @@ Data_{z,i}
 }{5}.
 $$
 
-Dalam implementasi menggunakan R, konstruksi DRI dilakukan dengan kode berikut:
-
-```{r, echo=FALSE}
-load("data/dri_score.RData")
-
-summary(dri_score$DRI)
-
-head(dri_score)
-
-```
 
 Pada dataset akhir, seluruh 388 responden memiliki skor lengkap untuk kelima dimensi sehingga tidak terdapat responden yang kehilangan dimensi pada proses pembentukan DRI.
 
 Nilai DRI merupakan composite standardized index, karena indeks dibentuk dari skor-skor dimensi yang telah distandardisasi menggunakan z-score. DRI tidak menggunakan transformasi min--max normalization. Oleh karena itu, nilai DRI dapat bernilai negatif maupun positif.
 
-Secara substantif, nilai DRI diinterpretasikan relatif terhadap rata-rata sampel. Nilai DRI yang lebih tinggi menunjukkan tingkat kesiapan digital yang relatif lebih tinggi, sedangkan nilai yang lebih rendah menunjukkan tingkat kesiapan digital yang relatif lebih rendah. Nilai yang mendekati nol menunjukkan tingkat kesiapan digital yang berada di sekitar rata-rata sampel.
+Secara substantif, nilai DRI diinterpretasikan relatif terhadap rata-rata sampel.
+Nilai DRI yang lebih tinggi menunjukkan tingkat kesiapan digital yang relatif lebih tinggi, sedangkan nilai yang lebih rendah menunjukkan tingkat kesiapan digital yang relatif lebih rendah.
+Nilai yang mendekati nol menunjukkan tingkat kesiapan digital yang berada di sekitar rata-rata sampel.
 
 ### Pemeriksaan Distribusi DRI
 
-Distribusi DRI diperiksa secara deskriptif sebelum digunakan dalam analisis spasial. Pemeriksaan meliputi statistik deskriptif dan visualisasi distribusi indeks.
+Histogram `DRI` menunjukkan bahwa nilai indeks terkonsentrasi di sekitar nilai tengah, dengan sebagian besar observasi berada pada kisaran nilai negatif hingga positif moderat.
+Setelah standardisasi, nilai DRI memiliki rata-rata 0 dan berada pada rentang −1,37 hingga 2,27.
+Median sebesar −0,17 yang sedikit lebih rendah daripada rata-rata menunjukkan bahwa distribusi cenderung sedikit menceng ke kanan.
 
-```{r, echo=FALSE}
-summary(dri_score$DRI)
-sd(dri_score$DRI, na.rm = TRUE)
-```
 
-Distribusi DRI kemudian divisualisasikan menggunakan histogram:
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#| label: fig-histdri
+#| fig-cap: "Distribusi indeks kesiapan digital (DRI) UMKM Kota Mataram setelah standardisasi"
 
-```{r, echo=FALSE}
-ggplot(dri_score, aes(x = DRI)) +
-  geom_histogram(bins = 30) +
+load("data/dri_score.RData")
+median_dri <- median(scale(dri_score$DRI), na.rm = TRUE)
+
+ggplot(dri_score, aes(x = scale(DRI))) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 30
+  ) +
+  geom_density(linewidth = 1) +
+  geom_vline(
+    xintercept = median_dri,
+    linetype = "dashed"
+  ) +
+  annotate(
+    "text",
+    x = median_dri,
+    y = Inf,
+    label = paste0("Median = ", round(median_dri, 2)),
+    vjust = 1.5,
+    hjust = -0.1
+  ) +
   labs(
-    title = "Distribution of Digital Readiness Index",
-    x = "Digital Readiness Index (DRI)",
-    y = "Frequency"
+    x = "DRI terstandardisasi",
+    y = "Kerapatan"
   ) +
   theme_minimal()
 ```
+
+
+Hal ini juga tercermin dari adanya sejumlah observasi dengan nilai DRI yang relatif tinggi, hingga mencapai 2,27, sementara nilai terendah berada pada −1,37.
+Kuartil pertama sebesar −0,86 dan kuartil ketiga sebesar 0,74 menunjukkan bahwa 50% observasi berada dalam rentang tersebut.
+Dengan demikian, histogram memperlihatkan distribusi DRI yang relatif terkonsentrasi di sekitar pusat, tetapi dengan ekor kanan yang lebih panjang akibat keberadaan beberapa UMKM dengan tingkat kesiapan digital yang relatif tinggi.
 
 ### Agregasi DRI pada Unit Spasial
 
@@ -419,31 +585,54 @@ $$
 
 dengan $DRI_j^{(area)}$ merupakan nilai DRI pada kelurahan $j$, $n_j$ adalah jumlah responden pada kelurahan $j$, dan $DRI_{ij}$ adalah skor DRI responden $i$ pada kelurahan $j$.
 
-```{r, echo=FALSE}
-dri_kel <- dri_score %>%
-  group_by(kecamatan, kelurahan) %>%
-  summarise(
-    n = n(),
-    DRI = mean(DRI, na.rm = TRUE),
-    DRI_sd = ifelse(
-      n() > 1,
-      sd(DRI, na.rm = TRUE),
-      NA_real_
-    ),
-    DRI_se = ifelse(
-      n() > 1,
-      sd(DRI, na.rm = TRUE) / sqrt(n()),
-      NA_real_
-    ),
-    .groups = "drop"
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-drimtrvlg
+#| fig-cap: "DRI(standardized) per Kelurahan"
+
+
+load("data/mtrvlg_dri.RData")
+
+ggplot(mtrvlg_dri) +
+  geom_sf(aes(fill = scale(DRI)), color = "white", linewidth = 0.2) +
+  scale_fill_viridis_c(
+    option = "viridis",
+    na.value = "grey90"
+  ) +
+  labs(
+    fill = "DRI"
+  ) +
+  theme_void() +
+  theme(
+    legend.position = "right",
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9)
   )
 
-dri_kel
+# dri_kel <- dri_score %>%
+#   group_by(kecamatan, kelurahan) %>%
+#   summarise(
+#     n = n(),
+#     DRI = mean(DRI, na.rm = TRUE),
+#     DRI_sd = ifelse(
+#       n() > 1,
+#       sd(DRI, na.rm = TRUE),
+#       NA_real_
+#     ),
+#     DRI_se = ifelse(
+#       n() > 1,
+#       sd(DRI, na.rm = TRUE) / sqrt(n()),
+#       NA_real_
+#     ),
+#     .groups = "drop"
+#   )
+# 
+# dri_kel
 ```
 
-Hasil agregasi menghasilkan 35 kelurahan dengan jumlah responden yang tidak sama antarwilayah. Oleh karena itu, selain nilai rata-rata DRI, jumlah responden ($n$) dan ukuran variasi DRI pada masing-masing kelurahan juga disimpan untuk keperluan pemeriksaan dan analisis selanjutnya.
-
-Dengan konstruksi tersebut, DRI yang digunakan sebagai response variable dalam analisis spasial merepresentasikan rata-rata tingkat kesiapan digital pada tingkat kelurahan, bukan skor individual responden.
+Hasil agregasi menghasilkan 35 kelurahan dengan jumlah responden yang tidak sama antarwilayah.
+Oleh karena itu, selain nilai rata-rata DRI, jumlah responden ($n$) dan ukuran variasi DRI pada masing-masing kelurahan juga disimpan untuk keperluan pemeriksaan dan analisis selanjutnya.
+Dengan konstruksi tersebut, DRI yang digunakan sebagai *response variable* dalam analisis spasial merepresentasikan rata-rata tingkat kesiapan digital pada tingkat kelurahan, bukan skor individual responden.
+@fig-drimtrvlg memberikan gambaran awal mengenai pola spasial kesiapan digital sebelum dilakukan pemodelan lebih lanjut.
 
 ## Aspek halal
 
@@ -453,7 +642,7 @@ Aspek halal dalam penelitian ini diukur melalui sepuluh pernyataan dengan skala 
 
 Secara deskriptif, respons UMKM cenderung menunjukkan penilaian yang positif terhadap manfaat sertifikasi halal. Hal ini terutama terlihat pada HAL2, HAL6, dan HAL9. Pada HAL2, yaitu pernyataan bahwa sertifikasi halal meningkatkan kepercayaan konsumen, sebanyak 52% responden memberikan skor 4 dan 35% memberikan skor 5. Pada HAL6 mengenai peningkatan daya saing produk, 55% responden memberikan skor 4 dan 30% skor 5. Sementara itu, pada HAL9 mengenai kemampuan sertifikasi halal dalam memperluas pasar, 56% responden memberikan skor 4 dan 34% skor 5. HAL1 mengenai pentingnya sertifikasi halal juga menunjukkan kecenderungan respons positif, dengan 43% responden memberikan skor 4 dan 28% skor 5.
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -526,7 +715,7 @@ Pola tersebut menunjukkan bahwa sepuluh item tidak sepenuhnya menggambarkan satu
 
 Pengelompokan tersebut juga memperoleh dukungan dari analisis CFA ordinal menggunakan estimator WLSMV. Loading terstandar untuk dimensi kesadaran dan persepsi manfaat berada pada rentang 0,834–0,919. Pada dimensi kesiapan, loading HAL3 dan HAL7 masing-masing sebesar 0,893 dan 0,884. Untuk dimensi hambatan, loading HAL4 sebesar 0,546 dan HAL8 sebesar 0,909.
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -576,7 +765,7 @@ ggplot(
 
 Meskipun demikian, ukuran kesesuaian model secara keseluruhan belum menunjukkan kecocokan yang sepenuhnya baik. CFI dan TLI standar masing-masing sebesar 0,990 dan 0,983, sedangkan RMSEA sebesar 0,146 dan SRMR sebesar 0,072. Nilai robust CFI sebesar 0,872 dan robust RMSEA sebesar 0,211 juga menunjukkan bahwa model tidak sebaik jika hanya dinilai berdasarkan indeks fit standar. Oleh karena itu, hasil CFA dalam penelitian ini lebih tepat digunakan sebagai informasi pendukung mengenai pola pengelompokan indikator, bukan sebagai dasar untuk menyatakan bahwa keseluruhan struktur pengukuran telah memiliki kecocokan yang sangat baik.
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(semPlot)
 
 load("data/fit_halal.RData")
@@ -602,7 +791,7 @@ Berdasarkan hasil eksplorasi tersebut, aspek halal tidak dikonstruksi menjadi sa
 
 Skor Kesadaran dan Persepsi Manfaat Sertifikasi Halal dihitung sebagai rata-rata empat item, yaitu HAL1, HAL2, HAL6, dan HAL9. Konsistensi internal keempat item tersebut tergolong baik, dengan Cronbach's alpha sebesar 0,88 dan korelasi antaritem rata-rata sebesar 0,67. Penghapusan salah satu item juga tidak memberikan peningkatan berarti terhadap nilai alpha, sehingga keempat item dipertahankan dalam skor komposit.
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(tidyr)
 library(ggplot2)
@@ -688,7 +877,7 @@ Ketiga skor komposit pertama dihitung sebagai rata-rata skor item penyusunnya, s
 
 Setelah skor aspek halal dibentuk, hubungan antara kesiapan digital dan aspek halal dianalisis melalui korelasi. Hasilnya menunjukkan bahwa `DRI` memiliki korelasi positif dengan seluruh skor aspek halal, tetapi dengan kekuatan yang berbeda. Korelasi terbesar terdapat antara `DRI` dan Kesiapan Sertifikasi Halal, yaitu sebesar 0,564. Selanjutnya, korelasi DRI dengan Kesadaran dan Persepsi Manfaat Sertifikasi Halal sebesar 0,382, sedangkan korelasi dengan Hambatan Sertifikasi Halal sebesar 0,225. Hubungan DRI dengan Dukungan/Sosialisasi Pemerintah sebesar 0,134 dan dengan Akses Layanan Sertifikasi Halal sebesar 0,071.
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 cor_halal_dri <- tibble::tibble(
   Aspek = c(
     "Kesiapan sertifikasi",
@@ -851,6 +1040,50 @@ Hasil estimasi model CAR menunjukkan bahwa parameter spasial memiliki nilai post
 
 Sementara itu, Selang kepercayaan 95% untuk masing-masing efek spasial $\phi_i$ masih mencakup nilai nol. Kedua hasil tersebut menggambarkan aspek yang berbeda dari struktur spasial dalam model. Parameter $\rho$ merepresentasikan tingkat ketergantungan spasial secara keseluruhan, sedangkan $\phi_i$ merepresentasikan kontribusi efek spasial spesifik pada masing-masing kelurahan. Oleh karena itu, ketidakpastian pada efek spasial individual tidak bertentangan dengan adanya bukti ketergantungan spasial secara keseluruhan.
 
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-spatial-phi
+#| fig-cap: "Distribusi spasial efek spasial spesifik wilayah ($\\phi_i$) pada model CAR di Kota Mataram. Nilai positif dan negatif menunjukkan arah kontribusi komponen spasial lokal terhadap nilai DRI setelah memperhitungkan variabel prediktor dalam model."
+
+library(leaflet)
+load("data/mtrvlg_phi.RData")
+
+# adjust color palette for phi
+lim <- max(abs(mtrvlg_phi$phi), na.rm = TRUE)
+pal_phi <- colorNumeric(
+  palette = viridisLite::viridis(256),
+  domain = c(-lim, lim)
+)
+
+# plotting
+leaflet(mtrvlg_phi) %>%
+  addTiles() %>%
+  addPolygons(
+    fillColor = ~pal_phi(phi),
+    fillOpacity = 0.85,
+    color = "white",
+    weight = 1,
+    opacity = 1,
+    label = ~paste0(
+      kelurahan,
+      ": ",
+      round(phi, 3)
+    ),
+    highlightOptions = highlightOptions(
+      weight = 2,
+      color = "black",
+      bringToFront = TRUE
+    )
+  ) %>%
+  addLegend(
+    pal = pal_phi,
+    values = ~phi,
+    title = "Nilai phi",
+    position = "bottomright",
+    opacity = 1
+  )
+```
+
+
 Dengan demikian, hasil model menunjukkan adanya struktur ketergantungan spasial pada tingkat global, sementara bukti mengenai kontribusi spesifik dari masing-masing kelurahan masih belum cukup kuat berdasarkan selang kepercayaan individualnya.
 
 ## Kesiapan digital dan aspek sertifikasi halal
@@ -859,7 +1092,7 @@ Setelah skor aspek halal dibentuk, hubungan antara kesiapan digital dan aspek se
 
 Hasil analisis menunjukkan bahwa DRI memiliki korelasi positif dengan seluruh aspek halal, meskipun kekuatan hubungannya berbeda. Korelasi terbesar ditemukan antara DRI dan Kesiapan Sertifikasi Halal, yaitu sebesar 0,564. Selanjutnya, korelasi DRI dengan Kesadaran dan Persepsi Manfaat Sertifikasi Halal sebesar 0,382, sedangkan korelasi dengan Hambatan Sertifikasi Halal sebesar 0,225. Hubungan dengan Dukungan/Sosialisasi Pemerintah dan Akses Layanan Sertifikasi Halal relatif lemah, masing-masing sebesar 0,134 dan 0,071.
 
-```{r}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 halal_plot <- halal_score %>%
   mutate(
@@ -908,10 +1141,34 @@ Menariknya, korelasi positif antara DRI dan Hambatan Sertifikasi Halal, meskipun
 
 Secara keseluruhan, hasil menunjukkan bahwa aspek sertifikasi halal tidak memiliki hubungan yang seragam dengan kesiapan digital. Hubungan yang relatif lebih kuat terlihat pada aspek internal UMKM, terutama Kesiapan Sertifikasi Halal dan Kesadaran serta Persepsi Manfaat Sertifikasi Halal, sedangkan hubungan dengan aspek eksternal berupa Dukungan/Sosialisasi Pemerintah dan Akses Layanan Sertifikasi Halal relatif lemah. Di antara aspek yang dianalisis, Kesiapan Sertifikasi Halal memiliki korelasi paling besar dengan DRI (r = 0,564). Oleh karena itu, hubungan antara kesiapan digital dan kesiapan sertifikasi halal dapat menjadi fokus analisis dan pembahasan lebih lanjut.
 
-# Kesimpulan
+# Rekomendasi Kebijakan
 
-Perbandingan antara model Gaussian nonspasial dan model Gaussian Leroux CAR menunjukkan bahwa kedua model menghasilkan estimasi koefisien regresi yang relatif konsisten. Rata-rata indikator *e-commerce* (`mean_ecomm`) menunjukkan asosiasi positif yang paling jelas dengan DRI, dengan posterior mean sebesar 0.655 dan interval kredibel 95% sebesar (0.373; 0.938) pada model CAR. Karena variabel telah distandardisasi, hasil tersebut menunjukkan bahwa peningkatan satu simpangan baku pada rata-rata indikator *e-commerce* dikaitkan dengan peningkatan sekitar 0.65 simpangan baku pada DRI, setelah mengendalikan kovariat lainnya dan struktur spasial.
+1. **Menerapkan pendampingan sertifikasi halal berbasis tingkat kesiapan UMKM**, dengan DRI sebagai salah satu instrumen untuk menentukan intensitas pendampingan. Contohnya seperti tabel berikut:
 
-Meskipun estimasi koefisien regresi relatif serupa, model CAR memberikan kecocokan yang lebih baik dibandingkan model nonspasial, dengan DIC sebesar 42.78 dibandingkan 51.64 dan WAIC sebesar 47.32 dibandingkan 52.15. Nilai LMPL juga lebih tinggi pada model CAR, yaitu -25.87 dibandingkan -26.86. Selain itu, posterior parameter ketergantungan spasial $\rho$ memiliki mean sebesar 0.393 dengan interval kredibel 95% sebesar (0.0145; 0.9202), yang memberikan bukti adanya ketergantungan spasial positif pada komponen residual model. Namun, interval kredibel untuk efek spasial individual pada tingkat kelurahan mencakup nol, sehingga belum terdapat bukti posterior yang cukup untuk menyimpulkan adanya efek spasial residual yang berbeda dari nol pada kelurahan tertentu.
+| Kondisi                               | Fokus intervensi                                                                        |
+| ------------------------------------- | --------------------------------------------------------------------------------------- |
+| DRI relatif rendah                    | Literasi digital dasar + pengenalan sertifikasi halal                                   |
+| DRI relatif rendah + readiness rendah | Pendampingan intensif dan bantuan administratif                                         |
+| DRI relatif tinggi + readiness rendah | Fokus pada akses informasi, prosedur, dan fasilitasi sertifikasi                        |
+| DRI relatif tinggi + readiness tinggi | Fasilitasi percepatan proses dan penguatan kapasitas                                    |
+| DRI tinggi + sudah tersertifikasi     | Pengembangan usaha, digital marketing, dan pemanfaatan sertifikasi sebagai nilai tambah |
 
-Secara keseluruhan, hasil menunjukkan bahwa struktur spasial relevan dalam pemodelan DRI pada tingkat kelurahan, sementara hubungan antara karakteristik wilayah dan DRI, khususnya indikator *e-commerce*, relatif stabil setelah struktur spasial diperhitungkan.
+
+2. **Mengintegrasikan program digitalisasi UMKM dan sertifikasi halal**, khususnya melalui penguatan kemampuan administrasi digital, dokumentasi usaha, dan pengelolaan informasi yang diperlukan dalam proses sertifikasi.
+
+3. **Mengembangkan layanan pendampingan sertifikasi halal yang lebih operasional dan terintegrasi**, sehingga UMKM tidak hanya menerima sosialisasi tetapi memperoleh bantuan dari tahap identifikasi persyaratan hingga pengajuan.
+
+4. **Mengembangkan zonasi prioritas intervensi berbasis kombinasi kesiapan digital dan status/kesiapan sertifikasi halal**, sehingga sumber daya pemerintah dapat diarahkan pada wilayah dan kelompok UMKM dengan kebutuhan yang berbeda.
+
+5. **Menggunakan indikator *outcome* dalam evaluasi program, seperti proporsi UMKM yang berpindah dari belum siap menjadi siap**, dari belum mengajukan menjadi mengajukan, dan dari proses menjadi memiliki sertifikat, bukan hanya jumlah peserta sosialisasi atau kegiatan pendampingan.
+
+
+
+
+<!-- # Kesimpulan -->
+
+<!-- Perbandingan antara model Gaussian nonspasial dan model Gaussian Leroux CAR menunjukkan bahwa kedua model menghasilkan estimasi koefisien regresi yang relatif konsisten. Rata-rata indikator *e-commerce* (`mean_ecomm`) menunjukkan asosiasi positif yang paling jelas dengan DRI, dengan posterior mean sebesar 0.655 dan interval kredibel 95% sebesar (0.373; 0.938) pada model CAR. Karena variabel telah distandardisasi, hasil tersebut menunjukkan bahwa peningkatan satu simpangan baku pada rata-rata indikator *e-commerce* dikaitkan dengan peningkatan sekitar 0.65 simpangan baku pada DRI, setelah mengendalikan kovariat lainnya dan struktur spasial. -->
+
+<!-- Meskipun estimasi koefisien regresi relatif serupa, model CAR memberikan kecocokan yang lebih baik dibandingkan model nonspasial, dengan DIC sebesar 42.78 dibandingkan 51.64 dan WAIC sebesar 47.32 dibandingkan 52.15. Nilai LMPL juga lebih tinggi pada model CAR, yaitu -25.87 dibandingkan -26.86. Selain itu, posterior parameter ketergantungan spasial $\rho$ memiliki mean sebesar 0.393 dengan interval kredibel 95% sebesar (0.0145; 0.9202), yang memberikan bukti adanya ketergantungan spasial positif pada komponen residual model. Namun, interval kredibel untuk efek spasial individual pada tingkat kelurahan mencakup nol, sehingga belum terdapat bukti posterior yang cukup untuk menyimpulkan adanya efek spasial residual yang berbeda dari nol pada kelurahan tertentu. -->
+
+<!-- Secara keseluruhan, hasil menunjukkan bahwa struktur spasial relevan dalam pemodelan DRI pada tingkat kelurahan, sementara hubungan antara karakteristik wilayah dan DRI, khususnya indikator *e-commerce*, relatif stabil setelah struktur spasial diperhitungkan. -->
