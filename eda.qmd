@@ -35,13 +35,18 @@ execute:
 editor: visual
 ---
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(janitor)
 library(readxl)
 library(gt)
 library(ggplot2)
 library(dplyr)
+library(spdep)
+library(leaflet)
+library(tidyr)
+library(semPlot)
+
 ```
 
 
@@ -77,7 +82,6 @@ Sebanyak 50 kelurahan digunakan sebagai unit analisis untuk menggambarkan varias
 #| label: fig-mtrmap
 #| fig-cap: "Peta 50 kelurahan di Kota Mataram sebagai unit analisis, dengan gradasi warna menunjukkan jumlah UMKM pada masing-masing kelurahan."
 
-library(leaflet)
 load("data/mtrvlg_umkm2.RData")
 
 leaflet() %>%
@@ -393,6 +397,94 @@ Selanjutnya, kelompok 477 dan 471 masing-masing mencakup 684 unit (16.3%) dan 67
 Kelompok 472 mencakup 381 unit (9.1%), sedangkan kelompok 463 mencakup 243 unit (5.8%). 
 Kelompok-kelompok kegiatan lainnya memiliki proporsi yang lebih kecil.
 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: fig-mtrumkm_point
+#| fig-cap: "Sebaran geografis UMKM kota Mataram"
+
+load("data/umkm_geo2.RData")
+load("data/mtrvlg_umkm2.RData")
+
+umkm_sf <- umkm_geo2 %>%
+  filter(
+    !is.na(latitude),
+    !is.na(longitude)
+  ) %>%
+  st_as_sf(
+    coords = c("longitude", "latitude"),
+    crs = 4326,
+    remove = FALSE
+  )
+
+skala_colors <- c(
+  "Usaha Mikro" = "blue",
+  "Usaha Kecil" = "green",
+  "Usaha Menengah" = "orange",
+  "Usaha Besar" = "red"
+)
+
+leaflet() %>%
+  addTiles() %>%
+  addPolygons(
+  data = mtrvlg_umkm2,
+  
+  fillColor = ~colorNumeric(
+    palette = viridisLite::viridis(256),
+    domain = mtrvlg_umkm2$jumlah_umkm
+  )(jumlah_umkm),
+  
+  fillOpacity = 0.6,
+  color = "white",
+  weight = 1,
+  
+  label = ~paste0(
+    kelurahan,
+    " | ",
+    kecamatan,
+    " | UMKM: ",
+    jumlah_umkm
+  ),
+  
+  popup = ~paste0(
+    "<b>Kelurahan:</b> ", kelurahan, "<br>",
+    "<b>Kecamatan:</b> ", kecamatan, "<br>",
+    "<b>Jumlah UMKM:</b> ", jumlah_umkm
+  )
+) %>%
+  
+# UMKM points
+
+addCircleMarkers(
+  data = umkm_sf,
+  
+  radius = 2.5,
+  stroke = FALSE,
+  weight = 1,
+  fillOpacity = 0.5,
+  # color = "black",
+  fillColor = ~skala_colors[skala_usaha], #still not working!
+  
+  label = ~judul_kbli,
+  
+  popup = ~paste0(
+    "<b>", judul_kbli, "</b><br><br>",
+    
+    "<b>Jenis usaha:</b> ", jenis_perusahaan, "<br>",
+    "<b>Skala usaha:</b> ", skala_usaha, "<br>",
+    "<b>Kelurahan:</b> ", kelurahan, "<br>",
+    "<b>Kecamatan:</b> ", kecamatan, "<br>",
+    "<b>KBLI:</b> ", kbli, "<br>",
+    "<b>Luas:</b> ", luas, " m²<br>",
+    "<b>Investasi:</b> Rp ",
+    format(investasi, big.mark = ".", scientific = FALSE),
+    "<br>",
+    "<b>TKI:</b> ", tki_org
+  )
+)
+
+```
+
+
 ## Data survei
 
 Survei yang digunakan dalam penelitian ini dirancang untuk memperoleh gambaran mengenai karakteristik usaha sekaligus tingkat kesiapan digital pelaku Usaha Mikro, Kecil, dan Menengah (UMKM). Instrumen terdiri atas bagian informasi umum mengenai usaha dan pemilik, serta sejumlah pernyataan yang mengukur aspek-aspek terkait penggunaan dan kesiapan teknologi digital. Pada bagian karakteristik usaha, responden diminta memberikan informasi mengenai jenis usaha, penggunaan kanal penjualan atau pembelian secara daring, usia usaha, jumlah tenaga kerja, omzet bulanan, serta karakteristik pemilik seperti usia dan pendidikan terakhir. Informasi lokasi usaha juga dikumpulkan hingga tingkat kelurahan.
@@ -415,9 +507,6 @@ Temuan tersebut penting karena tujuan penelitian bukan semata-mata memperoleh ju
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 #| label: tbl-dimdri
 #| tbl-cap: "Dimensi Penyusun Digital Readiness Index"
-
-library(dplyr)
-library(gt)
 
 dimensi_dri <- tibble(
   Dimensi = c(
@@ -716,9 +805,6 @@ Pola tersebut menunjukkan bahwa sepuluh item tidak sepenuhnya menggambarkan satu
 Pengelompokan tersebut juga memperoleh dukungan dari analisis CFA ordinal menggunakan estimator WLSMV. Loading terstandar untuk dimensi kesadaran dan persepsi manfaat berada pada rentang 0,834–0,919. Pada dimensi kesiapan, loading HAL3 dan HAL7 masing-masing sebesar 0,893 dan 0,884. Untuk dimensi hambatan, loading HAL4 sebesar 0,546 dan HAL8 sebesar 0,909.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(ggplot2)
-library(dplyr)
-library(tidyr)
 
 load("data/cor_df.RData")
 item_order <- c(
@@ -766,7 +852,6 @@ ggplot(
 Meskipun demikian, ukuran kesesuaian model secara keseluruhan belum menunjukkan kecocokan yang sepenuhnya baik. CFI dan TLI standar masing-masing sebesar 0,990 dan 0,983, sedangkan RMSEA sebesar 0,146 dan SRMR sebesar 0,072. Nilai robust CFI sebesar 0,872 dan robust RMSEA sebesar 0,211 juga menunjukkan bahwa model tidak sebaik jika hanya dinilai berdasarkan indeks fit standar. Oleh karena itu, hasil CFA dalam penelitian ini lebih tepat digunakan sebagai informasi pendukung mengenai pola pengelompokan indikator, bukan sebagai dasar untuk menyatakan bahwa keseluruhan struktur pengukuran telah memiliki kecocokan yang sangat baik.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(semPlot)
 
 load("data/fit_halal.RData")
 
@@ -792,9 +877,6 @@ Berdasarkan hasil eksplorasi tersebut, aspek halal tidak dikonstruksi menjadi sa
 Skor Kesadaran dan Persepsi Manfaat Sertifikasi Halal dihitung sebagai rata-rata empat item, yaitu HAL1, HAL2, HAL6, dan HAL9. Konsistensi internal keempat item tersebut tergolong baik, dengan Cronbach's alpha sebesar 0,88 dan korelasi antaritem rata-rata sebesar 0,67. Penghapusan salah satu item juga tidak memberikan peningkatan berarti terhadap nilai alpha, sehingga keempat item dipertahankan dalam skor komposit.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(dplyr)
-library(tidyr)
-library(ggplot2)
 
 halal_construct <- halal_score %>%
   mutate(
@@ -878,6 +960,7 @@ Ketiga skor komposit pertama dihitung sebagai rata-rata skor item penyusunnya, s
 Setelah skor aspek halal dibentuk, hubungan antara kesiapan digital dan aspek halal dianalisis melalui korelasi. Hasilnya menunjukkan bahwa `DRI` memiliki korelasi positif dengan seluruh skor aspek halal, tetapi dengan kekuatan yang berbeda. Korelasi terbesar terdapat antara `DRI` dan Kesiapan Sertifikasi Halal, yaitu sebesar 0,564. Selanjutnya, korelasi DRI dengan Kesadaran dan Persepsi Manfaat Sertifikasi Halal sebesar 0,382, sedangkan korelasi dengan Hambatan Sertifikasi Halal sebesar 0,225. Hubungan DRI dengan Dukungan/Sosialisasi Pemerintah sebesar 0,134 dan dengan Akses Layanan Sertifikasi Halal sebesar 0,071.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
 cor_halal_dri <- tibble::tibble(
   Aspek = c(
     "Kesiapan sertifikasi",
@@ -1043,7 +1126,6 @@ Sementara itu, Selang kepercayaan 95% untuk masing-masing efek spasial $\phi_i$ 
 #| label: fig-spatial-phi
 #| fig-cap: "Distribusi spasial efek spasial spesifik wilayah ($\\phi_i$) pada model CAR di Kota Mataram. Nilai positif dan negatif menunjukkan arah kontribusi komponen spasial lokal terhadap nilai DRI setelah memperhitungkan variabel prediktor dalam model."
 
-library(leaflet)
 load("data/mtrvlg_phi.RData")
 
 # adjust color palette for phi
