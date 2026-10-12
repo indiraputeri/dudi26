@@ -191,7 +191,7 @@ edges_sf <- edges %>%
     y2 = coords[to, 2]
   )
 
-ggplot() +
+mtr_nb <- ggplot() +
   geom_sf(
     data = mtrvlg,
     fill = "grey95",
@@ -215,3 +215,11 @@ ggplot() +
     size = 1.5
   ) +
   theme_void()
+
+ggsave(
+  filename = "figs/mtr_nb.png",
+  plot = mtr_nb,
+  width = 8,
+  height = 6,
+  dpi = 300
+)

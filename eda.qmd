@@ -397,6 +397,9 @@ Selanjutnya, kelompok 477 dan 471 masing-masing mencakup 684 unit (16.3%) dan 67
 Kelompok 472 mencakup 381 unit (9.1%), sedangkan kelompok 463 mencakup 243 unit (5.8%). 
 Kelompok-kelompok kegiatan lainnya memiliki proporsi yang lebih kecil.
 
+### Peta interaktif UMKM Kota Mataram
+
+berikut merupakan sebaran UMKM yang memberikan info mengenai jenis usaha, lokasi kecamatan dan kelurahan, KBLI, luas area, investasi, dan banyaknya tenaga kerja. 
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 #| label: fig-mtrumkm_point
@@ -1198,7 +1201,7 @@ ggplot(
 ) +
   geom_col() +
   scale_fill_viridis_d(
-    option = "E",
+    option = "D",
     name = "Skor kesiapan"
   ) +
   scale_y_continuous(
@@ -1212,6 +1215,8 @@ ggplot(
   theme(
     panel.grid.minor = element_blank()
   )
+
+
 ```
 
 Pola distribusi juga menunjukkan kecenderungan bahwa UMKM pada kelompok DRI yang lebih tinggi memiliki skor Kesiapan Sertifikasi Halal yang lebih terkonsentrasi pada nilai yang lebih tinggi. Pada kelompok DRI rendah, skor 3 merupakan kategori yang paling banyak ditemukan, yaitu sebesar 24,6%. Pada kelompok DRI sedang, skor 3 dan 4 merupakan kategori yang dominan, masing-masing sebesar 25,6% dan 24,0%. Sementara itu, pada kelompok DRI tinggi, skor 4 dan 5 masing-masing mencakup 30,2% responden. Skor rendah, yaitu 1 sampai 2,5, hanya mencakup proporsi yang relatif kecil pada kelompok DRI tinggi.

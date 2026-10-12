@@ -1,8 +1,28 @@
 ---
 title: "Zonasi Intervensi Kebijakan UMKM Kota Mataram Melalui Pemetaan Geospasial untuk Akselerasi Digitalisasi dan Sertifikasi Halal"
 subtitle: "Laporan akhir Penelitian Terapan (DUDI)"
-format: revealjs
-editor: visual
+author:
+  - name: Indira Puteri Kinasih
+    orcid: 0009-0009-6959-6723
+    email: indiraputeri@uinmataram.ac.id
+    affiliations: Universitas Islam Negeri Mataram
+    
+  - name: Any Tsalasatul Fitriyah
+  - name: Nurul Susianti
+  - name: Ulfatun Hasanah
+format:
+  ubd-revealjs:
+    output-file: finalreport.html
+    self-contained: true
+    chalkboard: false
+    toc: false
+    toc-depth: 1
+    transition: fade
+    auto-stretch: false
+    width: 1250  # 1050
+    height: 760  # 700
+execute:
+  echo: false
 ---
 
 ## Quarto
