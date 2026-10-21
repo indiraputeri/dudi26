@@ -1,0 +1,286 @@
+---
+title: "Policy Brief: Zonasi Intervensi Kebijakan UMKM Kota Mataram"
+subtitle: "Mempercepat Digitalisasi dan Sertifikasi Halal melalui Kebijakan Berbasis Data dan Wilayah"
+
+# author:
+#   - name: Indira Puteri Kinasih
+#     affiliation: Universitas Islam Negeri Mataram
+#   - name: Any Tsalasatul Fitriyah
+#     affiliation: Universitas Islam Negeri Mataram
+#   - name: Nurul Susianti
+#     affiliation: Universitas Islam Negeri Mataram
+#   - name: Ulfatun Hasanah
+#     affiliation: Universitas Islam Negeri Mataram
+#   - name: Nur Awalunnisa
+#     affiliation: Universitas Islam Negeri Mataram
+
+# date: "2026-10-20"
+lang: id
+# language: 
+#   title-block-author-single: "Penulis"
+#   title-block-author-plural: "Tim Peneliti"
+
+format:
+  html:
+    toc: true
+    toc-title: "Daftar Isi"
+    number-sections: true
+    smooth-scroll: true
+    theme: cosmo
+    page-layout: article
+    title-block-banner: "#f1f3fa"
+    css: styles.css
+    link-external-newwindow: true
+    
+  pdf:
+    documentclass: report
+    papersize: a4
+    pdf-engine: lualatex
+    geometry:
+      - top=2.2cm
+      - bottom=2.2cm
+      - left=2.5cm
+      - right=2.5cm
+    fontsize: 11pt
+    linestretch: 1.15
+    colorlinks: true
+    toc: false
+    toc-title: "Daftar Isi"
+    number-sections: true
+    keep-tex: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+keywords:
+  - UMKM
+  - Kota Mataram
+  - Digitalisasi
+  - Sertifikasi Halal
+  - Indeks Kesiapan Digital
+  - Analisis Spasial
+  - Kebijakan Berbasis Data
+
+---
+
+
+# Tim Peneliti {.unnumbered .unlisted}
+
+
+- **Indira Puteri Kinasih, Ph.D.**  
+  indiraputeri@uinmataram.ac.id
+
+- **Dr. Any Tsalasatul Fitriyah**  
+  any.tsalasatul@uinmataram.ac.id
+
+- **Nurul Susianti, M.E.**  
+  nurulsusianti@uinmataram.ac.id
+
+- **Ulfatun Hasanah, M.PA**  
+  ulfatunhasanah@uinmataram.ac.id
+
+- **Nur Awalunnisa, M.SEI.**  
+  awalunnisa@uinmataram.ac.id
+
+\newpage
+
+<!-- ## Zonasi Intervensi Kebijakan UMKM Kota Mataram -->
+<!-- ### Mempercepat Digitalisasi dan Sertifikasi Halal melalui Kebijakan Berbasis Data dan Wilayah -->
+
+<!-- **Disusun oleh:** Tim Peneliti Universitas Islam Negeri Mataram   -->
+<!-- **Program:** Penelitian DUDI/Kementerian Agama Tahun 2026   -->
+<!-- **Wilayah kajian:** Kota Mataram, Nusa Tenggara Barat -->
+
+# Ringkasan {.unnumbered .unlisted}
+
+Usaha Mikro, Kecil, dan Menengah (UMKM) memiliki peran penting dalam perekonomian Kota Mataram. Namun, penguatan UMKM tidak cukup dilakukan melalui program pelatihan dan bantuan yang seragam untuk seluruh pelaku usaha. Perbedaan kapasitas digital, pemanfaatan perdagangan elektronik, kondisi infrastruktur, serta kesiapan dan hambatan sertifikasi halal memerlukan intervensi yang lebih terarah.
+
+Penelitian *Zonasi Intervensi Kebijakan UMKM Kota Mataram: Pemetaan Geospasial untuk Akselerasi Digitalisasi dan Sertifikasi Halal* mengembangkan pendekatan berbasis data untuk mengidentifikasi karakteristik UMKM, memetakan kesiapan digital, serta mengeksplorasi hubungan antara kesiapan digital dan sejumlah faktor pendukung maupun penghambat pada tingkat kelurahan. Analisis menggabungkan data karakteristik UMKM, survei pelaku usaha, pemetaan geospasial, dan pemodelan statistik dengan mempertimbangkan keterkaitan antarwilayah.
+
+Hasil analisis menunjukkan adanya variasi kesiapan digital antarpelaku usaha. Dalam model spasial yang digunakan, pemanfaatan perdagangan elektronik memiliki hubungan positif dengan indeks kesiapan digital UMKM. Kesiapan terkait halal juga menunjukkan estimasi hubungan positif, sedangkan hambatan terkait halal menunjukkan arah hubungan negatif. Estimasi pengaruh infrastruktur digital mengarah positif, tetapi ketidakpastian estimasinya masih cukup besar sehingga hasilnya belum memberikan bukti yang kuat mengenai hubungan tersebut. Temuan ini perlu dipahami sebagai hubungan statistik, bukan bukti sebab-akibat.
+
+Berdasarkan hasil tersebut, policy brief ini merekomendasikan lima arah kebijakan: (1) menetapkan zonasi prioritas intervensi berdasarkan karakteristik dan kebutuhan UMKM; (2) mengintegrasikan pelatihan digital dengan pendampingan penggunaan perdagangan elektronik; (3) memperkuat layanan konsultasi dan fasilitasi sertifikasi halal; (4) menghubungkan pendampingan digital dan halal dengan penguatan mutu produk; serta (5) membangun sistem pemantauan program berbasis data geospasial.
+
+Pemerintah Kota Mataram bersama perangkat daerah terkait, pendamping UMKM, perguruan tinggi, dan lembaga layanan halal perlu mengembangkan pendekatan tersebut secara bertahap. Tujuannya bukan sekadar meningkatkan jumlah kegiatan pelatihan atau sertifikat yang diterbitkan, melainkan memperkuat kemampuan UMKM untuk memanfaatkan teknologi, memenuhi persyaratan halal, dan mengembangkan usaha secara berkelanjutan.
+
+# Latar Belakang Masalah {.unnumbered .unlisted}
+
+Digitalisasi membuka peluang bagi UMKM untuk memperluas jangkauan pasar, memperbaiki pengelolaan usaha, dan meningkatkan akses terhadap informasi serta layanan ekonomi. Pada saat yang sama, pemenuhan persyaratan halal menjadi bagian penting dalam pengembangan usaha, khususnya bagi pelaku usaha makanan dan minuman yang perlu memperhatikan kepatuhan terhadap ketentuan yang berlaku.
+
+Meskipun demikian, kemampuan UMKM untuk memanfaatkan peluang tersebut tidak selalu sama. Sebagian pelaku usaha mungkin telah menggunakan media sosial atau platform perdagangan elektronik untuk menjual produk, sementara sebagian lainnya masih memerlukan dukungan dalam keterampilan digital, strategi pemasaran, pengelolaan informasi, dan pemanfaatan teknologi secara konsisten.
+
+Demikian pula, pengetahuan mengenai sertifikasi halal tidak selalu diikuti oleh kesiapan untuk memenuhi persyaratan administratif maupun teknis. Pelaku usaha dapat memerlukan penjelasan mengenai alur sertifikasi, dokumen yang dibutuhkan, proses pendampingan, dan penerapan jaminan produk halal dalam kegiatan produksi sehari-hari.
+
+Pendekatan kebijakan yang seragam berisiko menghasilkan intervensi yang kurang sesuai dengan kebutuhan aktual. Pelatihan pemasaran digital, misalnya, belum tentu menjadi kebutuhan paling mendesak bagi UMKM yang belum memiliki produk, pencatatan, atau kapasitas operasional yang memadai. Sebaliknya, pelaku usaha yang telah menggunakan platform digital mungkin membutuhkan dukungan lanjutan berupa penguatan strategi penjualan, kualitas produk, dan perluasan pasar.
+
+Oleh karena itu, diperlukan pendekatan kebijakan yang mempertimbangkan dua dimensi sekaligus: karakteristik dan kebutuhan pelaku usaha serta distribusi spasial UMKM antarkelurahan. Pemetaan geospasial dapat membantu pemerintah mengidentifikasi wilayah yang perlu memperoleh perhatian lebih lanjut dan menyusun program yang lebih terarah.
+
+# Temuan Utama Penelitian {.unnumbered .unlisted}
+
+## Kebutuhan UMKM perlu dibaca secara multidimensional {.unnumbered .unlisted}
+
+Penelitian mengembangkan Indeks Kesiapan Digital (*Digital Readiness Index* atau DRI) melalui penggabungan dimensi yang mencakup karakteristik usaha, keterampilan digital, strategi, keamanan, praktik pengelolaan data, pemanfaatan ekonomi teknologi digital, dan infrastruktur.
+
+Pendekatan indeks komposit digunakan untuk merangkum beberapa dimensi kesiapan digital tanpa mengasumsikan bahwa seluruh dimensi tersebut harus membentuk satu faktor laten hierarkis. Dengan demikian, DRI berfungsi sebagai ukuran ringkas untuk analisis dan pemetaan, bukan sebagai pengganti informasi mengenai dimensi penyusunnya.
+
+Implikasi kebijakannya adalah bahwa nilai kesiapan digital perlu dibaca bersama karakteristik usaha dan indikator penyusunnya. Dua kelurahan dengan nilai DRI yang relatif serupa dapat memiliki kebutuhan intervensi yang berbeda apabila hambatan utama UMKM di kedua wilayah tersebut tidak sama.
+
+## Pemanfaatan perdagangan elektronik berkaitan positif dengan kesiapan digital {.unnumbered .unlisted}
+
+Dalam model spasial tingkat kelurahan, koefisien pemanfaatan perdagangan elektronik (*e-commerce*) diperkirakan sebesar 0,396 dengan selang kredibel 95% sebesar 0,040–0,754. Seluruh selang berada di atas nol, sehingga hasil model mendukung adanya hubungan positif antara pemanfaatan perdagangan elektronik dan DRI, dengan tetap memperhatikan keterbatasan desain penelitian.
+
+Temuan ini menunjukkan pentingnya mendorong pemanfaatan teknologi digital dalam kegiatan usaha secara nyata, bukan hanya meningkatkan pengetahuan umum mengenai teknologi. Pendampingan dapat diarahkan pada penggunaan platform penjualan, pengelolaan katalog produk, komunikasi dengan pelanggan, dan pemanfaatan kanal digital yang sesuai dengan kebutuhan usaha.
+
+Namun, karena analisis bersifat observasional dan menggunakan agregasi tingkat kelurahan, hasil tersebut tidak membuktikan bahwa penggunaan perdagangan elektronik secara langsung menyebabkan peningkatan kesiapan digital. Hubungan yang teramati juga dapat mencerminkan karakteristik usaha dan faktor lain yang berkaitan.
+
+## Kesiapan halal dan hambatan halal perlu ditangani secara bersamaan {.unnumbered .unlisted}
+
+Model menghasilkan estimasi koefisien positif untuk kesiapan halal sebesar 0,737 dan koefisien negatif untuk hambatan halal sebesar −0,420. Kedua estimasi tersebut menunjukkan arah hubungan yang berbeda dan relevan bagi perumusan intervensi.
+
+Kesiapan halal dapat menjadi pintu masuk untuk mengintegrasikan pengembangan usaha dengan pendampingan pemenuhan persyaratan halal. Sementara itu, hambatan halal perlu dipetakan lebih lanjut untuk mengetahui kendala yang dapat ditangani melalui penyederhanaan akses informasi, fasilitasi dokumen, pendampingan proses sertifikasi, atau penguatan praktik produksi.
+
+Besaran koefisien tersebut tidak boleh ditafsirkan sebagai ukuran dampak kebijakan. Ketidakpastian estimasi dan kekuatan bukti untuk masing-masing prediktor perlu diperiksa sebelum menetapkan besaran prioritas intervensi. Secara khusus, hasil model belum cukup untuk menyatakan bahwa semua aspek kesiapan maupun hambatan halal memiliki hubungan yang sama kuat dengan DRI.
+
+## Bukti mengenai infrastruktur digital masih memerlukan pendalaman {.unnumbered .unlisted}
+
+Koefisien infrastruktur digital diperkirakan sebesar 0,497, dengan selang kredibel 95% sebesar −0,164 hingga 1,166. Walaupun arah estimasinya positif, selang tersebut mencakup nol.
+
+Dengan demikian, penelitian belum memberikan bukti yang cukup kuat untuk menyimpulkan adanya hubungan statistik yang jelas antara indikator infrastruktur yang digunakan dan DRI pada tingkat kelurahan.
+
+Temuan ini bukan alasan untuk mengabaikan infrastruktur digital. Sebaliknya, pemerintah perlu memeriksa apakah indikator yang digunakan telah menggambarkan kualitas konektivitas, keterjangkauan biaya, ketersediaan perangkat, dan akses aktual yang dialami pelaku usaha. Evaluasi tersebut penting agar kebijakan infrastruktur didasarkan pada hambatan yang benar-benar teridentifikasi.
+
+## Pemetaan geospasial membuka peluang untuk intervensi yang lebih terarah {.unnumbered .unlisted}
+
+Penelitian mengagregasikan indikator UMKM untuk analisis pada 50 kelurahan di Kota Mataram dan mengembangkan peta interaktif yang memuat informasi lokasi serta karakteristik usaha. Pemetaan ini dapat digunakan sebagai perangkat awal untuk membaca distribusi UMKM dan menyusun prioritas program berbasis wilayah.
+
+Analisis spasial juga mempertimbangkan keterkaitan antarkelurahan. Pendekatan ini relevan karena karakteristik UMKM di suatu wilayah tidak selalu berdiri sendiri dan dapat berkaitan dengan kondisi wilayah di sekitarnya.
+
+Peta perlu digunakan bersama informasi jumlah UMKM, komposisi skala usaha, kesiapan digital, dan indikator halal. Wilayah dengan nilai rata-rata DRI rendah, misalnya, perlu diperiksa lebih lanjut untuk menentukan apakah intervensi utama yang dibutuhkan berupa pelatihan dasar, akses infrastruktur, pendampingan halal, atau kombinasi beberapa program.
+
+Peta tersebut merupakan instrumen pendukung pengambilan keputusan, bukan dasar tunggal untuk menetapkan penerima bantuan atau menyimpulkan bahwa seluruh UMKM dalam satu kelurahan memiliki kondisi yang sama.
+
+# Rekomendasi Kebijakan {.unnumbered .unlisted}
+
+## Terapkan zonasi intervensi berdasarkan kebutuhan UMKM {.unnumbered .unlisted}
+
+Pemerintah Kota Mataram perlu menggunakan peta geospasial dan indikator penelitian untuk menyusun prioritas intervensi pada tingkat kelurahan. Penetapan prioritas tidak cukup didasarkan pada nilai DRI semata, tetapi juga perlu mempertimbangkan jumlah UMKM, skala usaha, pemanfaatan perdagangan elektronik, kesiapan halal, hambatan halal, serta karakteristik lokal.
+
+Zonasi sebaiknya menggunakan pendekatan multidimensional. Sebagai kerangka operasional awal, pemerintah dapat membedakan kebutuhan intervensi sebagai berikut:
+
+- **Penguatan dasar digital:** untuk wilayah atau kelompok usaha yang memerlukan peningkatan keterampilan digital dasar dan pengenalan pemanfaatan teknologi.
+- **Akselerasi perdagangan elektronik:** untuk UMKM yang telah memiliki dasar digital dan memerlukan pendampingan dalam penggunaan platform penjualan serta pengembangan pasar.
+- **Fasilitasi kesiapan halal:** untuk UMKM yang membutuhkan informasi, pemeriksaan kesiapan dokumen, pendampingan proses sertifikasi, dan penguatan praktik produksi.
+- **Penguatan terpadu:** untuk kelompok usaha yang membutuhkan pendampingan digital dan halal secara bersamaan.
+
+Kategori tersebut merupakan kerangka usulan program, bukan klasifikasi empiris kelurahan yang telah ditetapkan oleh penelitian. Penetapan kelurahan prioritas harus dilakukan setelah indikator aktual diperiksa dan diverifikasi bersama perangkat daerah serta pendamping UMKM.
+
+## Alihkan fokus digitalisasi dari pelatihan umum ke pendampingan penggunaan {.unnumbered .unlisted}
+
+Program digitalisasi sebaiknya tidak berhenti pada sosialisasi atau pelatihan satu kali. Pemerintah perlu mengembangkan pendampingan bertahap yang berorientasi pada penerapan teknologi dalam kegiatan usaha.
+
+Kegiatan yang dapat diprioritaskan meliputi:
+
+1. Pembuatan dan perbaikan katalog produk digital.
+2. Penggunaan media sosial dan platform perdagangan elektronik yang sesuai dengan jenis usaha.
+3. Peningkatan keterampilan komunikasi dan pelayanan pelanggan secara digital.
+4. Pengelolaan pesanan, informasi produk, dan pencatatan transaksi.
+5. Pendampingan lanjutan untuk menilai penggunaan kanal digital setelah pelatihan.
+
+Pelaksanaan dapat melibatkan Dinas Koperasi dan UKM, PLUT, perguruan tinggi, komunitas usaha, serta mitra platform digital. Keberhasilan program perlu dinilai melalui perubahan praktik usaha, bukan hanya jumlah peserta yang mengikuti pelatihan.
+
+## Integrasikan pendampingan halal dengan penguatan mutu produk {.unnumbered .unlisted}
+
+Layanan halal perlu dikembangkan sebagai bagian dari pembinaan usaha, bukan sebagai kegiatan administratif yang terpisah dari pengembangan produk.
+
+Pemerintah dan mitra pendamping dapat mengembangkan layanan terpadu yang mencakup:
+
+1. Identifikasi status sertifikasi dan kebutuhan masing-masing UMKM.
+2. Pemeriksaan awal kelengkapan dokumen dan persyaratan yang relevan.
+3. Informasi mengenai jalur sertifikasi yang sesuai dengan jenis dan kondisi usaha.
+4. Pendampingan proses pengajuan melalui jalur dan lembaga berwenang.
+5. Penguatan praktik produksi, kebersihan, konsistensi bahan, dan dokumentasi yang mendukung penjaminan produk halal.
+6. Pemantauan perkembangan pengajuan sampai pada status penyelesaian yang dapat diverifikasi.
+
+Skema layanan perlu disesuaikan dengan ketentuan yang berlaku, termasuk persyaratan program sertifikasi yang relevan. Tidak semua pelaku usaha dapat menggunakan jalur atau skema yang sama.
+
+Masukan dari kegiatan diskusi pemangku kepentingan dalam penelitian juga memperlihatkan relevansi kebutuhan informasi mengenai proses sertifikasi halal dan penjaminan mutu produk melalui layanan pendampingan seperti PLUT. Kebutuhan tersebut dapat dijadikan dasar untuk merancang layanan yang lebih mudah diakses oleh pelaku UMKM.
+
+## Bangun layanan pendampingan terpadu digital dan halal {.unnumbered .unlisted}
+
+Program digitalisasi dan halal sebaiknya tidak dijalankan sebagai dua agenda yang terpisah. UMKM yang membutuhkan kedua jenis dukungan dapat memperoleh pendampingan terpadu melalui klinik usaha di tingkat kecamatan atau kelurahan, dengan jadwal dan mekanisme layanan yang terkoordinasi.
+
+Pendampingan dapat menghubungkan pengembangan katalog digital dengan perbaikan informasi produk, identitas usaha, pencatatan bahan, dan dokumentasi proses produksi. Dengan demikian, kegiatan digitalisasi dapat mendukung pengembangan pasar, sementara penguatan praktik usaha mendukung kesiapan memenuhi persyaratan halal.
+
+Model layanan terpadu perlu memperhatikan kapasitas masing-masing UMKM. Usaha yang masih membutuhkan pembenahan dasar sebaiknya tidak langsung dibebani target adopsi teknologi yang kompleks atau proses administratif yang belum siap dipenuhi.
+
+## Bangun sistem pemantauan berbasis data geospasial {.unnumbered .unlisted}
+
+Peta interaktif hasil penelitian perlu dikembangkan sebagai salah satu instrumen pendukung perencanaan dan evaluasi program UMKM. Pemerintah dapat mengintegrasikan data spasial dengan informasi program, karakteristik usaha, status pendampingan, dan perkembangan hasil intervensi.
+
+Sistem pemantauan perlu memperhatikan kualitas data, pembaruan informasi, perlindungan data pelaku usaha, dan konsistensi definisi indikator. Data individu yang bersifat sensitif atau mengidentifikasi pelaku usaha tidak perlu ditampilkan secara terbuka apabila tidak dibutuhkan untuk tujuan layanan publik.
+
+Pembaruan berkala memungkinkan pemerintah membandingkan kondisi awal dengan perkembangan setelah program dilaksanakan. Namun, perubahan indikator tidak boleh langsung dianggap sebagai dampak program tanpa mempertimbangkan faktor lain yang mungkin memengaruhi hasil.
+
+# Rencana Implementasi {.unnumbered .unlisted}
+
+Pelaksanaan rekomendasi dapat dilakukan secara bertahap melalui koordinasi lintas perangkat daerah dan mitra pendamping.
+
+**Tahap 1: Validasi data dan penetapan prioritas.** Pemerintah bersama tim peneliti dan pendamping UMKM meninjau peta, memeriksa kelengkapan data, mengidentifikasi kebutuhan yang paling mendesak, dan menyepakati kriteria penetapan wilayah prioritas. Hasilnya berupa daftar wilayah dan kelompok UMKM yang memerlukan jenis intervensi tertentu.
+
+**Tahap 2: Perancangan dan pelaksanaan program.** Perangkat daerah bersama PLUT, perguruan tinggi, dan mitra terkait menyelenggarakan pendampingan digital, konsultasi halal, serta penguatan mutu produk sesuai dengan kebutuhan yang telah diidentifikasi. Program dapat dimulai pada wilayah prioritas yang datanya telah diverifikasi.
+
+**Tahap 3: Pemantauan dan evaluasi.** Perkembangan peserta dipantau melalui indikator yang telah ditetapkan. Hasil evaluasi digunakan untuk memperbaiki materi, mekanisme pendampingan, dan distribusi sumber daya pada periode berikutnya.
+
+Pembagian peran yang disarankan adalah sebagai berikut:
+
+| Pemangku kepentingan | Peran yang disarankan |
+|---|---|
+| Pemerintah Kota Mataram dan perangkat daerah terkait | Menetapkan prioritas, mengoordinasikan program, dan mengintegrasikan hasil pemetaan ke dalam perencanaan. |
+| Dinas Koperasi dan UKM serta PLUT | Menyelenggarakan pendampingan usaha, fasilitasi digitalisasi, konsultasi, dan rujukan layanan halal. |
+| Lembaga dan pendamping halal yang berwenang | Memberikan informasi persyaratan, mendampingi proses sesuai kewenangan, dan memverifikasi perkembangan sertifikasi. |
+| Perguruan tinggi | Mendukung analisis data, pendampingan teknis, evaluasi program, dan pembaruan informasi geospasial. |
+| Pelaku dan komunitas UMKM | Mengidentifikasi kebutuhan, mengikuti pendampingan, menerapkan praktik yang relevan, dan memberikan umpan balik. |
+
+# Indikator Pemantauan dan Evaluasi {.unnumbered .unlisted}
+
+Agar pelaksanaan kebijakan dapat dievaluasi secara terukur, pemerintah perlu menetapkan indikator awal, target, periode pemantauan, dan sumber data sebelum program dimulai.
+
+| Dimensi | Indikator yang disarankan |
+|---|---|
+| Jangkauan intervensi | Jumlah kelurahan yang dipetakan dan divalidasi; jumlah UMKM yang menerima pendampingan; distribusi peserta menurut skala usaha. |
+| Kesiapan digital | Perubahan DRI dan dimensi penyusunnya; perubahan keterampilan atau praktik digital yang terukur. |
+| Pemanfaatan perdagangan elektronik | Proporsi UMKM yang aktif menggunakan kanal digital untuk penjualan; keberlanjutan penggunaan setelah pendampingan. |
+| Infrastruktur digital | Kendala konektivitas, perangkat, dan keterjangkauan yang teridentifikasi; tindak lanjut terhadap hambatan yang dapat ditangani. |
+| Kesiapan halal | Jumlah UMKM yang telah menjalani pemeriksaan kesiapan dan menerima pendampingan sesuai kebutuhan. |
+| Progres sertifikasi halal | Jumlah pengajuan yang dimulai, diproses, dan diselesaikan; status sertifikasi yang dapat diverifikasi. |
+| Mutu produk | Perbaikan dokumentasi dan praktik produksi yang relevan; tindak lanjut atas hasil pembinaan mutu. |
+| Efektivitas layanan | Tingkat penyelesaian pendampingan, waktu layanan, kepuasan peserta, dan tindak lanjut hasil evaluasi. |
+
+Nilai awal indikator perlu diukur sebelum intervensi dilaksanakan. Target kuantitatif sebaiknya ditetapkan setelah jumlah sasaran, kapasitas pendamping, anggaran, dan kondisi awal diketahui, bukan ditentukan secara arbitrer.
+
+Evaluasi dapat dilakukan dengan membandingkan indikator sebelum dan sesudah program. Apabila sumber daya memungkinkan, rancangan evaluasi yang memiliki kelompok pembanding atau penerapan bertahap dapat membantu membedakan perubahan yang berkaitan dengan intervensi dari perubahan yang terjadi karena faktor lain.
+
+# Implikasi dan Batasan Kebijakan {.unnumbered .unlisted}
+
+Penelitian ini menyediakan dasar empiris untuk mengembangkan kebijakan UMKM yang lebih terarah secara spasial. Namun, beberapa batasan perlu dipertimbangkan dalam penerapannya.
+
+Pertama, indeks komposit merangkum beberapa dimensi kesiapan digital. Nilai agregat perlu dibaca bersama indikator penyusunnya agar perbedaan kebutuhan antarwilayah tidak terabaikan.
+
+Kedua, hasil pemodelan spasial menunjukkan hubungan statistik pada tingkat agregasi kelurahan. Hasil tersebut tidak membuktikan hubungan sebab-akibat pada tingkat individu. Oleh sebab itu, hasil model perlu dipadukan dengan verifikasi lapangan sebelum digunakan untuk menetapkan intervensi spesifik.
+
+Ketiga, ketidakpastian estimasi berbeda antarvariabel. Temuan mengenai hubungan positif perdagangan elektronik memperoleh dukungan statistik dari selang kredibelnya, sedangkan hasil untuk infrastruktur digital masih belum konklusif. Tingkat kepastian hasil perlu dipertimbangkan dalam menentukan prioritas program.
+
+Keempat, peta wilayah tidak menggambarkan seluruh variasi kondisi UMKM di dalam satu kelurahan. Pengambilan keputusan mengenai peserta program perlu didukung pemeriksaan kebutuhan pada tingkat usaha.
+
+Kelima, status sertifikasi halal dan kesiapan memenuhi persyaratan halal merupakan dua hal yang berbeda. Program perlu membedakan pelaku usaha yang telah memiliki sertifikat, yang sedang menjalani proses, dan yang masih memerlukan pendampingan awal.
+
+Dengan mempertimbangkan batasan tersebut, hasil penelitian sebaiknya digunakan sebagai dasar untuk menyusun prioritas awal, melakukan validasi, dan memperbaiki kebijakan secara berkelanjutan.
+
+# Penutup {.unnumbered .unlisted}
+
+Akselerasi digitalisasi dan sertifikasi halal UMKM Kota Mataram membutuhkan pendekatan yang menghubungkan data, layanan pendampingan, dan kebutuhan aktual pelaku usaha. Hasil penelitian menunjukkan bahwa pemanfaatan perdagangan elektronik dan kesiapan halal merupakan dimensi yang relevan untuk dipertimbangkan dalam perumusan kebijakan, sementara hambatan halal memerlukan perhatian khusus dan peran infrastruktur perlu dievaluasi lebih lanjut berdasarkan kondisi lapangan.
+
+Pemerintah Kota Mataram dapat memanfaatkan pemetaan geospasial sebagai instrumen untuk menentukan prioritas wilayah, mengoordinasikan layanan, dan memantau perkembangan program. Pendekatan ini diharapkan membantu mengarahkan sumber daya secara lebih tepat, memperkuat kapasitas usaha, serta membangun ekosistem UMKM yang lebih adaptif terhadap perkembangan ekonomi digital dan ketentuan halal.
+

@@ -1,0 +1,282 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  indonesian,
+  11pt,
+  a4paper,
+]{report}
+\usepackage{xcolor}
+\usepackage[top=2.2cm,bottom=2.2cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Daftar Isi}
+\else
+  \newcommand\contentsname{Daftar Isi}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Daftar Gambar}
+\else
+  \newcommand\listfigurename{Daftar Gambar}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Daftar Tabel}
+\else
+  \newcommand\listtablename{Daftar Tabel}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Gambar}
+\else
+  \newcommand\figurename{Gambar}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabel}
+\else
+  \newcommand\tablename{Tabel}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Daftar}
+\newcommand*\listoflistings{\listof{codelisting}{Daftar Daftar}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Executive Summary},
+  pdflang={id},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Executive Summary}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Zonasi Intervensi Kebijakan UMKM Kota Mataram: Pemetaan
+Geospasial untuk Akselerasi Digitalisasi dan Sertifikasi Halal}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+
+\setstretch{1.15}
+\chapter*{Ringkasan Eksekutif}\label{ringkasan-eksekutif}
+
+Penelitian \emph{Zonasi Intervensi Kebijakan UMKM Kota Mataram: Pemetaan
+Geospasial untuk Akselerasi Digitalisasi dan Sertifikasi Halal}
+dilaksanakan untuk menyediakan informasi berbasis data yang dapat
+mendukung perencanaan pengembangan Usaha Mikro, Kecil, dan Menengah
+(UMKM) di Kota Mataram. Penelitian ini berangkat dari kebutuhan untuk
+memahami variasi kesiapan digital pelaku UMKM dan keterkaitannya dengan
+aktivitas perdagangan elektronik, infrastruktur digital, hambatan
+terkait halal, serta kesiapan pemenuhan persyaratan halal.
+
+Penelitian menggunakan pendekatan kuantitatif dengan analisis
+deskriptif, pemetaan geospasial, dan pemodelan statistik yang
+mempertimbangkan keterkaitan antarwilayah. Data UMKM digunakan untuk
+menggambarkan karakteristik dan persebaran usaha, sedangkan informasi
+survei digunakan untuk menyusun indeks kesiapan digital serta indikator
+yang berkaitan dengan aspek halal. Analisis dilanjutkan dengan pemodelan
+\emph{Conditional Autoregressive} (CAR) untuk mengkaji hubungan antara
+kesiapan digital dan empat kelompok prediktor, dengan mempertimbangkan
+struktur spasial wilayah kelurahan.
+
+Hasil penelitian menghasilkan peta interaktif UMKM Kota Mataram yang
+menyajikan informasi lokasi dan karakteristik usaha. Selain itu,
+penelitian menghasilkan indeks kesiapan digital (\emph{Digital Readiness
+Index} atau DRI), analisis hubungan antara kesiapan digital dan
+faktor-faktor yang relevan, serta informasi spasial yang dapat digunakan
+sebagai bahan awal untuk mengidentifikasi kebutuhan pendampingan menurut
+wilayah.
+
+Hasil pemodelan menunjukkan hubungan positif antara aktivitas
+perdagangan elektronik dan indeks kesiapan digital UMKM. Kesiapan halal
+juga menunjukkan arah hubungan positif dalam estimasi model. Sementara
+itu, estimasi hubungan infrastruktur digital dan hambatan terkait halal
+masih mengandung ketidakpastian sehingga perlu ditafsirkan secara
+hati-hati. Temuan tersebut menunjukkan pentingnya mempertimbangkan
+aktivitas digital dan kesiapan pemenuhan persyaratan halal dalam
+perencanaan pengembangan kapasitas UMKM, tanpa mengasumsikan bahwa
+seluruh faktor telah terbukti memiliki pengaruh yang pasti.
+
+Kemanfaatan utama penelitian terletak pada penyediaan instrumen
+informasi dan dasar analitis bagi pemerintah daerah, lembaga pendamping
+UMKM, dan pemangku kepentingan lainnya. Peta interaktif dapat digunakan
+untuk mengeksplorasi persebaran usaha dan karakteristik wilayah,
+sedangkan hasil analisis dapat menjadi bahan pertimbangan dalam menyusun
+prioritas pendampingan, merancang program peningkatan kapasitas digital,
+dan mengintegrasikan edukasi halal dengan penguatan kualitas produk.
+
+Diseminasi hasil penelitian turut dilakukan melalui forum diskusi
+kelompok terarah (\emph{Focus Group Discussion} atau FGD) pada 13
+Oktober 2026 di Mataram. Diskusi melibatkan unsur perguruan tinggi,
+pemangku kepentingan terkait UMKM, dan pelaku usaha. Salah satu isu yang
+disampaikan oleh pelaku UMKM adalah kebutuhan informasi mengenai proses
+pengurusan sertifikasi halal dan penjaminan kualitas produk. Masukan
+tersebut memperkuat relevansi agenda pendampingan yang menghubungkan
+digitalisasi usaha dengan kesiapan pemenuhan persyaratan halal.
+
+Sebagai tindak lanjut, hasil penelitian dapat dimanfaatkan untuk
+mendukung perencanaan program berbasis wilayah, penguatan literasi dan
+aktivitas perdagangan elektronik, pendampingan sertifikasi halal, serta
+pemantauan perkembangan kesiapan digital UMKM. Pelaksanaannya perlu
+disesuaikan dengan kebutuhan aktual di lapangan, disertai verifikasi
+data dan koordinasi dengan instansi yang berwenang.
+
+Secara keseluruhan, penelitian ini memberikan kontribusi melalui
+pengembangan peta interaktif, indeks kesiapan digital, analisis
+statistik dan spasial, serta rekomendasi kebijakan yang dapat menjadi
+dasar pendukung pengambilan keputusan berbasis data. Hasil tersebut
+diharapkan dapat memperkuat sinergi antara perguruan tinggi, pemerintah
+daerah, lembaga pendamping, dan pelaku UMKM dalam mendorong pengembangan
+usaha yang lebih adaptif terhadap digitalisasi dan lebih siap memenuhi
+persyaratan sertifikasi halal.
+
+\textbf{Luaran utama:} Peta interaktif UMKM Kota Mataram, indeks
+kesiapan digital UMKM, hasil pemodelan statistik dan spasial, serta
+rekomendasi pemanfaatan untuk perencanaan intervensi kebijakan.
+
+\textbf{Tautan peta interaktif:}
+\url{https://indiraputeri.github.io/dudi26/eda\#peta-interaktif-umkm-kota-mataram}
+
+\textbf{Kata kunci:} UMKM, kesiapan digital, perdagangan elektronik,
+sertifikasi halal, pemetaan geospasial, model CAR, kebijakan berbasis
+data.
+
+
+
+
+\end{document}

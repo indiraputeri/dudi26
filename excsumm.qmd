@@ -1,0 +1,81 @@
+---
+title: "Executive Summary"
+subtitle: "Zonasi Intervensi Kebijakan UMKM Kota Mataram: Pemetaan Geospasial untuk Akselerasi Digitalisasi dan Sertifikasi Halal"
+
+# author:
+#   - name: Indira Puteri Kinasih
+#     affiliation: Universitas Islam Negeri Mataram
+#   - name: Any Tsalasatul Fitriyah
+#     affiliation: Universitas Islam Negeri Mataram
+#   - name: Nurul Susianti
+#     affiliation: Universitas Islam Negeri Mataram
+#   - name: Ulfatun Hasanah
+#     affiliation: Universitas Islam Negeri Mataram
+#   - name: Nur Awalunnisa
+#     affiliation: Universitas Islam Negeri Mataram
+
+# date: "2026-10-20"
+lang: id
+# language: 
+#   title-block-author-single: "Penulis"
+#   title-block-author-plural: "Tim Peneliti"
+
+format:
+  html:
+    toc: true
+    toc-title: "Daftar Isi"
+    number-sections: true
+    smooth-scroll: true
+    theme: cosmo
+    page-layout: article
+    title-block-banner: "#f1f3fa"
+    css: styles.css
+    link-external-newwindow: true
+    
+  pdf:
+    documentclass: report
+    papersize: a4
+    pdf-engine: lualatex
+    geometry:
+      - top=2.2cm
+      - bottom=2.2cm
+      - left=2.5cm
+      - right=2.5cm
+    fontsize: 11pt
+    linestretch: 1.15
+    colorlinks: true
+    toc: false
+    toc-title: "Daftar Isi"
+    number-sections: true
+    keep-tex: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+---
+
+# Ringkasan Eksekutif {.unnumbered .unlisted}
+
+Penelitian *Zonasi Intervensi Kebijakan UMKM Kota Mataram: Pemetaan Geospasial untuk Akselerasi Digitalisasi dan Sertifikasi Halal* dilaksanakan untuk menyediakan informasi berbasis data yang dapat mendukung perencanaan pengembangan Usaha Mikro, Kecil, dan Menengah (UMKM) di Kota Mataram. Penelitian ini berangkat dari kebutuhan untuk memahami variasi kesiapan digital pelaku UMKM dan keterkaitannya dengan aktivitas perdagangan elektronik, infrastruktur digital, hambatan terkait halal, serta kesiapan pemenuhan persyaratan halal.
+
+Penelitian menggunakan pendekatan kuantitatif dengan analisis deskriptif, pemetaan geospasial, dan pemodelan statistik yang mempertimbangkan keterkaitan antarwilayah. Data UMKM digunakan untuk menggambarkan karakteristik dan persebaran usaha, sedangkan informasi survei digunakan untuk menyusun indeks kesiapan digital serta indikator yang berkaitan dengan aspek halal. Analisis dilanjutkan dengan pemodelan *Conditional Autoregressive* (CAR) untuk mengkaji hubungan antara kesiapan digital dan empat kelompok prediktor, dengan mempertimbangkan struktur spasial wilayah kelurahan.
+
+Hasil penelitian menghasilkan peta interaktif UMKM Kota Mataram yang menyajikan informasi lokasi dan karakteristik usaha. Selain itu, penelitian menghasilkan indeks kesiapan digital (*Digital Readiness Index* atau DRI), analisis hubungan antara kesiapan digital dan faktor-faktor yang relevan, serta informasi spasial yang dapat digunakan sebagai bahan awal untuk mengidentifikasi kebutuhan pendampingan menurut wilayah.
+
+Hasil pemodelan menunjukkan hubungan positif antara aktivitas perdagangan elektronik dan indeks kesiapan digital UMKM. Kesiapan halal juga menunjukkan arah hubungan positif dalam estimasi model. Sementara itu, estimasi hubungan infrastruktur digital dan hambatan terkait halal masih mengandung ketidakpastian sehingga perlu ditafsirkan secara hati-hati. Temuan tersebut menunjukkan pentingnya mempertimbangkan aktivitas digital dan kesiapan pemenuhan persyaratan halal dalam perencanaan pengembangan kapasitas UMKM, tanpa mengasumsikan bahwa seluruh faktor telah terbukti memiliki pengaruh yang pasti.
+
+Kemanfaatan utama penelitian terletak pada penyediaan instrumen informasi dan dasar analitis bagi pemerintah daerah, lembaga pendamping UMKM, dan pemangku kepentingan lainnya. Peta interaktif dapat digunakan untuk mengeksplorasi persebaran usaha dan karakteristik wilayah, sedangkan hasil analisis dapat menjadi bahan pertimbangan dalam menyusun prioritas pendampingan, merancang program peningkatan kapasitas digital, dan mengintegrasikan edukasi halal dengan penguatan kualitas produk.
+
+Diseminasi hasil penelitian turut dilakukan melalui forum diskusi kelompok terarah (*Focus Group Discussion* atau FGD) pada 13 Oktober 2026 di Mataram. Diskusi melibatkan unsur perguruan tinggi, pemangku kepentingan terkait UMKM, dan pelaku usaha. Salah satu isu yang disampaikan oleh pelaku UMKM adalah kebutuhan informasi mengenai proses pengurusan sertifikasi halal dan penjaminan kualitas produk. Masukan tersebut memperkuat relevansi agenda pendampingan yang menghubungkan digitalisasi usaha dengan kesiapan pemenuhan persyaratan halal.
+
+Sebagai tindak lanjut, hasil penelitian dapat dimanfaatkan untuk mendukung perencanaan program berbasis wilayah, penguatan literasi dan aktivitas perdagangan elektronik, pendampingan sertifikasi halal, serta pemantauan perkembangan kesiapan digital UMKM. Pelaksanaannya perlu disesuaikan dengan kebutuhan aktual di lapangan, disertai verifikasi data dan koordinasi dengan instansi yang berwenang.
+
+Secara keseluruhan, penelitian ini memberikan kontribusi melalui pengembangan peta interaktif, indeks kesiapan digital, analisis statistik dan spasial, serta rekomendasi kebijakan yang dapat menjadi dasar pendukung pengambilan keputusan berbasis data. Hasil tersebut diharapkan dapat memperkuat sinergi antara perguruan tinggi, pemerintah daerah, lembaga pendamping, dan pelaku UMKM dalam mendorong pengembangan usaha yang lebih adaptif terhadap digitalisasi dan lebih siap memenuhi persyaratan sertifikasi halal.
+
+**Luaran utama:** Peta interaktif UMKM Kota Mataram, indeks kesiapan digital UMKM, hasil pemodelan statistik dan spasial, serta rekomendasi pemanfaatan untuk perencanaan intervensi kebijakan.
+
+**Tautan peta interaktif:** [https://indiraputeri.github.io/dudi26/eda#peta-interaktif-umkm-kota-mataram](https://indiraputeri.github.io/dudi26/eda#peta-interaktif-umkm-kota-mataram)
+
+**Kata kunci:** UMKM, kesiapan digital, perdagangan elektronik, sertifikasi halal, pemetaan geospasial, model CAR, kebijakan berbasis data.

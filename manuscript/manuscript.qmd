@@ -1,0 +1,640 @@
+---
+title: "Spatial Variation in Digital Readiness among MSMEs: A Bayesian CAR Analysis in Mataram City, Indonesia"
+author:
+  - name: "Indira Puteri Kinasih"
+    email: "indiraputeri@uinmataram.ac.id"
+    orcid: "0009-0009-6959-6723"
+    affiliation:
+      - name: Universitas Islam Negeri Mataram
+        id: 1
+        address: Universitas Islam Negeri Matarm, Jalan Gajah Mada
+        city: Mataram
+        country: Indonesia
+        postal-code: 83116
+
+  - name: "Any Tsalasatul Fitriyah"
+    email: "any.tsalasatul@uinmataram.ac.id"
+    orcid: "0000-0001-7417-7739"
+    affiliations:
+      - ref: 1
+
+  - name: "Nurul Susianti"
+    email: "nurulsusianti@uinmataram.ac.id"
+    orcid: "0009-0006-4279-9860"
+    affiliations:
+      - ref: 1
+
+  - name: "Ulfatun Hasanah"
+    email: "ulfatunhasanah@uinmataram.ac.id"
+    orcid: "0000-0001-6719-3415"
+    affiliations:
+      - ref: 1
+
+  - name: "Nur Awalunnisa"
+    email: "awalunnisa@uinmataram.ac.id"
+    orcid: "0009-0003-1525-1232"
+    affiliations:
+      - ref: 1
+
+abstract: |
+ Micro, small, and medium enterprises (MSMEs) play an important role in local economic development, but their capacity to adopt digital technologies and comply with halal requirements is unlikely to be spatially homogeneous. Identifying such spatial variation is therefore important for designing geographically targeted interventions. This study examines the digital readiness and halal-related preparedness of MSMEs in Mataram City, Indonesia, and investigates their spatial variation at the kelurahan level. A total of 4,185 MSME records were used to describe the spatial distribution and structural characteristics of businesses, while survey data from 388 MSME respondents were used to construct measures of digital readiness and halal-related characteristics. Digital readiness was represented through five dimensions, while halal-related conditions were examined through separate constructs representing awareness, readiness, and barriers rather than being collapsed into a single index. The resulting indicators were aggregated to 50 kelurahan and analysed using a Leroux conditional autoregressive (CAR) model. A conventional generalized linear model (GLM) was used as a non-spatial comparator. The results indicate substantial heterogeneity in MSME characteristics across Mataram. Most registered businesses were individually owned enterprises, while food provision and retail activities constituted the dominant business groups. The spatial model provided better overall model fit than the GLM, with a lower Deviance Information Criterion (DIC) of 80.474 compared with 83.237. In the CAR model, digital commerce activity, infrastructure, and halal readiness were positively associated with the response, whereas halal-related barriers showed a negative association. The findings demonstrate that interventions based on a city-wide uniform strategy may overlook local differences in MSME needs. Spatially differentiated policies combining digital infrastructure, online market participation, halal facilitation, and business assistance are therefore recommended.
+ 
+keywords:
+  - Digital readiness
+  - MSMEs
+  - Bayesian spatial statistics
+  - Conditional autoregressive model
+  - Indonesia
+
+# lang: en
+# 
+# format:
+#   pdf:
+#     documentclass: article
+#     papersize: a4
+#     fontsize: 11pt
+#     number-sections: true
+#     colorlinks: true
+#     geometry:
+#       - margin=1in
+#     linestretch: 1.25
+#     toc: false
+#     keep-tex: true
+
+# bibliography: references.bib
+# csl: apa.csl
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+---
+
+## Introduction
+
+Micro, small, and medium enterprises (MSMEs) play an important role in inclusive and sustainable economic development. Within the Sustainable Development Goals (SDGs), MSME development is closely related to poverty reduction (SDG 1), productive employment and inclusive economic growth (SDG 8), and innovation, technology access, and the integration of small businesses into markets and value chains (SDG 9). These priorities are also reflected in Indonesia's national development agenda, which places MSMEs within broader efforts to strengthen the economy, promote more equitable development, and accelerate technology-based transformation [@bappenas2020rpjmn; @bappenas2025rpjmn]. MSMEs are further connected to the business and industrial sectors through their roles as producers, suppliers, service providers, and participants in value chains involving industry, tourism, and the creative economy [@worldbank2021indonesia].
+
+Despite their importance, MSMEs continue to face constraints in accessing technology, markets, finance, human resources, management capacity, and product standardisation [@oecd2018sme; @oecd2021digital; @adb2021asia; @bpsntb2025]. Consequently, the number of MSMEs in an area provides only a partial description of their economic capacity and development needs. Policies based solely on the concentration of businesses may overlook differences in the capabilities and enabling conditions of enterprises. Evidence-based MSME development therefore requires information that combines business characteristics with the geographical context in which enterprises operate [@worldbank2021indonesia].
+
+This issue is particularly relevant in Mataram City, one of the main centres of economic activity in West Nusa Tenggara. Administrative data indicate 111,016 MSMEs in Mataram, consisting of 84,104 micro enterprises, 24,780 small enterprises, and 2,132 medium enterprises. The large proportion of micro enterprises highlights the importance of strengthening the capacity of businesses that may have more limited resources for technology adoption, market expansion, and compliance with product standards. However, aggregate statistics do not reveal how MSMEs are distributed within the city or whether their development characteristics vary systematically between locations. A spatial perspective is therefore needed to identify geographical heterogeneity in MSME conditions.
+
+Digitalisation is one important dimension of MSME capacity. The use of social media, online marketplaces, digital payments, and other digital technologies can expand market access, improve business processes, and strengthen connections between MSMEs and wider business and industrial networks [@adb2021asia; @chang2021cashless; @morisson2025digitalisasi]. Nevertheless, technology adoption is unlikely to be homogeneous across enterprises. Differences in digital skills, managerial capacity, infrastructure, access to information, and business resources can create substantial variation in the extent to which MSMEs are able to use digital technologies [@oecd2018sme; @worldbank2021indonesia].
+
+Digital readiness therefore needs to be considered as a multidimensional characteristic rather than being represented by a single indicator of technology use. Previous studies have conceptualised digital readiness in terms of combinations of technological, organisational, human-resource, and business-process capabilities [@silva2023clarification]. Various studies have subsequently developed measures of digital readiness among SMEs and MSMEs [@pirola2019digital; @rafiah2022digital; @anggraini2022assessing; @okfalisa2021measuring]. Such an approach makes it possible to distinguish between whether an enterprise uses a digital technology and whether the enterprise possesses the broader capabilities required to use digital technologies effectively.
+
+In addition to digitalisation, halal assurance represents an important dimension of MSME development in Indonesia, particularly for food, beverage, and other consumer-oriented businesses. Halal certification is not only associated with regulatory compliance but can also contribute to consumer confidence, product differentiation, and market access [@hartini2024implikasi]. The implementation of halal assurance under Law No. 33 of 2014 and subsequent government facilitation programmes has increased the relevance of halal preparedness for MSMEs [@uu2014jaminan]. Nevertheless, the availability of certification programmes does not necessarily imply that enterprises have equal awareness, preparedness, access to assistance, or ability to overcome the practical barriers associated with halal certification. Previous studies have identified continuing needs for facilitation, assistance, and better understanding of the conditions affecting MSME participation in halal certification [@nabila2023sertifikasi; @rahayu2023mapping; @purwati2024pendampingan; @fajriana2026analisis].
+
+Digital readiness and halal preparedness may also be related to the geographical context of MSMEs. Enterprises located in neighbouring areas can share access to infrastructure, markets, information, government services, business-support institutions, and other aspects of the local economic environment. Consequently, MSMEs in nearby administrative areas may exhibit more similar characteristics than enterprises located farther apart. Conversely, differences in local conditions may generate spatial inequalities in digital capacity and halal preparedness. Ignoring such spatial dependence may therefore result in an incomplete representation of the factors associated with MSME development.
+
+Spatial approaches have previously been applied to MSME studies to describe business distributions, identify clusters, and examine regional potential [@supriyanto2017klasterisasi]. Spatial analysis has also been applied in studies concerning halal industries and product quality [@rahayu2023mapping]. However, studies of MSME digital readiness have generally emphasised individual or organisational characteristics, while spatial studies of MSMEs have often focused primarily on geographical distribution. Digitalisation and halal-related conditions have also commonly been considered as separate issues. There remains limited empirical work that integrates multidimensional digital readiness with halal-related characteristics and explicitly accounts for spatial dependence between local areas.
+
+This study addresses this gap by examining the spatial variation of MSME digital readiness in Mataram City using a combination of business data, survey-based indicators, and spatial statistical modelling. The analysis aggregates MSME characteristics to the kelurahan level and examines digital readiness in relation to four area-level predictors: digital commerce activity, digital infrastructure, halal-related barriers, and halal readiness. A conventional generalized linear model (GLM) is first used as a non-spatial benchmark, followed by a Bayesian Leroux conditional autoregressive (CAR) model to account for spatial dependence among neighbouring kelurahan.
+
+The study has two related objectives. First, it describes the spatial distribution and characteristics of MSMEs in Mataram City, including their digital and halal-related conditions. Second, it evaluates the extent to which digital commerce activity, infrastructure, halal-related barriers, and halal readiness are associated with area-level digital readiness after accounting for spatial dependence. Comparison between the GLM and CAR models is used to assess whether incorporating geographical structure provides additional explanatory information.
+
+The contribution of this study is therefore not limited to producing a map of MSME locations. Rather, it demonstrates how spatial statistical modelling can be used to move from descriptive MSME mapping towards an understanding of geographically structured differences in business readiness. The resulting evidence provides a basis for more differentiated policy interventions, in which areas with limited digital capacity, infrastructure constraints, greater halal-related barriers, or lower halal readiness can be identified for more targeted forms of assistance. This approach can support local governments in developing MSME policies that consider not only the number and distribution of enterprises, but also the multidimensional and spatially structured conditions underlying their development.
+
+## Conceptual framework
+MSME development is conceptualised as a multidimensional phenomenon shaped by digital capabilities, the use of digital technologies, enabling infrastructure, and conditions associated with halal certification. These dimensions represent distinct but potentially related aspects of business readiness and development.
+
+Digital readiness is the primary outcome of interest. It reflects multiple aspects of MSME capacity, including business capabilities, digital practices, and access to enabling infrastructure. Rather than treating digital readiness as a single observable characteristic, this study considers it a composite construct that captures variation across these dimensions. The resulting Digital Readiness Index (DRI) provides a basis for examining differences in digital readiness across MSMEs and their geographical distribution.
+
+Halal-related conditions constitute a complementary analytical dimension. Awareness of halal certification, readiness to meet certification requirements, and perceived barriers to certification may shape the business environment in which MSMEs pursue digitalisation and broader development opportunities. These conditions are conceptually distinct from digital readiness, although they may be associated with it. In particular, halal readiness and perceived barriers may reflect differences in business capacity, access to information, and the resources available to meet formal requirements.
+
+The study further recognises that MSMEs operate within geographically differentiated environments. Differences in infrastructure, market access, and business support may contribute to spatial variation in digital readiness. Consequently, the analysis considers both the associations between digital readiness and selected explanatory variables and the possibility that geographical proximity is relevant to the observed patterns.
+
+Based on this framework, the empirical analysis examines the spatial distribution of the DRI across urban villages (kelurahan) in Mataram City and its association with four explanatory variables: e-commerce utilisation, infrastructure, halal-related barriers, and halal readiness. A non-spatial generalised linear model (GLM) and a spatial conditional autoregressive (CAR) model are used to assess these associations while accounting for different assumptions about geographical dependence. The findings are interpreted as evidence of spatial variation and statistical associations, rather than as proof of causal relationships.
+
+## Materials and Methods
+
+### Study area and data
+
+The study was conducted in Mataram City, West Nusa Tenggara, Indonesia. The administrative unit used for spatial analysis was the kelurahan. Spatial data were prepared for 50 kelurahan.
+
+```{r, echo=FALSE}
+#| label: fig-mtrmap
+#| fig-cap: "Map of the 50 urban villages (kelurahan) in Mataram City, with colour gradients indicating the number of MSMEs in each village."
+#| fig-align: "center"
+#| fig-pos: "H"
+#| out-width: "75%"
+
+library(ggplot2)
+library(sf)
+library(viridis)
+
+load("../data/mtrvlg_umkm2.RData")
+
+ggplot(mtrvlg_umkm2) +
+  geom_sf(
+    aes(fill = jumlah_umkm),
+    colour = "white",
+    linewidth = 0.3
+  ) +
+  scale_fill_viridis_c(
+    option = "D",
+    name = "Number of MSMEs",
+    labels = scales::label_number(big.mark = ".", decimal.mark = ",")
+  ) +
+  # labs(
+  #   caption = "Sumber: Data UMKM Kota Mataram; diolah peneliti."
+  # ) +
+  coord_sf(datum = NA) +
+  theme_minimal() +
+  guides(fill = guide_colorbar(barwidth = 0.5, barheight = 7)) +
+  theme(
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = "right",
+    legend.title = element_text(size = 10),
+    legend.text = element_text(size = 9),
+    plot.caption = element_text(size = 8, hjust = 0),
+    panel.background = element_rect(fill = "white", colour = NA)
+  )
+```
+
+
+Two complementary data sources were used. The first consisted of administrative or business records containing information on 4,185 MSMEs. These data were used to describe the composition and spatial distribution of MSMEs in Mataram. The second consisted of survey responses from 388 MSMEs. The survey data were used to measure digital readiness and halal-related characteristics.
+
+The combination of these datasets enabled the study to distinguish between the population-level spatial distribution of businesses and the more detailed behavioural and perception-based indicators obtained from the survey.
+
+### Descriptive analysis of MSMEs
+
+Business characteristics were summarised according to business scale, legal form, location, and economic activity. The dominant economic activities were identified using the Indonesian Standard Industrial Classification (KBLI).
+
+Among the 4,185 MSMEs, individually owned businesses constituted the largest legal category, with 3,560 enterprises or approximately 85.1%. Other legal forms included CV, PT, cooperatives, and several less frequent categories.
+
+```{r}
+#| label: tbl-summaryumkm
+#| tbl-cap: "Characteristics of MSMEs by District"
+#| tbl-pos: "h"
+
+library(kableExtra)
+library(readxl)
+library(tidyverse)
+library(janitor)
+
+umkm <- read_excel(
+  "../data/umkm.xlsx",
+  sheet = "DATA UMKM TAHUN 2024",
+  skip = 2
+) |>
+  clean_names()
+
+umkm <- umkm %>% 
+  select(-no, -nib, -nama_perusahaan, 
+         -alamat_usaha, -email, -nomor_telp,
+         -nama_pemilik_usaha) %>% 
+  rename(investasi = jumlah_investasi_rp,
+         luas = luas_tanah_mm
+         ) %>% 
+  mutate(
+    kecamatan = recode(
+      kecamatan,
+      "Selaprang" = "Selaparang"
+    )
+  )
+
+
+sum_kec <- umkm %>%
+  group_by(kecamatan) %>%
+  summarise(
+    n = n(),
+    investasi_median = median(investasi, na.rm = TRUE) / 1e6,
+    investasi_q1 = quantile(investasi, 0.25, na.rm = TRUE) / 1e6,
+    investasi_q3 = quantile(investasi, 0.75, na.rm = TRUE) / 1e6,
+    tenaga_kerja_mean = mean(tki_org, na.rm = TRUE),
+    tenaga_kerja_q1 = quantile(tki_org, 0.25, na.rm = TRUE),
+    tenaga_kerja_q3 = quantile(tki_org, 0.75, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    Investasi = sprintf(
+      "%.1f (%.1f–%.1f)",
+      investasi_median,
+      investasi_q1,
+      investasi_q3
+    ),
+    `Tenaga Kerja` = sprintf(
+      "%.0f (%.0f–%.0f)",
+      tenaga_kerja_mean,
+      tenaga_kerja_q1,
+      tenaga_kerja_q3
+    )
+  ) %>%
+  select(
+    kecamatan = kecamatan,
+    `Jumlah UMKM` = n,
+    `Investasi (Rp juta)` = Investasi,
+    `Tenaga Kerja` = `Tenaga Kerja`
+  )
+
+# Komposisi skala usaha per kecamatan
+skala_kec <- umkm %>%
+  count(kecamatan, skala_usaha) %>%
+  group_by(kecamatan) %>%
+  mutate(
+    persentase = 100 * n / sum(n)
+  ) %>%
+  ungroup() %>%
+  mutate(
+    skala = paste0(
+      n, " (", round(persentase, 1), "%)"
+    )
+  ) %>%
+  select(kecamatan, skala_usaha, skala) %>%
+  pivot_wider(
+    names_from = skala_usaha,
+    values_from = skala,
+    values_fill = "0 (0.0%)"
+  )
+
+# Gabungkan
+sum_kec <- sum_kec %>%
+  left_join(skala_kec, by = "kecamatan") 
+
+
+
+sum_kec %>%
+  kbl(
+    booktabs = TRUE,
+    escape = TRUE,
+    align = "lccccccc",
+    col.names = c(
+      "District",
+      "Number of MSMEs",
+      "Investment (IDR million)",
+      "Employment",
+      "Micro",
+      "Small",
+      "Medium",
+      "Large"
+    ),
+    longtable = FALSE
+  ) %>%
+  kable_styling(
+    latex_options = c("hold_position", "striped"),
+    font_size = 8,
+    full_width = FALSE,
+    position = "center"
+  ) %>%
+  column_spec(1, width = "2.2cm") %>%
+  column_spec(2, width = "1.5cm") %>%
+  column_spec(3, width = "2.5cm") %>%
+  column_spec(4, width = "2.0cm") %>%
+  column_spec(5:8, width = "1.5cm") %>% 
+  footnote(
+    general = "Number of MSMEs and business-scale composition are reported as counts (percentages). Investment is reported as median (Q1–Q3), while employment is reported as mean (Q1–Q3).",
+    # threeparttable = TRUE,
+    general_title = "Note:"
+  )
+```
+
+
+The largest groups of business activities included food provision, specialised retail trade, general retail trade, retail trade in food and agricultural products, and wholesale trade in food and beverages. These categories indicate a strong concentration of MSMEs in food-related and retail activities.
+
+```{r, echo=FALSE}
+#| label: tbl-kbli
+#| tbl-cap: "Distribution of 4,185 MSMEs by three-digit KBLI business activity group"
+#| tbl-pos: "h"
+
+library(kableExtra)
+library(readxl)
+library(tidyverse)
+library(janitor)
+
+load("../data/kelompok_kbli.RData")
+
+kelompok_kbli %>%
+  kbl(
+    booktabs = TRUE,
+    escape = TRUE,
+    align = "lcc",
+    col.names = c(
+      "Business Activity Group",
+      "Number (n)",
+      "Percentage (%)"
+    )
+  ) %>%
+  kable_styling(
+    latex_options = c("hold_position", "striped"),
+    font_size = 8,
+    full_width = FALSE,
+    position = "center"
+  ) %>%
+  column_spec(1, width = "8.5cm") %>%
+  column_spec(2, width = "2.0cm") %>%
+  column_spec(3, width = "2.0cm")
+```
+
+
+Spatial visualisation was used to identify the geographical distribution of businesses and their characteristics across kelurahan
+
+### Construction of the Digital Readiness Index
+
+The Digital Readiness Index (DRI) was constructed as a composite measure of the digital readiness of individual MSMEs. The index comprises five dimensions: **digital skills, digital business processes, digital strategy, digital security, and data use**. Each dimension was measured using multiple Likert-scale questionnaire items. Specifically, digital skills was measured by three items (SKL1–SKL3), business processes by three items (BUS1–BUS3), strategy by two items (STR1–STR2), security by two items (SEC1–SEC2), and data use by two items (DAT1–DAT2).
+
+For MSME $i$, the score for dimension $k$ was calculated as the arithmetic mean of its corresponding questionnaire items:
+
+$$
+D_{ik}=\frac{1}{J_k}\sum_{j=1}^{J_k}X_{ijk},
+$$
+
+where $J_k$ denotes the number of items in dimension $k$. The overall DRI was then calculated as the arithmetic mean of the five dimension scores:
+
+$$
+DRI_i=\frac{1}{5}\sum_{k=1}^{5}D_{ik}.
+$$
+
+Thus, each dimension contributes equally to the overall index, regardless of the number of items used to measure it. All indicators were measured on the same Likert scale, so no additional standardisation was applied. Higher DRI values indicate greater digital readiness.
+
+Two additional composite measures, **digital infrastructure** (INF1–INF3) and **digital commerce activity** (ECO1–ECO3), were calculated separately but were not incorporated into the DRI. These measures were subsequently used as explanatory variables in the spatial regression analysis. At the spatial level, individual DRI scores were aggregated for each kelurahan using the median, while the number of surveyed MSMEs was retained as a measure of sample size for each spatial unit.
+
+### Explanatory Variables
+
+Four explanatory variables were included in the spatial regression model: digital commerce activity, digital infrastructure, halal-related barriers, and halal readiness. These variables were selected to examine the associations between MSMEs' digital engagement, access to digital resources, and halal certification-related conditions and the Digital Readiness Index (DRI) across urban villages (*kelurahan*) in Mataram City.
+
+Digital commerce activity was measured using three questionnaire items (ECO1–ECO3), while digital infrastructure was measured using three items (INF1–INF3). For each respondent, the corresponding score was calculated as the arithmetic mean of the items within each measure. Both measures were constructed separately from the DRI, which comprises digital skills, business processes, digital strategy, digital security, and data use. This distinction enabled digital commerce activity and infrastructure to be examined as explanatory factors rather than as components of the outcome index.
+
+Halal readiness was measured using two questionnaire items (HAL3 and HAL7), while halal-related barriers were measured using two items (HAL4 and HAL8). The arithmetic mean of the corresponding items was calculated for each measure. These variables were included to examine whether perceived readiness for halal certification and reported barriers were associated with variation in digital readiness.
+
+The four explanatory variables were aggregated to the *kelurahan* level by calculating their respective means across surveyed MSMEs within each area. The resulting area-level measures were included as covariates in the Leroux conditional autoregressive (CAR) model, with the area-level DRI as the response variable. This specification allowed associations between the four covariates and digital readiness to be estimated while accounting for spatial dependence between neighbouring urban villages.
+
+Let $Y_{ij}$ denote the Digital Readiness Index (DRI) of respondent $j$ in kelurahan $i$, where $i=1,\ldots,I$ and $j=1,\ldots,n_i$. Let $\mathbf{x}_{ij}$ denote the vector of individual-level explanatory variables and $\mathbf{z}_i$ the vector of kelurahan-level contextual variables. The multilevel spatial regression model is specified as
+
+$$
+Y_{ij}\mid b_i \sim N(\mu_{ij},\sigma^2),
+$$
+
+with
+
+$$
+\beta_0
++
+\mathbf{x}_{ij}^{\mathsf T}\boldsymbol{\beta}
++
+\mathbf{z}_i^{\mathsf T}\boldsymbol{\gamma}
++
+b_i.
+$$
+
+Here, $\beta_0$ is the overall intercept, $\boldsymbol{\beta}$ and $\boldsymbol{\gamma}$ are the regression coefficient vectors associated with individual-level and kelurahan-level covariates, respectively, and $\sigma^2$ denotes the individual-level residual variance. The term $b_i$ represents the kelurahan-specific random effect, which accounts for residual heterogeneity between areas and spatial dependence not explained by the observed covariates.
+
+Spatial dependence in the area-specific effects is modelled using the Leroux conditional autoregressive (CAR) specification. This formulation incorporates spatial dependence through the neighbourhood structure of the kelurahan, with a spatial dependence parameter governing the relative contribution of neighbouring area effects. It allows the model to accommodate varying degrees of spatial dependence, from independent area effects to spatially structured effects, while accounting for residual heterogeneity across kelurahan.
+
+The Gaussian likelihood is adopted as the primary specification because the DRI is constructed as a continuous composite index. Its suitability will be assessed by examining the empirical distribution of the index and evaluating model adequacy through appropriate residual and posterior predictive diagnostics. If substantial skewness or boundary concentration indicates that the Gaussian specification is inadequate, an alternative likelihood or an appropriate transformation will be considered.
+
+#### Spatial random effects
+The spatially structured variation was modelled using a Leroux conditional autoregressive (CAR) specification. Let $u_i$ denote the spatial random effect associated with area $i$. Conditional on the random effects of the remaining areas, the Leroux CAR model can be expressed as
+
+$$
+u_i \mid \mathbf{u}_{-i}
+\sim
+N\left(
+\frac{\rho \sum_j w_{ij}u_j}
+{\rho \sum_j w_{ij} + 1-\rho},
+\frac{1}
+{\tau\left(\rho \sum_j w_{ij}+1-\rho\right)}
+\right),
+$$
+
+where $w_{ij}$ denotes the spatial neighbourhood matrix, $\tau$ is a precision parameter, and $\rho$ is the spatial dependence parameter. The parameter $\rho$ controls the degree of spatial dependence among neighbouring areas, with values closer to zero corresponding to weaker spatial dependence and larger values indicating stronger spatial structuring.
+
+The spatial neighbourhood structure was defined using queen contiguity between the 50 kelurahan in Mataram City. Two areas were considered neighbours when their boundaries or vertices were contiguous. The resulting neighbourhood structure was incorporated into the Leroux CAR model to account for spatially structured variation in the DRI that was not explained by the observed covariates.
+
+The resulting spatial model was estimated using a Bayesian framework. Posterior inference was obtained using Markov chain Monte Carlo (MCMC), with multiple chains and burn-in and thinning procedures applied to reduce the influence of initial values and serial correlation. Convergence was assessed using standard MCMC diagnostic measures, including the potential scale reduction factor and effective sample size.
+
+The Leroux CAR specification was fitted alongside a corresponding non-spatial Gaussian regression model. Both models used the same response variable and covariates, allowing the spatial specification to be evaluated while holding the fixed-effects structure constant.
+
+## Results
+
+### Characteristics of the surveyed MSMEs
+
+The descriptive analysis shows that the MSME population in Mataram is strongly dominated by micro-scale and individually owned enterprises. The 4,185 business records indicate that the MSME population is not structurally homogeneous, with substantial differences in business scale, legal form, and economic activity.
+
+The ten largest KBLI groups were dominated by food provision and retail activities. Food provision accounted for 935 businesses, or approximately 22.3% of the dataset. Specialised retail trade accounted for 684 businesses (16.3%), while general retail trade accounted for 674 businesses (16.1%). Retail trade in food and agricultural products accounted for 381 businesses (9.1%), and wholesale trade in food and beverages accounted for 243 businesses (5.8%).
+
+This concentration suggests that interventions targeting food and retail businesses may reach a substantial proportion of the MSME population. At the same time, the spatial distribution of these businesses indicates that city-wide averages may conceal meaningful local differences.
+
+### Digital Readiness
+
+The DRI demonstrated considerable variation across the surveyed MSMEs.
+The standardised index had a minimum of approximately -1.37 and a maximum of approximately 2.27, with a median of approximately -0.19.
+The distribution indicates that a substantial proportion of businesses were located below the overall mean of the standardised index, while a smaller group demonstrated relatively high levels of digital readiness.
+
+At the spatial level, the variation in DRI suggests that digital readiness is not uniformly distributed across Mataram.
+This spatial heterogeneity provides a basis for examining whether neighbouring kelurahan exhibit similar levels of readiness after controlling for observed business-related predictors.
+
+### Digital commerce and halal-related characteristics
+
+Digital commerce activity was positively associated with the DRI and was also related to infrastructure conditions. This indicates that digital adoption is not simply a matter of individual business willingness but is connected to the broader conditions under which businesses operate.
+
+The halal-related indicators showed differentiated relationships with digital readiness. Halal readiness demonstrated a stronger positive association with DRI than halal awareness, whereas halal-related barriers showed a weaker and positive bivariate association before accounting for the other predictors.
+
+The distinction between readiness and barriers is analytically important. A business may demonstrate awareness of halal requirements without having the resources or organisational preparedness required to implement them. Consequently, policy interventions based solely on awareness may not adequately address practical constraints.
+
+### Comparison between GLM and CAR models
+
+Both the non-spatial GLM and the Leroux CAR model used the same response and four predictors:
+
+$$
+\mathrm{DRI}
+\sim
+\mathrm{mean\_ecomm}
++\mathrm{mean\_infr}
++\mathrm{mean\_halbarrier}
++\mathrm{mean\_halreadiness}.
+$$
+
+The posterior estimates from the two models were highly similar, indicating that the inclusion of the spatial component did not substantially alter the estimated associations between the predictors and DRI.
+
+```{r, echo=FALSE}
+
+#| label: tbl-model-comparison
+#| tbl-cap: "Comparison of GLM and Leroux CAR model estimates"
+#| tbl-pos: "h"
+
+library(knitr)
+library(kableExtra)
+
+model_comparison <- data.frame(
+  Predictor = c(
+    "Intercept",
+    "Digital commerce activity",
+    "Digital infrastructure",
+    "Halal-related barriers",
+    "Halal readiness"
+  ),
+  GLM = c(
+    "-1.35 (-3.88, 1.19)",
+    "0.40 (0.04, 0.75)",
+    "0.49 (-0.18, 1.16)",
+    "-0.42 (-0.97, 0.13)",
+    "0.74 (0.24, 1.24)"
+  ),
+  CAR = c(
+    "-1.36 (-3.90, 1.18)",
+    "0.40 (0.04, 0.75)",
+    "0.50 (-0.16, 1.17)",
+    "-0.42 (-0.97, 0.12)",
+    "0.74 (0.24, 1.24)"
+  )
+)
+
+
+model_comparison |>
+  kbl(
+    booktabs = TRUE,
+    escape = TRUE,
+    align = "lcc",
+    col.names = c("Predictor", "GLM", "Leroux CAR"),
+    longtable = FALSE
+  ) |>
+  kable_styling(
+    latex_options = c("hold_position", "striped"),
+    font_size = 9,
+    full_width = FALSE,
+    position = "center"
+  ) |>
+  column_spec(1, width = "5.0cm") |>
+  column_spec(2, width = "4.0cm") |>
+  column_spec(3, width = "4.0cm")
+```
+
+
+The direction and magnitude of the four predictor effects were almost unchanged between the models. Digital commerce activity showed a positive association with DRI, with a posterior mean of 0.396 in the CAR model and a 95% credible interval of 0.040 to 0.754. Halal readiness showed the largest positive association, with a posterior mean of 0.737 and a 95% credible interval of 0.241 to 1.239.
+
+Digital infrastructure also had a positive posterior mean of 0.497, although its 95% credible interval included zero (-0.164 to 1.166). Halal-related barriers had a negative posterior mean of -0.420, with a 95% credible interval of -0.971 to 0.123. Thus, the posterior intervals provide stronger evidence for the associations with digital commerce activity and halal readiness than for the associations with infrastructure and halal-related barriers.
+
+The similarity between the GLM and CAR estimates is itself informative. It indicates that accounting for spatial dependence did not substantially change the estimated fixed effects. Instead, the principal contribution of the CAR model is to account for geographical structure remaining in the residual variation.
+
+### Model fit and spatial dependence
+
+The CAR model provided a modest improvement in model fit relative to the GLM.
+
+```{r}
+#| label: tbl-modelfit
+#| tbl-cap: "Model fit comparison between GLM and Leroux CAR"
+#| tbl-pos: "h"
+
+model_fit <- data.frame(
+  Model = c("GLM", "CAR"),
+  DIC = c("83.237", "80.474"),
+  WAIC = c("83.871", "80.981"),
+  LMPL = c("-42.23", "-42.01")
+)
+
+model_fit |>
+  kbl(
+    booktabs = TRUE,
+    escape = TRUE,
+    align = "lccc",
+    col.names = c("Model", "DIC", "WAIC", "LMPL"),
+    label = "tbl-model-fit"
+  ) |>
+  kable_styling(
+    latex_options = c("hold_position", "striped"),
+    font_size = 9,
+    full_width = FALSE,
+    position = "center"
+  ) |>
+  row_spec(2, bold = TRUE)
+```
+
+
+<!-- | Model | DIC | pD | LMPL | -->
+<!-- |---|---:|---:|---:| -->
+<!-- | GLM | 83.237 | 5.848 | -42.23 | -->
+<!-- | CAR | **80.474** | **5.590** | **-42.01** | -->
+
+The Leroux CAR model showed modest improvements over the non-spatial GLM across all three model fit criteria. DIC decreased from 83.24 to 80.47, while WAIC decreased from 83.87 to 80.98.
+LMPL also increased slightly, from −42.23 to −42.01, indicating a small improvement in predictive performance.
+These results provide some support for incorporating spatial structure into the model, although the differences are modest rather than substantial.
+The findings suggest that accounting for spatial dependence provides additional information for explaining variation in the Digital Readiness Index (DRI), without implying that the non-spatial model is inadequate.
+
+The estimated Leroux spatial dependence parameter was
+$$
+\rho=0.400
+\qquad
+(95\%\,CI: 0.016,\;0.916).
+$$
+Because the credible interval is almost entirely within the admissible range and excludes zero, there is evidence of residual spatial dependence after accounting for digital commerce activity, infrastructure, halal-related barriers, and halal readiness.
+
+Here, $\rho$ should be interpreted as a spatial dependence parameter, not as an explanatory effect analogous to a regression coefficient.
+A value of approximately 0.40 indicates a moderate tendency for neighbouring kelurahan to exhibit similar residual DRI values.
+The wide credible interval, however, indicates substantial uncertainty about the strength of this dependence.
+
+This result provides statistical justification for retaining the spatial component in the final model. Neighbouring kelurahan appear to share some unobserved characteristics associated with DRI that are not completely captured by the four observed predictors.
+
+### Interpretation of the fixed effects
+
+The CAR model suggests three important patterns.
+
+First, digital commerce activity has a positive association with DRI. The posterior mean of 0.396 indicates that kelurahan with greater levels of digital commerce activity tend to have higher DRI, conditional on the other predictors and spatial structure. The 95% credible interval does not include zero, providing posterior evidence for a positive association.
+
+Second, halal readiness has the strongest estimated positive association among the four predictors. Its posterior mean is 0.737, with a 95% credible interval of 0.241 to 1.239. This suggests that greater preparedness for halal-related requirements is associated with higher digital readiness at the kelurahan level. The result should not be interpreted causally. Rather, the two dimensions appear to coexist systematically across the observed areas.
+
+Third, digital infrastructure and halal-related barriers show weaker posterior evidence. Infrastructure has a positive posterior mean of 0.497, whereas halal-related barriers have a negative posterior mean of -0.420. However, the credible intervals for both parameters include zero. These variables therefore show suggestive associations in the expected directions, but the available data do not provide equally strong evidence for non-zero effects.
+
+## Discussion
+
+The results demonstrate that MSME development in Mataram is multidimensional. Digitalisation cannot be adequately represented by a single measure of technology adoption, while halal development cannot be reduced to certification status alone.
+
+The strong representation of food and retail businesses is particularly relevant to policy design. These sectors are likely to interact directly with consumers and may therefore benefit from interventions involving digital promotion, marketplace utilisation, product presentation, payment systems, and halal assurance.
+
+The positive relationship between digital commerce activity and the response supports the importance of online channels in MSME development. However, the result should not be interpreted as evidence that simply encouraging businesses to create social media accounts will generate economic improvements. Digital commerce requires supporting infrastructure, skills, appropriate business strategies, and the ability to translate digital exposure into actual transactions.
+
+The positive association with infrastructure reinforces this interpretation. Infrastructure provides an enabling environment within which digital tools can be used effectively. Consequently, interventions should not focus exclusively on individual training. Local governments may also need to address differences in connectivity, access to digital services, and supporting facilities between administrative areas.
+
+The relationship between halal readiness and the response is also noteworthy. The result suggests that halal preparedness may be integrated with broader business development rather than treated solely as a regulatory obligation. Assistance with certification procedures, documentation, product assurance, and access to relevant services may therefore provide benefits extending beyond compliance.
+
+The negative association between halal barriers and the response provides an additional policy signal. Awareness alone may be insufficient when businesses face procedural, financial, informational, or service-access constraints. Interventions should therefore distinguish between an information deficit and an implementation barrier.
+
+The spatial model provides an additional perspective. The lower DIC and slightly improved LMPL indicate that spatial dependence contributes to explaining the observed variation. This suggests that local policy design should consider the geographical concentration of MSME characteristics rather than treating each business as an isolated unit.
+
+However, the spatial effect should not be interpreted as proof that neighbouring businesses directly influence one another. Spatial dependence may arise from shared infrastructure, similar market environments, administrative programmes, population characteristics, or other unobserved contextual factors.
+
+### Policy Implications
+
+The results support a differentiated policy strategy rather than a single intervention applied uniformly across Mataram.
+
+First, areas with relatively low digital readiness and limited digital commerce activity should be prioritised for foundational digital interventions. These may include practical training in social media marketing, marketplace use, digital payment systems, product photography, and basic digital business management.
+
+Second, areas with relatively low infrastructure indicators require an enabling-environment approach. Training is unlikely to be sufficient if businesses continue to face limitations in connectivity or access to digital facilities.
+
+Third, areas with low halal readiness but relatively high business activity may benefit from targeted halal facilitation. Rather than relying only on general awareness campaigns, assistance can focus on practical preparation, documentation, product assurance, and navigation of certification procedures.
+
+Fourth, areas characterised by high halal-related barriers should receive more intensive facilitation. Local support institutions, including relevant government agencies and business assistance centres, can provide direct consultation and help businesses identify and resolve specific barriers.
+
+Fifth, areas exhibiting multiple disadvantages should be treated as priority intervention zones. For example, a kelurahan with low digital readiness, weak infrastructure, low halal readiness, and high barriers would require an integrated intervention rather than separate programmes delivered independently.
+
+The spatial analysis therefore supports a policy-zoning framework based on combinations of characteristics rather than a simple ranking of kelurahan.
+
+## Limitations
+
+Several limitations should be considered.
+
+First, the survey component was based on a sample of 388 MSMEs, while the administrative dataset contained 4,185 business records. The two datasets therefore provide complementary but not identical representations of the MSME population.
+
+Second, several indicators were based on self-reported responses. Such measurements may be affected by differences in interpretation and reporting behaviour.
+
+Third, the spatial analysis was conducted at the kelurahan level. Aggregation may conceal substantial within-kelurahan variation. The results should therefore not be interpreted as applying uniformly to every business located within an area.
+
+Fourth, the analysis is observational and cross-sectional. The regression coefficients represent conditional associations and should not be interpreted as causal effects.
+
+Finally, spatial dependence can be modelled in different ways depending on the definition of neighbourhood. The present analysis uses queen contiguity, and alternative spatial structures could potentially produce somewhat different results.
+
+## Conclusion
+
+This study demonstrates the value of integrating MSME profiling, multidimensional digital and halal indicators, and spatial statistical modelling for local policy analysis.
+
+The MSME population of Mataram is dominated by individually owned enterprises and is concentrated in food and retail activities. At the same time, digital readiness and halal-related characteristics vary across enterprises and administrative areas.
+
+The CAR model provided a better fit than the corresponding non-spatial GLM, indicating that spatial dependence contributes information beyond the observed predictors. Digital commerce activity, digital infrastructure, and halal readiness were positively associated with the response, whereas halal-related barriers were negatively associated.
+
+The findings suggest that MSME policy should move beyond uniform city-wide interventions. Spatially differentiated strategies can be used to identify areas requiring digital capacity building, infrastructure support, halal facilitation, or combinations of these interventions.
+
+More broadly, the study illustrates how spatial modelling can support the transition from descriptive MSME mapping to evidence-based policy zoning. Future research should extend the analysis using longitudinal data, finer spatial units, and additional indicators of business performance to evaluate whether geographically targeted interventions lead to measurable improvements in MSME outcomes.
+
+## References

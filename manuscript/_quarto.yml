@@ -1,0 +1,76 @@
+project:
+  type: manuscript
+  output-dir: docs
+  # post-render:
+  #   - _cleanup.R
+  
+manuscript:
+  article: manuscript.qmd
+  # code-links:
+  #   - repo
+  #   - text: Web Scraping House Data
+  #     icon: code
+  #     href: notebooks/webscrape.R
+  #   - text: Data Extraction using LLM
+  #     icon: code
+  #     href: notebooks/llm.R
+
+format:
+  html: default
+    # other-links:
+    #   - text: Brunei House Price Data
+    #     icon: database
+    #     href: data/hspbn_2025-03-03.csv  
+    #   - text: BDCB RPPI
+    #     icon: database
+    #     href: data/rppi.csv
+    #   - text: Brunei Spatial Area Data
+    #     icon: database
+    #     href: https://raw.githubusercontent.com/Bruneiverse/bruneimap/refs/heads/main/inst/extdata/bn_kpg_level_data.csv
+  docx: 
+    # reference-doc: template.docx
+    output-file: umkm_dudi
+  nature-pdf:
+    keep-tex: false
+    output-file: umkm_dudi
+    number-sections: true
+    toc: false
+    #code-line-numbers: false
+    journal:
+      name: Journal of Statistical Theory and Applications
+    header-includes:
+     - \usepackage{amsmath}
+     - \usepackage{graphicx}
+     - \usepackage{caption}
+     - \captionsetup[figure]{font=small}
+     - \captionsetup[table]{font = small}
+     - \usepackage{xcolor}  # Import xcolor package for defining colors
+     - \definecolor{mycodecolor}{RGB}{0,0,255}
+     - \usepackage{fancyvrb}
+     - \BeforeBeginEnvironment{verbatim}{\small}
+     - \fvset{fontsize=\small}
+     - \usepackage{setspace}\singlespacing
+     - \usepackage{float}
+     - \usepackage{booktabs}
+     # - \usepackage{bm}
+
+execute:
+  echo: false
+  # cache: true
+  # freeze: auto
+  warning: false
+  code-overflow: wrap
+  
+bibliography:
+  - ../dudirefs.bib
+
+engine: knitr
+
+citation: 
+  type: article-journal
+  issued: 2026
+  container-title: "Manuscript in Submission"
+  url: https://indiraputeri-phd.github.io/dudi26/manuscript
+google-scholar: true
+notebook-links: false
+

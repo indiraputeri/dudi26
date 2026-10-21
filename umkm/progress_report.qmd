@@ -52,7 +52,7 @@ header-includes:
     \cfoot{\pagemark}
     \setlist{nosep}
 
-bibliography: dudirefs.bib
+bibliography: ../dudirefs.bib
 ---
 
 <!-- # Tim Peneliti {.unnumbered .unlisted} -->
@@ -385,7 +385,7 @@ Desain penelitian menggunakan pendekatan *sequential mixed methods*. Tahap perta
 
 Secara umum, tahapan penelitian digambarkan pada @fig-tahap berikut
 
-![Tahapan riset](figs/tahaprisetdudi.png){#fig-tahap width=50%}
+![Tahapan riset](../figs/tahaprisetdudi.png){#fig-tahap width=50%}
 
 Penelitian melibatkan Dinas Koperasi dan UKM Kota Mataram serta UMKM yang tersebar di Kota Mataram sebagai sumber dan mitra penyedia data.
 
@@ -598,11 +598,11 @@ Sebagai bagian dari persiapan pelaksanaan penelitian, telah dilakukan koordinasi
 ::: {.columns}
 
 ::: {.column width="50%"}
-![Kunjungan dan koordinasi kebutuhan data di Dinas UMKM kota Mataram](figs/kunjungan_dinaskota.jpeg){#fig-kunj1 width=50%}
+![Kunjungan dan koordinasi kebutuhan data di Dinas UMKM kota Mataram](../figs/kunjungan_dinaskota.jpeg){#fig-kunj1 width=50%}
 :::
 
 ::: {.column width="50%"}
-![Koordinasi kerjasama riset di PLUT NTB](figs/kunjungan_plut.jpeg){#fig-kunj2 width=50%}
+![Koordinasi kerjasama riset di PLUT NTB](../figs/kunjungan_plut.jpeg){#fig-kunj2 width=50%}
 :::
 
 :::
@@ -646,7 +646,7 @@ Dataset terdiri atas 4.185 unit usaha dengan 17 variabel yang mencakup informasi
 #| warning: false
 
 umkm <- read_excel(
-  "data/umkm.xlsx",
+  "../data/umkm.xlsx",
   sheet = "DATA UMKM TAHUN 2024",
   skip = 2
 ) %>% 
@@ -793,7 +793,7 @@ Dengan demikian, informasi karakteristik usaha dan bagian survei lainnya digunak
 
 ```{r, echo=FALSE}
 
-srv <- read_csv("data/dri.csv")
+srv <- read_csv("../data/dri.csv")
 
 # Kolom kelurahan dari Google Form
 kolom_kelurahan <- c(
@@ -1044,7 +1044,7 @@ $$
 Dalam implementasi menggunakan R, konstruksi DRI dilakukan dengan kode berikut:
 
 ```{r, echo=FALSE}
-load("data/dri_score.RData")
+load("../data/dri_score.RData")
 
 summary(dri_score$DRI)
 
