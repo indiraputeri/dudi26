@@ -18,11 +18,14 @@ geometry:
 format:
   html:
     toc: true
-    toc-depth: 3
+    toc-title: "Daftar Isi"
     number-sections: false
-    code-fold: true
-    code-summary: "Tampilkan kode"
+    smooth-scroll: true
     theme: cosmo
+    page-layout: article
+    title-block-banner: "#f1f3fa"
+    css: styles.css
+    link-external-newwindow: true
     
   pdf:
     toc: true
@@ -50,17 +53,37 @@ library(semPlot)
 ```
 
 
-## Latar Belakang
+# Tim Peneliti {.unnumbered .unlisted}
 
-Data master UMKM Kota Mataram menjadi sumber informasi awal untuk memahami karakteristik, distribusi, dan kondisi usaha UMKM yang menjadi sasaran penelitian. Data tersebut digunakan untuk membangun konteks empiris mengenai populasi UMKM sebelum dilakukan analisis lebih lanjut mengenai kesiapan digital dan aspek sertifikasi halal.
 
-Analisis dilakukan secara bertahap, dimulai dengan Analisis Data Eksploratori (Exploratory Data Analysis/EDA) untuk memahami struktur data, karakteristik UMKM, distribusi spasial, serta kualitas dan keterbatasan data. Tahap ini kemudian dilanjutkan dengan analisis dan pemodelan statistik serta spasial untuk mengidentifikasi pola, hubungan, dan variasi antarwilayah yang relevan dengan kesiapan digital dan sertifikasi halal.
+- **Indira Puteri Kinasih, Ph.D.**  
+  indiraputeri@uinmataram.ac.id
 
-Hasil analisis dan pemodelan selanjutnya digunakan untuk memperoleh insight mengenai faktor-faktor yang berkaitan dengan kesiapan digital, kondisi sertifikasi halal, serta variasinya antarwilayah. Temuan tersebut menjadi dasar dalam menyusun rekomendasi kebijakan yang lebih terarah, khususnya dalam menentukan kelompok dan wilayah yang memerlukan prioritas intervensi.
+- **Dr. Any Tsalasatul Fitriyah**  
+  any.tsalasatul@uinmataram.ac.id
 
-Dengan demikian, analisis tidak hanya diarahkan untuk menghasilkan deskripsi statistik, tetapi membangun alur analitis dari **pemahaman data, pemodelan, interpretasi hasil, hingga perumusan rekomendasi kebijakan**.
+- **Nurul Susianti, M.E.**  
+  nurulsusianti@uinmataram.ac.id
 
-### Tujuan
+- **Ulfatun Hasanah, M.PA**  
+  ulfatunhasanah@uinmataram.ac.id
+
+- **Nur Awalunnisa, M.SEI.**  
+  awalunnisa@uinmataram.ac.id
+  
+---
+
+# Latar Belakang
+
+Transformasi digital dan pemenuhan sertifikasi halal merupakan dua aspek penting dalam penguatan daya saing UMKM. Namun, kesiapan UMKM dalam mengadopsi teknologi digital dan memenuhi persyaratan sertifikasi halal dapat berbeda antarusaha maupun antarwilayah. Tanpa pemetaan yang memadai, intervensi kebijakan berisiko belum sepenuhnya menjangkau kelompok UMKM dan wilayah yang paling membutuhkan dukungan.
+
+Penelitian ini bertujuan menganalisis kesiapan digital dan kondisi sertifikasi halal UMKM di Kota Mataram melalui pendekatan statistik dan spasial. Analisis eksploratori dilakukan untuk memahami karakteristik UMKM, distribusi geografis, serta kualitas dan keterbatasan data. Selanjutnya, analisis statistik dan pemodelan spasial digunakan untuk mengidentifikasi variasi kesiapan digital, pola pengelompokan geografis, serta faktor-faktor yang berkaitan dengan kesiapan digital UMKM.
+
+Hasil analisis diinterpretasikan untuk memahami perbedaan kondisi dan kebutuhan UMKM antarwilayah. Temuan ini menjadi dasar penyusunan peta dan zonasi prioritas intervensi yang dapat mendukung percepatan transformasi digital serta penguatan ekosistem halal di Kota Mataram.
+
+Dengan demikian, penelitian ini mengintegrasikan analisis data, pemodelan statistik-spasial, dan interpretasi hasil untuk menghasilkan rekomendasi kebijakan yang lebih terarah dan berbasis bukti.
+
+## Tujuan
 
 Analisis ini bertujuan untuk:
 

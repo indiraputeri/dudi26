@@ -170,25 +170,26 @@ Among the 4,185 MSMEs, individually owned businesses constituted the largest leg
 #| tbl-cap: "Characteristics of MSMEs by District"
 #| tbl-pos: "h"
 
-library(kableExtra)
 library(readxl)
 library(tidyverse)
 library(janitor)
+library(kableExtra)
 
 umkm <- read_excel(
   "../data/umkm.xlsx",
   sheet = "DATA UMKM TAHUN 2024",
   skip = 2
 ) |>
-  clean_names()
-
-umkm <- umkm %>% 
-  select(-no, -nib, -nama_perusahaan, 
-         -alamat_usaha, -email, -nomor_telp,
-         -nama_pemilik_usaha) %>% 
-  rename(investasi = jumlah_investasi_rp,
-         luas = luas_tanah_mm
-         ) %>% 
+  clean_names() |>
+  select(
+    -no, -nib, -nama_perusahaan,
+    -alamat_usaha, -email, -nomor_telp,
+    -nama_pemilik_usaha
+  ) |>
+  rename(
+    investasi = jumlah_investasi_rp,
+    luas = luas_tanah_mm
+  ) |>
   mutate(
     kecamatan = recode(
       kecamatan,
@@ -196,97 +197,107 @@ umkm <- umkm %>%
     )
   )
 
-
-sum_kec <- umkm %>%
-  group_by(kecamatan) %>%
+# Summary by district
+sum_kec <- umkm |>
+  group_by(kecamatan) |>
   summarise(
     n = n(),
     investasi_median = median(investasi, na.rm = TRUE) / 1e6,
-    investasi_q1 = quantile(investasi, 0.25, na.rm = TRUE) / 1e6,
-    investasi_q3 = quantile(investasi, 0.75, na.rm = TRUE) / 1e6,
-    tenaga_kerja_mean = mean(tki_org, na.rm = TRUE),
-    tenaga_kerja_q1 = quantile(tki_org, 0.25, na.rm = TRUE),
-    tenaga_kerja_q3 = quantile(tki_org, 0.75, na.rm = TRUE),
+    investasi_q1 = quantile(
+      investasi, 0.25, na.rm = TRUE
+    ) / 1e6,
+    investasi_q3 = quantile(
+      investasi, 0.75, na.rm = TRUE
+    ) / 1e6,
     .groups = "drop"
-  ) %>%
+  ) |>
   mutate(
-    Investasi = sprintf(
+    `Investment (IDR million)` = sprintf(
       "%.1f (%.1f–%.1f)",
       investasi_median,
       investasi_q1,
       investasi_q3
-    ),
-    `Tenaga Kerja` = sprintf(
-      "%.0f (%.0f–%.0f)",
-      tenaga_kerja_mean,
-      tenaga_kerja_q1,
-      tenaga_kerja_q3
     )
-  ) %>%
+  ) |>
   select(
-    kecamatan = kecamatan,
-    `Jumlah UMKM` = n,
-    `Investasi (Rp juta)` = Investasi,
-    `Tenaga Kerja` = `Tenaga Kerja`
+    District = kecamatan,
+    `Number of MSMEs` = n,
+    `Investment (IDR million)`
   )
 
-# Komposisi skala usaha per kecamatan
-skala_kec <- umkm %>%
-  count(kecamatan, skala_usaha) %>%
-  group_by(kecamatan) %>%
+# Business-scale composition by district
+skala_kec <- umkm |>
+  count(kecamatan, skala_usaha) |>
+  group_by(kecamatan) |>
   mutate(
-    persentase = 100 * n / sum(n)
-  ) %>%
-  ungroup() %>%
-  mutate(
-    skala = paste0(
-      n, " (", round(persentase, 1), "%)"
+    percentage = 100 * n / sum(n),
+    value = sprintf(
+      "%d (%.1f%%)",
+      n,
+      percentage
     )
-  ) %>%
-  select(kecamatan, skala_usaha, skala) %>%
+  ) |>
+  ungroup() |>
+  select(
+    kecamatan,
+    skala_usaha,
+    value
+  ) |>
   pivot_wider(
     names_from = skala_usaha,
-    values_from = skala,
+    values_from = value,
     values_fill = "0 (0.0%)"
+  ) |>
+  rename(
+    District = kecamatan
   )
 
-# Gabungkan
-sum_kec <- sum_kec %>%
-  left_join(skala_kec, by = "kecamatan") 
+# Combine summaries
+sum_kec <- sum_kec |>
+  left_join(skala_kec, by = "District") |>
+  relocate(
+    District,
+    `Number of MSMEs`,
+    `Investment (IDR million)`,
+    Micro,
+    Small,
+    Medium,
+    Large
+  )
 
-
-
-sum_kec %>%
+# Table
+sum_kec |>
   kbl(
     booktabs = TRUE,
     escape = TRUE,
-    align = "lccccccc",
+    align = "lcccccc",
     col.names = c(
       "District",
       "Number of MSMEs",
       "Investment (IDR million)",
-      "Employment",
       "Micro",
       "Small",
       "Medium",
       "Large"
     ),
     longtable = FALSE
-  ) %>%
+  ) |>
   kable_styling(
     latex_options = c("hold_position", "striped"),
     font_size = 8,
     full_width = FALSE,
     position = "center"
-  ) %>%
-  column_spec(1, width = "2.2cm") %>%
-  column_spec(2, width = "1.5cm") %>%
-  column_spec(3, width = "2.5cm") %>%
-  column_spec(4, width = "2.0cm") %>%
-  column_spec(5:8, width = "1.5cm") %>% 
+  ) |>
+  column_spec(1, width = "2.2cm") |>
+  column_spec(2, width = "1.5cm") |>
+  column_spec(3, width = "2.5cm") |>
+  column_spec(4:7, width = "1.5cm") |>
   footnote(
-    general = "Number of MSMEs and business-scale composition are reported as counts (percentages). Investment is reported as median (Q1–Q3), while employment is reported as mean (Q1–Q3).",
-    # threeparttable = TRUE,
+    general = paste(
+      "Number of MSMEs and business-scale composition are reported",
+      "as counts (percentages). Investment is reported as",
+      "median (Q1–Q3)."
+    ),
     general_title = "Note:"
   )
 ```
